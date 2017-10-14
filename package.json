@@ -1,0 +1,35 @@
+{
+  "name": "andrea-portfolio-site",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "7.9.0",
+    "npm": "4.2.0"
+  },
+  "engineStrict": true,
+  "dependencies": {
+    "contentful": "4.6.1",
+    "jquery": "3.2.1",
+    "marked": "^0.3.6",
+    "moment": "^2.18.1",
+    "node-sass-chokidar": "0.0.3",
+    "normalize.css": "7.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-helmet": "5.1.3",
+    "react-loading": "0.1.4",
+    "react-router-dom": "4.1.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start": "react-scripts start",
+    "dev": "npm run start | npm run watch-css",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
