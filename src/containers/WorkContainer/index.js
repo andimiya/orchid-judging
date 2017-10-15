@@ -1,53 +1,40 @@
 import React from 'react';
 import GridTile from '../../components/GridTile';
-import { createClient } from 'contentful';
-import { SPACE_ID, ACCESSTOKEN } from '../../constants';
+import { BTCAPI } from '../../constants';
+import { ajax } from 'jquery';
+
 
 class WorkContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getAllResources = this.getAllResources.bind(this);
-
-    this.client = createClient({
-      space: SPACE_ID,
-      accessToken: ACCESSTOKEN
-    });
-
     this.state = {
-      content: [],
+      btcRateData: [],
+      lastUpdated: [],
+      btcRate: [],
       error: ''
     };
   }
 
   componentDidMount(){
-    this.getAllResources();
-  }
-
-  getAllResources(){
-    this.client.getEntries()
-    .then((entry) => {
-      this.setState ({ content: entry.items })
+    return ajax(BTCAPI).then(btc => {
+      this.setState ({
+        btcRateData: JSON.parse(btc),
+        lastUpdated: JSON.parse(btc).time.updated,
+        btcRate: JSON.parse(btc).bpi.USD.rate,
+      });
     })
   }
 
   render(props) {
+    console.log(this.state.btcRate);
     return (
-      <div className="work-container outer">
-        <div className="grid-area-container">
-          {this.state.content.map(({ fields, sys }, index) => {
-            return (
-              <GridTile
-                key={sys.id}
-                id={fields.slug}
-                title={fields.title}
-                position={fields.position}
-                slug={fields.slug}
-                workSample={fields.workSample.fields.file.url}
-                handleResourceClick={this.props.handleResourceClick}
-              />
-            );
-          })}
+      <div className="btc-container outer">
+        <div className="last-updated">
+          Last Updated: {this.state.lastUpdated}
+        </div>
+        <div className="btc-rate">
+          Current Bitcoin Rate: {this.state.btcRate}
         </div>
       </div>
     )
