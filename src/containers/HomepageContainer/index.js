@@ -28,25 +28,29 @@ class HomepageContainer extends React.Component {
   }
 
   getAllRates() {
-    return ajax(COINMARKET_API).then(data => {
-      this.setState ({
-        allData: data,
+    ajax(COINMARKET_API).then(data => {
+      const cryptoArray = data;
+      const finalResult = cryptoArray.filter((obj) => {
+        if (obj.symbol === 'BTC' || obj.symbol === 'ETH' || obj.symbol === 'LTC') {
+          return true;
+        }
+        return false;
       });
+      this.setState({ filteredData: finalResult })
     })
+
   }
 
   render(props) {
-    const cryptoArray = this.state.allData;
-    const finalResult = cryptoArray.filter((obj) => {
-      if (obj.symbol === 'BTC' || obj.symbol === 'ETH') {
-        return true;
-      }
-      return false;
-    });
-    this.setState({ filteredData: finalResult })
-    console.log(finalResult, 'cryptoArray');
+    console.log(this.state.filteredData, 'cryptoArray');
     return (
-      <div>Test</div>
+      <div>
+        {this.state.filteredData.map(index => {
+          return (
+            <div>{index.id}</div>
+          )
+        })}
+      </div>
     )
   };
 };
