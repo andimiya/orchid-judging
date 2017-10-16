@@ -13,8 +13,9 @@ class HomepageContainer extends React.Component {
     this.state = {
       allData: [],
       filteredData: [],
-      name: [],
+      calculated: [],
       btcInvested: 2060,
+      calculatedBtc: [],
       btcOwned: 0.37601801,
       ltcInvested: 600,
       ltcOwned: 10.6864541,
@@ -38,13 +39,17 @@ class HomepageContainer extends React.Component {
         }
         return false;
       });
-      this.setState({ filteredData: finalResult })
+      finalResult.map(index => {
+        this.setState({
+          filteredData: finalResult
+        })
+      })
     })
   }
 
   render(props) {
     console.log(this.state.filteredData, 'cryptoArray');
-
+    console.log(this.state.calculatedBtc, 'calculated btc');
     return (
       <div className="crypto-container outer">
         {this.state.filteredData.map(index => {
@@ -56,6 +61,11 @@ class HomepageContainer extends React.Component {
             </div>
           )
         })}
+        <div className="invested">
+          <div>BTC Invested: ${this.state.btcInvested}</div>
+          <div>LTC Invested: ${this.state.ltcInvested}</div>
+          <div>ETH Invested: ${this.state.ethInvested}</div>
+        </div>
       </div>
     )
   };
