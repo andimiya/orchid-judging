@@ -13,6 +13,7 @@ class HomepageContainer extends React.Component {
     this.state = {
       allData: [],
       filteredData: [],
+      name: [],
       btcInvested: 2060,
       btcOwned: 0.37601801,
       ltcInvested: 600,
@@ -39,7 +40,6 @@ class HomepageContainer extends React.Component {
       });
       this.setState({ filteredData: finalResult })
     })
-
   }
 
   render(props) {
