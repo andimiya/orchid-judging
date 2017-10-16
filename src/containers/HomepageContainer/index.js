@@ -13,8 +13,12 @@ class HomepageContainer extends React.Component {
     this.state = {
       allData: [],
       filteredData: [],
-      totalInvested: 2060,
-      bitcoinOwned: 0.37601801,
+      btcInvested: 2060,
+      btcOwned: 0.37601801,
+      ltcInvested: 600,
+      ltcOwned: 10.6864541,
+      ethInvested: 500,
+      ethOwned: 1.633243136699,
       valueOfBitcoin: '',
       error: ''
     };
@@ -42,10 +46,10 @@ class HomepageContainer extends React.Component {
     console.log(this.state.filteredData, 'cryptoArray');
 
     return (
-      <div>
+      <div className="crypto-container outer">
         {this.state.filteredData.map(index => {
           return (
-            <div key={index.id}>
+            <div key={index.id} className="crypto-set">
               <div>{index.name}</div>
               <div>Last Updated: {moment.unix(index.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
               <div>Current Price: ${index.price_usd}</div>

@@ -164,41 +164,12 @@ $text-link: #5db2a6;
   }
 }
 
-.btc-container {
-  margin: auto;
-  box-sizing: border-box;
-  margin-top: 5rem;
-  padding: 3rem;
+.outer {
+  margin: 8rem 5rem 5rem 5rem;
 }
 
-.showcase-container {
-  display: flex;
-  border-bottom: 1px solid grey;
-  padding-bottom: 3rem;
-  margin: 6rem 3rem 3rem 3rem;
-}
-
-.showcase-image-block {
-  margin: 2rem;
-  height: 400px;
-  flex: 0 0 60%;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-}
-
-.showcase-text-container {
-  padding: 0 2rem 0 2rem;
-  .showcase-title {
-    h1 {
-      letter-spacing: 0.6px;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: 300;
-      text-transform: uppercase;
-    }
-  }
+.crypto-set {
+  padding: 0.5rem;
 }
 
 .footer-container-inner {
@@ -209,111 +180,4 @@ $text-link: #5db2a6;
 
 .footer-item {
   margin: 0.5rem;
-}
-
-.resume-container {
-  margin: auto;
-  // border: 10px solid red;
-}
-
-.resume-body-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 0 15% 10rem 15%;
-
-  @include medium {
-    flex-wrap: nowrap;
-  };
-
-  h1 {
-    text-transform: uppercase;
-    font-weight: 300;
-    text-align: center;
-    font-size: 2rem;
-  }
-  h2 {
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: 1.2px;
-    color: $text-color-h2;
-  }
-  h3 {
-    text-transform: uppercase;
-    font-weight: 300;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
-    margin: 1.8rem 0 0 0;
-  }
-  h4 {
-    text-transform: uppercase;
-    font-weight: 300;
-    margin: 1rem 0 0 0;
-  }
-  hr {
-    margin: 2rem;
-    color: gray;
-  }
-  p {
-    line-height: 1.4rem;
-    margin: 0.3rem 0 0 0;
-  }
-  a {
-    text-decoration: none;
-    color: $text-link;
-  }
-  ul {
-    margin: 0 0 0.5rem 0;
-  }
-  li {
-    margin: 0.5rem 0 0.5rem 0;
-  }
-  .picture {
-    text-align: center;
-  }
-  .header-with-icon {
-    display: flex;
-    align-items: center;
-    img {
-      margin-right: 0.3rem;
-    }
-  }
-  .address-block {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-    span {
-      flex: 0 0 100%;
-    }
-    a {
-      display: flex;
-      text-decoration: none;
-      align-items: center;
-      color: black;
-      line-height: 2rem;
-      img {
-        margin: 0 0.4rem 0 0.4rem;
-      }
-    }
-  }
-  .sidebar-container {
-    flex: 0 0 100%;
-    padding: 3rem 2rem 0 2rem;
-    margin-top: 3rem;
-    border: none;
-    @include medium {
-      flex: 0 0 30%;
-      border-right: 1px solid #A5A5A5;
-    };
-  }
-  .right-panel-container {
-    flex: 0 0 100%;
-    padding: 1rem 0 0 0;
-    margin-top: 3.5rem;
-    padding: 1.5rem 3rem 3rem 3rem;
-    @include medium {
-      flex: 0 0 65%;
-    };
-  }
 }
