@@ -48,16 +48,17 @@ class HomepageContainer extends React.Component {
   }
 
   render(props) {
-    console.log(this.state.filteredData, 'cryptoArray');
-    console.log(this.state.calculatedBtc, 'calculated btc');
     return (
       <div className="crypto-container outer">
-        {this.state.filteredData.map(index => {
+        {this.state.filteredData.map((cryptoData, i) => {
+          const cryptoOwned = this.state[`${cryptoData.symbol.toLowerCase()}Owned`];
+          const currentValue = (cryptoOwned*cryptoData.price_usd).toFixed(2);
           return (
-            <div key={index.id} className="crypto-set">
-              <div>{index.name}</div>
-              <div>Last Updated: {moment.unix(index.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
-              <div>Current Price: ${index.price_usd}</div>
+            <div key={cryptoData.id} className="crypto-set">
+              <div>{cryptoData.name}</div>
+              <div>Last Updated: {moment.unix(cryptoData.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
+              <div>Current Price: ${cryptoData.price_usd}</div>
+              <div>Current Value: ${currentValue}</div>
             </div>
           )
         })}
