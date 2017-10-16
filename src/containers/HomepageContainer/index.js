@@ -1,5 +1,5 @@
 import React from 'react';
-import { BTCAPI } from '../../constants';
+import { COINMARKET_API } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
 
@@ -8,37 +8,45 @@ class HomepageContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.getAllRates = this.getAllRates.bind(this);
+
     this.state = {
-      btcRateData: [],
+      allData: [],
+      filteredData: [],
       lastUpdated: [],
       btcRate: [],
+      selectedCrypto: '',
+      totalInvested: 2060,
+      bitcoinOwned: 0.37601801,
+      valueOfBitcoin: '',
       error: ''
     };
   }
 
   componentDidMount(){
-    return ajax(BTCAPI).then(btc => {
-      let date = new Date(JSON.parse(btc).time.updated);
+    this.getAllRates();
+  }
 
+  getAllRates() {
+    return ajax(COINMARKET_API).then(data => {
       this.setState ({
-        btcRateData: JSON.parse(btc),
-        lastUpdated: date.toString(),
-        btcRate: JSON.parse(btc).bpi.USD.rate,
+        allData: data,
       });
     })
   }
 
   render(props) {
-    console.log(this.state.lastUpdated);
+    const cryptoArray = this.state.allData;
+    const finalResult = cryptoArray.filter((obj) => {
+      if (obj.symbol === 'BTC' || obj.symbol === 'ETH') {
+        return true;
+      }
+      return false;
+    });
+    this.setState({ filteredData: finalResult })
+    console.log(finalResult, 'cryptoArray');
     return (
-      <div className="btc-container outer">
-        <div className="last-updated">
-          <p>Last Updated: {moment(this.state.lastUpdated).format('MMMM Do YYYY, h:mm a')}</p>
-        </div>
-        <div className="btc-rate">
-          <p>Current Bitcoin Rate: {this.state.btcRate}</p>
-        </div>
-      </div>
+      <div>Test</div>
     )
   };
 };
