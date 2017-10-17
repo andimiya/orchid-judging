@@ -6,6 +6,12 @@ const BTCIcon = require('../../assets/bitcoinIcon.svg');
 const LTCIcon = require('../../assets/litecoinIcon.svg');
 const ETHIcon = require('../../assets/ethereumIcon.svg');
 
+const icons = {
+  BTCIcon: BTCIcon,
+  LTCIcon: LTCIcon,
+  ETHIcon: ETHIcon
+};
+
 class HomepageContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -56,12 +62,11 @@ class HomepageContainer extends React.Component {
           const cryptoOwned = this.state[`${cryptoData.symbol.toLowerCase()}Owned`];
           const currentValue = (cryptoOwned*cryptoData.price_usd).toFixed(2);
           const amountInvested = this.state[`${cryptoData.symbol.toLowerCase()}Invested`];
-          let icon = `${cryptoData.symbol}Icon`;
-          console.log(icon, 'icon');
+          let icon = icons[`${cryptoData.symbol}Icon`];
           return (
             <div key={cryptoData.id} className="crypto-set">
               <div className="title-container">
-                <img className="image" src={BTCIcon} height="80px" />
+                <img className="image" src={icon} height="80px" alt="currency image" />
                 <h2>{cryptoData.name}</h2>
               </div>
               <div className="data-container">
