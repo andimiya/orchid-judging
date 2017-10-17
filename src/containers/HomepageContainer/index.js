@@ -2,9 +2,9 @@ import React from 'react';
 import { COINMARKET_API } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
-const btcIcon = require('../../assets/bitcoinIcon.svg');
-const ltcIcon = require('../../assets/litecoinIcon.svg');
-const ethIcon = require('../../assets/ethereumIcon.svg');
+const BTCIcon = require('../../assets/bitcoinIcon.svg');
+const LTCIcon = require('../../assets/litecoinIcon.svg');
+const ETHIcon = require('../../assets/ethereumIcon.svg');
 
 class HomepageContainer extends React.Component {
   constructor(props) {
@@ -56,16 +56,20 @@ class HomepageContainer extends React.Component {
           const cryptoOwned = this.state[`${cryptoData.symbol.toLowerCase()}Owned`];
           const currentValue = (cryptoOwned*cryptoData.price_usd).toFixed(2);
           const amountInvested = this.state[`${cryptoData.symbol.toLowerCase()}Invested`];
-          const icon = `${cryptoData.symbol.toLowerCase()}Icon`;
+          let icon = `${cryptoData.symbol}Icon`;
           console.log(icon, 'icon');
           return (
             <div key={cryptoData.id} className="crypto-set">
-              <img className="image" src={`${cryptoData.symbol.toLowerCase()}Icon`} alt="Bitcoin" />
-              <h2>{cryptoData.name}</h2>
-              <div>Amount Invested: ${amountInvested}</div>
-              <div>Last Updated: {moment.unix(cryptoData.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
-              <div>Current Price: ${cryptoData.price_usd}</div>
-              <div>Current Value: ${currentValue}</div>
+              <div className="title-container">
+                <img className="image" src={BTCIcon} height="80px" />
+                <h2>{cryptoData.name}</h2>
+              </div>
+              <div className="data-container">
+                <div>Amount Invested: ${amountInvested}</div>
+                <div>Last Updated: {moment.unix(cryptoData.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
+                <div>Current Price: ${cryptoData.price_usd}</div>
+                <div>Current Value: ${currentValue}</div>
+              </div>
             </div>
           )
         })}

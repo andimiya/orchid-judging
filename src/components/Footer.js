@@ -5,12 +5,13 @@ const linkedinSVG = require('../assets/linkedin.svg');
 const gmailSVG = require('../assets/gmail.svg');
 
 const Footer = () => {
+  let link = linkedinSVG;
   return (
     <div className="footer-container">
       <div className="footer-container-inner">
         <div className="footer-item">
           <a href="https://www.linkedin.com/in/andreatakamiya/">
-            <img src={linkedinSVG} alt="Instagram" />
+            <img src={link} alt="Instagram" />
           </a>
         </div>
         <div className="footer-item">
