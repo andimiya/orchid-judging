@@ -116,10 +116,32 @@
         visibility: visible; } }
 
 .outer {
-  margin: 8rem 5rem 5rem 5rem; }
+  margin: 6rem 3rem 3rem 3rem; }
+
+.crypto-container {
+  display: flex;
+  box-sizing: border-box;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: center; }
 
 .crypto-set {
-  padding-bottom: 0.5rem; }
+  flex: 0 0 80%;
+  padding: 2rem;
+  margin: 1rem;
+  border: 1px solid grey;
+  background-color: #FAFAFA; }
+  @media (min-width: 750px) {
+    .crypto-set {
+      flex: 0 0 35%; } }
+  .crypto-set h2 {
+    font-size: 1.2rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    margin: 0;
+    margin-bottom: 0.8rem; }
+  .crypto-set div {
+    line-height: 1.5rem; }
 
 .footer-container-inner {
   display: flex;

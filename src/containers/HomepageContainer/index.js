@@ -2,7 +2,9 @@ import React from 'react';
 import { COINMARKET_API } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
-
+const btcIcon = require('../../assets/bitcoinIcon.svg');
+const ltcIcon = require('../../assets/litecoinIcon.svg');
+const ethIcon = require('../../assets/ethereumIcon.svg');
 
 class HomepageContainer extends React.Component {
   constructor(props) {
@@ -53,20 +55,20 @@ class HomepageContainer extends React.Component {
         {this.state.filteredData.map((cryptoData, i) => {
           const cryptoOwned = this.state[`${cryptoData.symbol.toLowerCase()}Owned`];
           const currentValue = (cryptoOwned*cryptoData.price_usd).toFixed(2);
+          const amountInvested = this.state[`${cryptoData.symbol.toLowerCase()}Invested`];
+          const icon = `${cryptoData.symbol.toLowerCase()}Icon`;
+          console.log(icon, 'icon');
           return (
             <div key={cryptoData.id} className="crypto-set">
-              <div>{cryptoData.name}</div>
+              <img className="image" src={`${cryptoData.symbol.toLowerCase()}Icon`} alt="Bitcoin" />
+              <h2>{cryptoData.name}</h2>
+              <div>Amount Invested: ${amountInvested}</div>
               <div>Last Updated: {moment.unix(cryptoData.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
               <div>Current Price: ${cryptoData.price_usd}</div>
               <div>Current Value: ${currentValue}</div>
             </div>
           )
         })}
-        <div className="invested">
-          <div>BTC Invested: ${this.state.btcInvested}</div>
-          <div>LTC Invested: ${this.state.ltcInvested}</div>
-          <div>ETH Invested: ${this.state.ethInvested}</div>
-        </div>
       </div>
     )
   };
