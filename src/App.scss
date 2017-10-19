@@ -220,6 +220,45 @@ $background-color-tiles: #FAFAFA;
   }
 }
 
+.form-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.8rem;
+
+    input {
+      padding: 0.3rem;
+      margin: 0.2rem;
+    }
+  }
+}
+
+.notice-container-success {
+  border: 1px solid #469557;
+  margin-bottom: 1rem;
+  width: 100%;
+
+  p {
+    padding: 0.4rem 0.3rem 0.3rem 1.3rem;
+    color: #469557;
+  }
+}
+
+.notice-container-error {
+  border: 1px solid #d64d3d;
+  margin-bottom: 1rem;
+  width: 100%;
+  p {
+    padding: 0.4rem 0.3rem 0.3rem 1.3rem;
+    color: #d64d3d;
+  }
+}
+
 .footer-container-inner {
   display: flex;
   justify-content: flex-end;

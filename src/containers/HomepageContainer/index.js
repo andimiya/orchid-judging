@@ -2,6 +2,8 @@ import React from 'react';
 import { COINMARKET_API, CRYPTO_API_TOTALCOIN, CRYPTO_API_INVESTMENTS } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
+import InvestmentForm from '../../components/InvestmentForm';
+
 const BTCIcon = require('../../assets/bitcoinIcon.svg');
 const LTCIcon = require('../../assets/litecoinIcon.svg');
 const ETHIcon = require('../../assets/ethereumIcon.svg');
@@ -110,6 +112,7 @@ class HomepageContainer extends React.Component {
             </div>
           )
         })}
+        <InvestmentForm />
       </div>
     )
   };
