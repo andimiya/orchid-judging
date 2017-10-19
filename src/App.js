@@ -1,18 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HomepageContainer from './containers/HomepageContainer';
 import Footer from './components/Footer';
 
 const App = () =>
   <div id="app-container">
-    <Router>
+    <BrowserRouter basename="/crypto-tracker">
       <div className="app">
         <NavBar />
-        <Route exact path="/" component={HomepageContainer} />
+          <Route exact path="/" component={HomepageContainer} />
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   </div>;
 
 export default App;

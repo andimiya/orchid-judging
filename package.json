@@ -1,7 +1,8 @@
 {
-  "name": "andrea-portfolio-site",
+  "name": "crypto-tracker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://andimiya.github.io/crypto-tracker",
   "engines": {
     "node": "7.9.0",
     "npm": "4.2.0"
@@ -9,6 +10,7 @@
   "engineStrict": true,
   "dependencies": {
     "contentful": "4.6.1",
+    "gh-pages": "1.0.0",
     "jquery": "3.2.1",
     "marked": "^0.3.6",
     "moment": "^2.18.1",
@@ -25,6 +27,8 @@
     "react-scripts": "1.0.7"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start",

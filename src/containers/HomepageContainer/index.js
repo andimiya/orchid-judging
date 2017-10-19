@@ -1,5 +1,6 @@
 import React from 'react';
 import { COINMARKET_API } from '../../constants';
+import { CRYPTO_API_INVESTMENTS } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
 const BTCIcon = require('../../assets/bitcoinIcon.svg');
@@ -17,12 +18,13 @@ class HomepageContainer extends React.Component {
     super(props);
 
     this.getAllRates = this.getAllRates.bind(this);
+    this.getTotalInvested = this.getTotalInvested.bind(this);
 
     this.state = {
       allData: [],
       filteredData: [],
       calculated: [],
-      btcInvested: 2060,
+      btcInvested: '',
       calculatedBtc: [],
       btcOwned: 0.37601801,
       ltcInvested: 600,
@@ -36,6 +38,7 @@ class HomepageContainer extends React.Component {
 
   componentDidMount(){
     this.getAllRates();
+    this.getTotalInvested();
   }
 
   getAllRates() {
@@ -48,14 +51,38 @@ class HomepageContainer extends React.Component {
         return false;
       });
       finalResult.map(index => {
-        this.setState({
+        return this.setState({
           filteredData: finalResult
         })
       })
     })
+    .catch (err => {
+      this.setState({ error: 'Coinmarket API error'})
+    })
+  }
+
+  getTotalInvested(){
+    ajax(`${CRYPTO_API_INVESTMENTS}totalInvested`).then(data => {
+      console.log(data, 'amountusd');
+      const btcAmount = data.filter((obj) => {
+        if (obj.currency === 'btc') {
+          return true;
+        }
+      });
+      let totalBtcInvested = btcAmount.reduce((total, item) => total + Number(item.amountusd), 0);
+      this.setState({ btcInvested: totalBtcInvested })
+    })
+
+      // console.log(data, 'data');
+      // arr.reduce((total, item) => total + Number(item.amountusd), 0));
+      // return this.setState({
+      //   // btcInvested: data;
+      // })
   }
 
   render(props) {
+    // console.log(this.state.filteredData);
+    console.log(this.state.btcInvested, 'btc invested');
     return (
       <div className="crypto-container outer">
         {this.state.filteredData.map((cryptoData, i) => {
@@ -66,7 +93,7 @@ class HomepageContainer extends React.Component {
           return (
             <div key={cryptoData.id} className="crypto-set">
               <div className="title-container">
-                <img className="image" src={icon} height="80px" alt="currency image" />
+                <img className="image" src={icon} height="80px" alt="currency symbol" />
                 <h2>{cryptoData.name}</h2>
               </div>
               <div className="data-container">
