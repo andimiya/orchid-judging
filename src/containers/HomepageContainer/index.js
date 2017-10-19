@@ -1,6 +1,5 @@
 import React from 'react';
-import { COINMARKET_API } from '../../constants';
-import { CRYPTO_API_INVESTMENTS } from '../../constants';
+import { COINMARKET_API, CRYPTO_API_TOTALCOIN, CRYPTO_API_INVESTMENTS } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
 const BTCIcon = require('../../assets/bitcoinIcon.svg');
@@ -18,7 +17,8 @@ class HomepageContainer extends React.Component {
     super(props);
 
     this.getAllRates = this.getAllRates.bind(this);
-    this.getTotalInvested = this.getTotalInvested.bind(this);
+    this.getTotalCoinOwned = this.getTotalCoinOwned.bind(this);
+    this.getTotalDollarsInvested = this.getTotalDollarsInvested.bind(this);
 
     this.state = {
       allData: [],
@@ -26,7 +26,7 @@ class HomepageContainer extends React.Component {
       calculated: [],
       btcInvested: '',
       calculatedBtc: [],
-      btcOwned: 0.37601801,
+      btcOwned: '',
       ltcInvested: 600,
       ltcOwned: 10.6864541,
       ethInvested: 500,
@@ -38,7 +38,8 @@ class HomepageContainer extends React.Component {
 
   componentDidMount(){
     this.getAllRates();
-    this.getTotalInvested();
+    this.getTotalCoinOwned();
+    this.getTotalDollarsInvested();
   }
 
   getAllRates() {
@@ -61,28 +62,31 @@ class HomepageContainer extends React.Component {
     })
   }
 
-  getTotalInvested(){
-    ajax(`${CRYPTO_API_INVESTMENTS}totalInvested`).then(data => {
-      console.log(data, 'amountusd');
+  getTotalCoinOwned(){
+    ajax(CRYPTO_API_TOTALCOIN).then(data => {
       const btcAmount = data.filter((obj) => {
         if (obj.currency === 'btc') {
           return true;
         }
       });
-      let totalBtcInvested = btcAmount.reduce((total, item) => total + Number(item.amountusd), 0);
-      this.setState({ btcInvested: totalBtcInvested })
+      let btcOwned = btcAmount.reduce((total, item) => total + Number(item.coinowned), 0);
+      this.setState({ btcOwned: btcOwned })
     })
+  }
 
-      // console.log(data, 'data');
-      // arr.reduce((total, item) => total + Number(item.amountusd), 0));
-      // return this.setState({
-      //   // btcInvested: data;
-      // })
+  getTotalDollarsInvested(){
+    ajax(CRYPTO_API_INVESTMENTS).then(data => {
+      const dollarAmountbtc = data.filter((obj) => {
+        if (obj.currency === 'btc') {
+          return true;
+        }
+      });
+      let btcInvested = dollarAmountbtc.reduce((total, item) => total + Number(item.amountusd), 0);
+      this.setState({ btcInvested: btcInvested.toFixed(2) })
+    })
   }
 
   render(props) {
-    // console.log(this.state.filteredData);
-    console.log(this.state.btcInvested, 'btc invested');
     return (
       <div className="crypto-container outer">
         {this.state.filteredData.map((cryptoData, i) => {
@@ -97,11 +101,12 @@ class HomepageContainer extends React.Component {
                 <h2>{cryptoData.name}</h2>
               </div>
               <div className="data-container">
+                <div>Current Market Price (USD): ${cryptoData.price_usd}</div>
+                <div>BTC Owned: {this.state.btcOwned.toFixed(4)}</div>
                 <div>Amount Invested: ${amountInvested}</div>
-                <div>Last Updated: {moment.unix(cryptoData.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
-                <div>Current Price: ${cryptoData.price_usd}</div>
-                <div>Current Value: ${currentValue}</div>
+                <div>My Coin's Current Value (USD): ${currentValue}</div>
               </div>
+              <div className="subtext">Last Updated:  {moment.unix(cryptoData.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
             </div>
           )
         })}
