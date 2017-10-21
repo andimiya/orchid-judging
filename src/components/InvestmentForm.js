@@ -26,19 +26,18 @@ class InvestmentForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const investments = {
-      url: CRYPTO_API_POST_INVESTMENT,
-      data: JSON.stringify({
-        currency: this.state.currency,
-        coinowned: Number(this.state.coinowned),
-        rate: Number(this.state.rate),
-        amountusd: Number(this.state.amountusd),
-      })
+    const data = {
+      currency: this.state.currency,
+      coinowned: Number(this.state.coinowned),
+      rate: Number(this.state.rate),
+      amountusd: Number(this.state.amountusd),
     };
-    console.log(investments, 'investments');
-    $.post(investments)
+    $.post({
+      url: CRYPTO_API_POST_INVESTMENT,
+      data: data
+    })
       .then(data => {
-        console.log(data, 'data');
+        console.log(data);
         if (data.statusCode === 200) {
           this.setState({
             sentStatus: 'sent',
