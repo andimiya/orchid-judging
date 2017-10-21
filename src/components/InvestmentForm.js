@@ -11,7 +11,8 @@ class InvestmentForm extends Component {
       coinowned: '',
       rate: '',
       amountusd: '',
-      sentStatus: ''
+      sentStatus: '',
+      selectValue: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,24 +21,25 @@ class InvestmentForm extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      selectValue: event.target.value
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const data = {
-      currency: this.state.currency,
+      currency: this.state.selectValue,
       coinowned: Number(this.state.coinowned),
       rate: Number(this.state.rate),
       amountusd: Number(this.state.amountusd),
     };
+    console.log(data, 'data');
     $.post({
       url: CRYPTO_API_POST_INVESTMENT,
       data: data
     })
       .then(data => {
-        console.log(data);
         if (data.statusCode === 200) {
           this.setState({
             sentStatus: 'sent',
@@ -53,8 +55,7 @@ class InvestmentForm extends Component {
       .catch(() => this.setState({ sentStatus: 'error' }));
   }
 
-  render() {
-    console.log(this.state.currency);
+  render(props) {
     return (
       <div className="investment-form-container">
         <div className="investment-form-inner">
@@ -82,14 +83,18 @@ class InvestmentForm extends Component {
           })()}
           <div className="form-container">
             <form onSubmit={this.handleSubmit}>
-              <input
-                type="text"
+              <select
+                value={this.state.selectValue}
                 onChange={this.handleChange}
-                placeholder="Currency Type"
                 name="currency"
-                value={this.state.currency}
-                className="input"
-              />
+              >
+              <option name="default" value="default">Select a Currency</option>
+                {this.props.currencies.map((currencies, i) => {
+                  return(
+                    <option value={currencies.name} key={currencies.id}>{currencies.name}</option>
+                  )
+                })}
+              </select>
               <input
                 type="number"
                 onChange={this.handleChange}

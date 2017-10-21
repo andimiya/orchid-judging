@@ -53,6 +53,7 @@ class HomepageContainer extends React.Component {
         }
         return false;
       });
+      this.setState({ allData: data})
       finalResult.map(index => {
         return this.setState({
           filteredData: finalResult
@@ -112,7 +113,8 @@ class HomepageContainer extends React.Component {
             </div>
           )
         })}
-        <InvestmentForm />
+        <InvestmentForm
+          currencies={this.state.allData} />
       </div>
     )
   };
