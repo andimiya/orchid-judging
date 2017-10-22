@@ -17,14 +17,21 @@ class InvestmentForm extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
+    });
+  }
+
+  handleDropdownChange(event) {
+    this.setState({
       selectValue: event.target.value
     });
   }
+
 
   handleSubmit(event) {
     event.preventDefault();
@@ -85,13 +92,13 @@ class InvestmentForm extends Component {
             <form onSubmit={this.handleSubmit}>
               <select
                 value={this.state.selectValue}
-                onChange={this.handleChange}
+                onChange={this.handleDropdownChange}
                 name="currency"
               >
               <option name="default" value="default">Select a Currency</option>
                 {this.props.currencies.map((currencies, i) => {
                   return(
-                    <option value={currencies.name} key={currencies.id}>{currencies.name}</option>
+                    <option value={currencies.symbol} key={currencies.id}>{currencies.name}</option>
                   )
                 })}
               </select>
