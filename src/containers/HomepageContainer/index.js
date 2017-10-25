@@ -1,5 +1,9 @@
 import React from 'react';
-import { COINMARKET_API, CRYPTO_API_GET_TOTALCOIN, CRYPTO_API_GET_INVESTMENTS } from '../../constants';
+import {
+  COINMARKET_API,
+  CRYPTO_API_GET_INVESTEDCURRENCIES,
+  CRYPTO_API_GET_TOTALCOIN,
+  CRYPTO_API_GET_INVESTMENTS } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -19,13 +23,15 @@ class HomepageContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getAllRates = this.getAllRates.bind(this);
+    this.getCurrentMarketRates = this.getCurrentMarketRates.bind(this);
     this.getTotalCoinOwned = this.getTotalCoinOwned.bind(this);
     this.getTotalDollarsInvested = this.getTotalDollarsInvested.bind(this);
+    this.getInvestedCurrencies = this.getInvestedCurrencies.bind(this);
 
     this.state = {
       allData: [],
       filteredData: [],
+      investedCurrencies: [],
       calculated: [],
       btcInvested: '',
       calculatedBtc: [],
@@ -40,20 +46,32 @@ class HomepageContainer extends React.Component {
   }
 
   componentDidMount(){
-    this.getAllRates();
+    this.getInvestedCurrencies();
+    this.getCurrentMarketRates();
     this.getTotalCoinOwned();
     this.getTotalDollarsInvested();
   }
 
-  getAllRates() {
+  getInvestedCurrencies() {
+    ajax(CRYPTO_API_GET_INVESTEDCURRENCIES).then(investedCurrencies => {
+      this.setState({ investedCurrencies: investedCurrencies })
+    })
+  }
+
+  getCurrentMarketRates() {
     ajax(COINMARKET_API).then(data => {
       const cryptoArray = data;
-      const finalResult = cryptoArray.filter((obj) => {
-        if (obj.symbol === 'BTC' || obj.symbol === 'ETH' || obj.symbol === 'LTC') {
-          return true;
-        }
-        return false;
-      });
+      const finalResult = this.state.investedCurrencies.map((currencies, i) => {
+        console.log(currencies.currency);
+      })
+      // const finalResult = cryptoArray.filter((obj) => {
+      //   this.state.investedCurrencies.map((currencies, i) => {
+      //     if (currencies.currency === 'BTC' || obj.symbol === 'ETH' || obj.symbol === 'LTC') {
+      //       return true;
+      //     }
+      //     return false;
+      //   })
+      // });
       this.setState({ allData: data})
       finalResult.map(index => {
         return this.setState({

@@ -41,7 +41,6 @@ class InvestmentForm extends Component {
       rate: Number(this.state.rate),
       amountusd: Number(this.state.amountusd),
     };
-    console.log(data, 'data');
     $.post({
       url: CRYPTO_API_POST_INVESTMENT,
       data: data
