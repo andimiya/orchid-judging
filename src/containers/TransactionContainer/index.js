@@ -1,5 +1,5 @@
 import React from 'react';
-import { CRYPTO_API_INVESTMENTS } from '../../constants';
+import { CRYPTO_API_INVESTMENTS, COINMARKET_API } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
 import InvestmentForm from '../../components/InvestmentForm';
@@ -10,15 +10,18 @@ class TransactionContainer extends React.Component {
     super(props);
 
     this.getTransactions = this.getTransactions.bind(this);
+    this.getAllCurrencies = this.getAllCurrencies.bind(this);
 
     this.state = {
       allData: [],
+      allCurrencies: [],
       error: ''
     };
   }
 
   componentDidMount(){
     this.getTransactions();
+    this.getAllCurrencies();
   }
 
   getTransactions(){
@@ -27,8 +30,14 @@ class TransactionContainer extends React.Component {
     })
   }
 
+  getAllCurrencies(){
+    ajax(COINMARKET_API).then(currencies => {
+      this.setState({ allCurrencies: currencies })
+    })
+  }
+
   render(props) {
-    console.log(this.state.allData, 'data');
+    console.log(this.state.allCurrencies, 'data');
     return (
       <div>
         <div className="transaction-container">
@@ -53,7 +62,7 @@ class TransactionContainer extends React.Component {
         </div>
         <div>
           <InvestmentForm
-            currencies={this.state.allData} />
+            currencies={this.state.allCurrencies} />
         </div>
       </div>
     )
