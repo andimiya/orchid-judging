@@ -1,5 +1,5 @@
 import React from 'react';
-import { CRYPTO_API_INVESTMENTS, COINMARKET_API } from '../../constants';
+import { CRYPTO_API_GET_INVESTMENTS, COINMARKET_API } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
 import InvestmentForm from '../../components/InvestmentForm';
@@ -25,7 +25,7 @@ class TransactionContainer extends React.Component {
   }
 
   getTransactions(){
-    ajax(CRYPTO_API_INVESTMENTS).then(data => {
+    ajax(CRYPTO_API_GET_INVESTMENTS).then(data => {
       this.setState({ allData: data })
     })
   }

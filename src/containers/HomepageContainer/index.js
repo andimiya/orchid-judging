@@ -1,5 +1,5 @@
 import React from 'react';
-import { COINMARKET_API, CRYPTO_API_TOTALCOIN, CRYPTO_API_INVESTMENTS } from '../../constants';
+import { COINMARKET_API, CRYPTO_API_GET_TOTALCOIN, CRYPTO_API_GET_INVESTMENTS } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -67,7 +67,7 @@ class HomepageContainer extends React.Component {
   }
 
   getTotalCoinOwned(){
-    ajax(CRYPTO_API_TOTALCOIN).then(data => {
+    ajax(CRYPTO_API_GET_TOTALCOIN).then(data => {
       const btcAmount = data.filter((obj) => {
         if (obj.currency === 'btc') {
           return true;
@@ -83,9 +83,9 @@ class HomepageContainer extends React.Component {
   }
 
   getTotalDollarsInvested(){
-    ajax(CRYPTO_API_INVESTMENTS).then(data => {
+    ajax(CRYPTO_API_GET_INVESTMENTS).then(data => {
       const dollarAmountbtc = data.filter((obj) => {
-        if (obj.currency === 'btc') {
+        if (obj.currency === 'BTC') {
           return true;
         } else {
           this.setState({ error: 'Error in getTotalDollarsInvested function' })
