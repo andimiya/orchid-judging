@@ -71,6 +71,10 @@ class HomepageContainer extends React.Component {
         if (obj.currency === 'btc') {
           return true;
         }
+        else {
+          this.setState({ error: 'Error in getTotalCoinOwned function' })
+          return false;
+        }
       });
       let btcOwned = btcAmount.reduce((total, item) => total + Number(item.coinowned), 0);
       this.setState({ btcOwned: btcOwned })
@@ -82,6 +86,9 @@ class HomepageContainer extends React.Component {
       const dollarAmountbtc = data.filter((obj) => {
         if (obj.currency === 'btc') {
           return true;
+        } else {
+          this.setState({ error: 'Error in getTotalDollarsInvested function' })
+          return false;
         }
       });
       let btcInvested = dollarAmountbtc.reduce((total, item) => total + Number(item.amountusd), 0);
