@@ -131,6 +131,9 @@
   margin: 1rem;
   border: 1px solid #bdbdbd;
   border-radius: 2px; }
+  .crypto-set a {
+    text-decoration: none;
+    color: black; }
   @media (min-width: 750px) {
     .crypto-set {
       flex: 0 0 18%; } }
@@ -145,6 +148,7 @@
       font-weight: 400;
       letter-spacing: 3.3px;
       text-transform: uppercase;
+      text-decoration: none;
       color: #68c9ba;
       margin: 0;
       margin-bottom: 0.8rem; }

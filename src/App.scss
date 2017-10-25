@@ -183,6 +183,10 @@ $background-color-tiles: #FAFAFA;
   margin: 1rem;
   border: 1px solid #bdbdbd;
   border-radius: 2px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
   // background-color: $background-color-tiles;
   @include medium {
     flex: 0 0 18%;
@@ -198,6 +202,7 @@ $background-color-tiles: #FAFAFA;
       font-weight: 400;
       letter-spacing: 3.3px;
       text-transform: uppercase;
+      text-decoration: none;
       color: $text-color-h2;
       margin: 0;
       margin-bottom: 0.8rem;

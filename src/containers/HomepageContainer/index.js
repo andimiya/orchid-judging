@@ -2,6 +2,7 @@ import React from 'react';
 import { COINMARKET_API, CRYPTO_API_TOTALCOIN, CRYPTO_API_INVESTMENTS } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import InvestmentForm from '../../components/InvestmentForm';
 
 const BTCIcon = require('../../assets/bitcoinIcon.svg');
@@ -106,6 +107,7 @@ class HomepageContainer extends React.Component {
           let icon = icons[`${cryptoData.symbol}Icon`];
           return (
             <div key={cryptoData.id} className="crypto-set">
+              <Link to="/transactions">
               <div className="title-container">
                 <img className="image" src={icon} height="80px" alt="currency symbol" />
                 <h2>{cryptoData.name}</h2>
@@ -117,6 +119,7 @@ class HomepageContainer extends React.Component {
                 <div>My Coin's Current Value (USD): ${currentValue}</div>
               </div>
               <div className="subtext">Last Updated:  {moment.unix(cryptoData.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
+              </Link>
             </div>
           )
         })}

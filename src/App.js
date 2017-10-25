@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 
 const App = () =>
   <div id="app-container">
-    <BrowserRouter basename="/crypto-tracker">
+    <BrowserRouter>
       <div>
         <NavBar />
           <Route exact path="/" component={HomepageContainer} />
