@@ -23,7 +23,7 @@ class HomepageContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getCurrentMarketRates = this.getCurrentMarketRates.bind(this);
+    this.getAllRates = this.getAllRates.bind(this);
     this.getTotalCoinOwned = this.getTotalCoinOwned.bind(this);
     this.getTotalDollarsInvested = this.getTotalDollarsInvested.bind(this);
     this.getInvestedCurrencies = this.getInvestedCurrencies.bind(this);
@@ -47,31 +47,27 @@ class HomepageContainer extends React.Component {
 
   componentDidMount(){
     this.getInvestedCurrencies();
-    this.getCurrentMarketRates();
+    this.getAllRates();
     this.getTotalCoinOwned();
     this.getTotalDollarsInvested();
   }
 
   getInvestedCurrencies() {
     ajax(CRYPTO_API_GET_INVESTEDCURRENCIES).then(investedCurrencies => {
+      console.log(investedCurrencies, 'invested currencies');
       this.setState({ investedCurrencies: investedCurrencies })
     })
   }
 
-  getCurrentMarketRates() {
+  getAllRates() {
     ajax(COINMARKET_API).then(data => {
       const cryptoArray = data;
-      const finalResult = this.state.investedCurrencies.map((currencies, i) => {
-        console.log(currencies.currency);
-      })
-      // const finalResult = cryptoArray.filter((obj) => {
-      //   this.state.investedCurrencies.map((currencies, i) => {
-      //     if (currencies.currency === 'BTC' || obj.symbol === 'ETH' || obj.symbol === 'LTC') {
-      //       return true;
-      //     }
-      //     return false;
-      //   })
-      // });
+      const finalResult = cryptoArray.filter((obj) => {
+        if (obj.symbol === 'BTC' || obj.symbol === 'ETH' || obj.symbol === 'LTC') {
+          return true;
+        }
+        return false;
+      });
       this.setState({ allData: data})
       finalResult.map(index => {
         return this.setState({
