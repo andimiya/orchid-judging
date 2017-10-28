@@ -21,11 +21,14 @@ const icons = {
   ETHIcon: ETHIcon
 };
 
+const USER_ID = 1;
+
 class HomepageContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.generateCards = this.generateCards.bind(this);
+    this.getTransactions = this.getTransactions.bind(this);
     // this.getInvestedCurrencies = this.getInvestedCurrencies.bind(this);
     // this.getAllInvestments = this.getAllInvestments.bind(this);
     // this.getTotalCoinOwned = this.getTotalCoinOwned.bind(this);
@@ -33,28 +36,31 @@ class HomepageContainer extends React.Component {
 
     this.state = {
       cryptoTypes: [],
+      transactions: [],
       error: ''
     };
   }
 
   componentDidMount(){
     this.generateCards();
+    this.getTransactions();
     // this.getAllRates();
     // this.getTotalCoinOwned();
     // this.getTotalDollarsInvested();
   }
 
   generateCards(){
-    ajax(`${CRYPTO_TYPES}?user_id=1`).then(cryptoTypes => {
-      console.log(cryptoTypes, 'currencies');
+    ajax(`${CRYPTO_TYPES}?user_id=${USER_ID}`).then(cryptoTypes => {
       this.setState({ cryptoTypes: cryptoTypes.data });
     })
   }
 
   getTransactions(){
-
+    ajax(`${GET_TRANSACTIONS}?user_id=${USER_ID}`).then(transactions => {
+      this.setState({ transactions: transactions.data })
+    })
   }
-  
+
   //
   // getInvestedCurrencies() {
   //   ajax(CRYPTO_API_GET_INVESTEDCURRENCIES).then(investedCurrencies => {
@@ -70,6 +76,7 @@ class HomepageContainer extends React.Component {
   // }
 
   render(props) {
+    console.log(this.state.transactions);
     return (
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
