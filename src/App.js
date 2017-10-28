@@ -11,7 +11,7 @@ const App = () =>
       <div>
         <NavBar />
           <Route exact path="/" component={HomepageContainer} />
-          <Route exact path="/transactions" component={TransactionContainer} />
+          
         <Footer />
       </div>
     </BrowserRouter>
