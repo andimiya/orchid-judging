@@ -3,6 +3,7 @@ import {
   COINMARKET_API,
   USERS,
   CRYPTO_TYPES,
+  CRYPTO_TYPES_SUM,
   GET_TRANSACTIONS,
   POST_TRANSACTIONS
  } from '../../constants';
@@ -28,25 +29,18 @@ class HomepageContainer extends React.Component {
     super(props);
 
     this.generateCards = this.generateCards.bind(this);
-    this.getTransactions = this.getTransactions.bind(this);
-    // this.getInvestedCurrencies = this.getInvestedCurrencies.bind(this);
-    // this.getAllInvestments = this.getAllInvestments.bind(this);
-    // this.getTotalCoinOwned = this.getTotalCoinOwned.bind(this);
-    // this.getTotalDollarsInvested = this.getTotalDollarsInvested.bind(this);
+    this.getTransactionSums = this.getTransactionSums.bind(this);
 
     this.state = {
       cryptoTypes: [],
-      transactions: [],
+      transactionSums: [],
       error: ''
     };
   }
 
   componentDidMount(){
     this.generateCards();
-    this.getTransactions();
-    // this.getAllRates();
-    // this.getTotalCoinOwned();
-    // this.getTotalDollarsInvested();
+    this.getTransactionSums();
   }
 
   generateCards(){
@@ -55,9 +49,9 @@ class HomepageContainer extends React.Component {
     })
   }
 
-  getTransactions(){
-    ajax(`${GET_TRANSACTIONS}?user_id=${USER_ID}`).then(transactions => {
-      this.setState({ transactions: transactions.data })
+  getTransactionSums(){
+    ajax(`${CRYPTO_TYPES_SUM}?user_id=${USER_ID}`).then(transactionSums => {
+      this.setState({ transactionSums: transactionSums.data })
     })
   }
 
@@ -76,7 +70,7 @@ class HomepageContainer extends React.Component {
   // }
 
   render(props) {
-    console.log(this.state.transactions);
+    console.log(this.state.transactionSums);
     return (
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
@@ -88,7 +82,16 @@ class HomepageContainer extends React.Component {
                 <h2>{currencies.name}</h2>
               </div>
               <div className="data-container">
-
+                {this.state.transactionSums.map(sums => {
+                  if (currencies.id === sums.crypto_id) {
+                    return (
+                      <div key={sums.crypto_id}>
+                        <div>USD Invested: ${sums.usd_invested}</div>
+                        <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
+                      </div>
+                    )
+                  }
+                })}
               </div>
             </div>
           )
