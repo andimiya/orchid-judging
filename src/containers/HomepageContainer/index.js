@@ -3,9 +3,7 @@ import {
   COINMARKET_API,
   USERS,
   CRYPTO_TYPES,
-  CRYPTO_TYPES_SUM,
-  GET_TRANSACTIONS,
-  POST_TRANSACTIONS
+  CRYPTO_TYPES_SUM
  } from '../../constants';
 import { ajax } from 'jquery';
 import moment from 'moment';
@@ -30,10 +28,12 @@ class HomepageContainer extends React.Component {
 
     this.generateCards = this.generateCards.bind(this);
     this.getTransactionSums = this.getTransactionSums.bind(this);
+    this.getExchangeRates = this.getExchangeRates.bind(this);
 
     this.state = {
       cryptoTypes: [],
       transactionSums: [],
+      exchangeRates: [],
       error: ''
     };
   }
@@ -41,10 +41,16 @@ class HomepageContainer extends React.Component {
   componentDidMount(){
     this.generateCards();
     this.getTransactionSums();
+    this.getExchangeRates();
   }
 
   generateCards(){
     ajax(`${CRYPTO_TYPES}?user_id=${USER_ID}`).then(cryptoTypes => {
+      cryptoTypes.data.map((crypto) => {
+        ajax(`${COINMARKET_API}${crypto.name}`).then(exchangeRates => {
+          console.log(exchangeRates, 'exchange rates generate');
+        });
+      })
       this.setState({ cryptoTypes: cryptoTypes.data });
     })
   }
@@ -52,29 +58,23 @@ class HomepageContainer extends React.Component {
   getTransactionSums(){
     ajax(`${CRYPTO_TYPES_SUM}?user_id=${USER_ID}`).then(transactionSums => {
       this.setState({ transactionSums: transactionSums.data })
-    })
+    });
   }
 
-  //
-  // getInvestedCurrencies() {
-  //   ajax(CRYPTO_API_GET_INVESTEDCURRENCIES).then(investedCurrencies => {
-  //     console.log(investedCurrencies, 'invested currencies');
-  //     this.setState({ investedCurrencies: investedCurrencies })
-  //   })
-  // }
-  //
-  // getAllInvestments(){
-  //   ajax(CRYPTO_API_GET_INVESTMENTS).then(data => {
-  //     console.log(data, 'all investements');
-  //   })
-  // }
+  getExchangeRates(){
+    ajax(`${COINMARKET_API}`).then(exchangeRates => {
+      this.setState({ exchangeRates })
+    });
+  }
 
   render(props) {
-    console.log(this.state.transactionSums);
+    console.log(this.state.exchangeRates, 'exchange rates');
     return (
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
+          console.log(this.state.exchangeRates[0].name, 'name');
+
           return (
             <div key={currencies.id} className="crypto-set">
               <div className="title-container">
@@ -102,26 +102,3 @@ class HomepageContainer extends React.Component {
 };
 
 export default HomepageContainer;
-//
-// {this.state.filteredData.map((cryptoData, i) => {
-//   const cryptoOwned = this.state[`${cryptoData.symbol.toLowerCase()}Owned`];
-//   const currentValue = (cryptoOwned*cryptoData.price_usd).toFixed(2);
-// i          let icon = icons[`${cryptoData.symbol}Icon`];
-//   return (
-//     <div key={cryptoData.id} className="crypto-set">
-//       <Link to="/transactions">
-//       <div className="title-container">
-//         <img className="image" src={icon} height="80px" alt="currency symbol" />
-//         <h2>{cryptoData.name}</h2>
-//       </div>
-//       <div className="data-container">
-//         <div>Current Market Price (USD): ${cryptoData.price_usd}</div>
-//         <div>BTC Owned: {this.state.btcOwned.toFixed(4)}</div>
-//         <div>Amount Invested: ${amountInvested}</div>
-//         <div>My Coin's Current Value (USD): ${currentValue}</div>
-//       </div>
-//       <div className="subtext">Last Updated:  {moment.unix(cryptoData.last_updated).format('MMM DD, YYYY - hh:mm a')}</div>
-//       </Link>
-//     </div>
-//   )
-// })}
