@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HomepageContainer from './containers/HomepageContainer';
-import TransactionContainer from './containers/TransactionContainer';
+// import TransactionContainer from './containers/TransactionContainer';
 import Footer from './components/Footer';
 
 const App = () =>
@@ -11,7 +11,6 @@ const App = () =>
       <div>
         <NavBar />
           <Route exact path="/" component={HomepageContainer} />
-          
         <Footer />
       </div>
     </BrowserRouter>

@@ -92,7 +92,7 @@ class HomepageContainer extends React.Component {
                           if (currencies.name === exchangeRates.id) {
                             return (
                               <div key={exchangeRates.id}>
-                                <div>Current Exchange: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
+                                <div>Current Market Price: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
                                 <div>Current Value (USD): {currentValue.toFixed(2)}</div>
                               </div>
                             )
