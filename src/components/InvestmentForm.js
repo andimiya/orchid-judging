@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import { CRYPTO_API_POST_INVESTMENT } from '../constants';
+import { POST_TRANSACTIONS, COINMARKET_API } from '../constants';
 import Notice from './Notice';
 
 class InvestmentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currency: '',
-      coinowned: '',
-      rate: '',
-      amountusd: '',
+      crypto_id: '',
+      coin_purchased: '',
+      exchange_rate: '',
+      usd_invested: '',
       sentStatus: '',
-      selectValue: ''
+      selectValue: '',
+      currencies: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getAllCurrencies = this.getAllCurrencies.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
+  }
+
+  componentDidMount(){
+    this.getAllCurrencies();
+  }
+
+  getAllCurrencies(){
+    $.get(COINMARKET_API).then(currencies => {
+      console.log(currencies, 'currencies');
+      this.setState({
+        currencies: currencies
+      });
+    });
   }
 
   handleChange(event) {
@@ -32,27 +47,26 @@ class InvestmentForm extends Component {
     });
   }
 
-
   handleSubmit(event) {
     event.preventDefault();
     const data = {
-      currency: this.state.selectValue,
-      coinowned: Number(this.state.coinowned),
-      rate: Number(this.state.rate),
-      amountusd: Number(this.state.amountusd),
+      crypto_id: this.state.selectValue,
+      coin_purchased: Number(this.state.coin_purchased),
+      exchange_rate: Number(this.state.exchange_rate),
+      usd_invested: Number(this.state.usd_invested),
     };
     $.post({
-      url: CRYPTO_API_POST_INVESTMENT,
+      url: POST_TRANSACTIONS,
       data: data
     })
       .then(data => {
         if (data.statusCode === 200) {
           this.setState({
             sentStatus: 'sent',
-            currency: '',
-            coinowned: '',
-            rate: '',
-            amountusd: ''
+            crypto_id: '',
+            coin_purchased: '',
+            exchange_rate: '',
+            usd_invested: ''
           });
         } else {
           this.setState({ sentStatus: 'error' });
@@ -92,37 +106,37 @@ class InvestmentForm extends Component {
               <select
                 value={this.state.selectValue}
                 onChange={this.handleDropdownChange}
-                name="currency"
+                name="crypto_id"
               >
               <option name="default" value="default">Select a Currency</option>
-                {this.props.currencies.map((currencies, i) => {
+                {this.state.currencies.map((currencies, i) => {
                   return(
-                    <option value={currencies.symbol} key={currencies.id}>{currencies.name}</option>
+                    <option value={currencies.rank} key={currencies.id}>{currencies.name}</option>
                   )
                 })}
               </select>
               <input
                 type="number"
                 onChange={this.handleChange}
-                placeholder="Amount of Coin Purchased"
-                name="coinowned"
-                value={this.state.coinowned}
+                placeholder="Coins Purchased"
+                name="coin_purchased"
+                value={this.state.coin_purchased}
                 className="input"
               />
               <input
                 type="text"
                 onChange={this.handleChange}
                 placeholder="Exchange Rate Purchased at (USD)"
-                name="rate"
-                value={this.state.rate}
+                name="exchange_rate"
+                value={this.state.exchange_rate}
                 className="input"
               />
               <input
                 type="text"
                 onChange={this.handleChange}
                 placeholder="Amount Invested (USD)"
-                name="amountusd"
-                value={this.state.amountusd}
+                name="usd_invested"
+                value={this.state.usd_invested}
                 className="input"
               />
               <input
