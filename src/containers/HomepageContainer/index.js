@@ -28,7 +28,6 @@ class HomepageContainer extends React.Component {
 
     this.generateCards = this.generateCards.bind(this);
     this.getTransactionSums = this.getTransactionSums.bind(this);
-    this.getExchangeRates = this.getExchangeRates.bind(this);
 
     this.state = {
       cryptoTypes: [],
@@ -41,14 +40,15 @@ class HomepageContainer extends React.Component {
   componentDidMount(){
     this.generateCards();
     this.getTransactionSums();
-    this.getExchangeRates();
   }
 
   generateCards(){
     ajax(`${CRYPTO_TYPES}?user_id=${USER_ID}`).then(cryptoTypes => {
       cryptoTypes.data.map((crypto) => {
         ajax(`${COINMARKET_API}${crypto.name}`).then(exchangeRates => {
-          console.log(exchangeRates, 'exchange rates generate');
+          let exchangeRatesArray = this.state.exchangeRates;
+          exchangeRatesArray.push(exchangeRates[0]);
+          this.setState({ exchangeRates: exchangeRatesArray })
         });
       })
       this.setState({ cryptoTypes: cryptoTypes.data });
@@ -61,20 +61,12 @@ class HomepageContainer extends React.Component {
     });
   }
 
-  getExchangeRates(){
-    ajax(`${COINMARKET_API}`).then(exchangeRates => {
-      this.setState({ exchangeRates })
-    });
-  }
-
   render(props) {
-    console.log(this.state.exchangeRates, 'exchange rates');
+    console.log(this.state.exchangeRates, 'sums');
     return (
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
-          console.log(this.state.exchangeRates[0].name, 'name');
-
           return (
             <div key={currencies.id} className="crypto-set">
               <div className="title-container">
@@ -82,12 +74,30 @@ class HomepageContainer extends React.Component {
                 <h2>{currencies.name}</h2>
               </div>
               <div className="data-container">
+                {this.state.exchangeRates.map(exchange => {
+                  if (currencies.name === exchange.name) {
+                    return (
+                      <div>{exchange.price_usd}</div>
+                    )
+                  }
+                })}
                 {this.state.transactionSums.map(sums => {
                   if (currencies.id === sums.crypto_id) {
                     return (
                       <div key={sums.crypto_id}>
                         <div>USD Invested: ${sums.usd_invested}</div>
                         <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
+                        {this.state.exchangeRates.map(exchangeRates => {
+                          const currentValue = (sums.coin_purchased*exchangeRates.price_usd);
+                          if (currencies.name === exchangeRates.id) {
+                            return (
+                              <div key={exchangeRates.id}>
+                                <div>Current Exchange: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
+                                <div>Current Value (USD): {currentValue.toFixed(2)}</div>
+                              </div>
+                            )
+                          }
+                        })}
                       </div>
                     )
                   }
