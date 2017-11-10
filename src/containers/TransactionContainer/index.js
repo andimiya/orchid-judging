@@ -1,71 +1,51 @@
-// import React from 'react';
-// import { ajax } from 'jquery';
-// import moment from 'moment';
-// import InvestmentForm from '../../components/InvestmentForm';
-// import TransactionTable from '../../components/TransactionTable';
-//
-// class TransactionContainer extends React.Component {
-//   constructor(props) {
-//     super(props);
-//
-//     this.getTransactions = this.getTransactions.bind(this);
-//     this.getAllCurrencies = this.getAllCurrencies.bind(this);
-//
-//     this.state = {
-//       allData: [],
-//       allCurrencies: [],
-//       error: ''
-//     };
-//   }
-//
-//   componentDidMount(){
-//     this.getTransactions();
-//     this.getAllCurrencies();
-//   }
-//
-//   getTransactions(){
-//     ajax(CRYPTO_API_GET_INVESTMENTS).then(data => {
-//       this.setState({ allData: data })
-//     })
-//   }
-//
-//   getAllCurrencies(){
-//     ajax(COINMARKET_API).then(currencies => {
-//       this.setState({ allCurrencies: currencies })
-//     })
-//   }
-//
-//   render(props) {
-//     console.log(this.state.allCurrencies, 'data');
-//     return (
-//       <div>
-//         <div className="transaction-container">
-//           <div className="investment-line-container">
-//             <div className="investment-line">
-//               <div>Date Updated</div>
-//               <div>Currency</div>
-//               <div>Amount Invested (USD)</div>
-//               <div>Amount of Coin Purchased</div>
-//             </div>
-//           {this.state.allData.map((transactions, i) => {
-//             return(
-//               <div className="investment-line">
-//                 <div className="column">{moment(transactions.updatedAt).format('MMM DD, YYYY hh:mm a')}</div>
-//                 <div className="column">{transactions.currency}</div>
-//                 <div className="column">{transactions.amountusd}</div>
-//                 <div className="column">{transactions.coinowned}</div>
-//               </div>
-//             )
-//           })}
-//           </div>
-//         </div>
-//         <div>
-//           <InvestmentForm
-//             currencies={this.state.allCurrencies} />
-//         </div>
-//       </div>
-//     )
-//   };
-// };
-//
-// export default TransactionContainer;
+import React from 'react';
+import { ajax } from 'jquery';
+import moment from 'moment';
+import { GET_TRANSACTIONS } from '../../constants';
+import InvestmentForm from '../../components/InvestmentForm';
+import TransactionTable from '../../components/TransactionTable';
+
+const USER_ID = 1;
+
+class TransactionContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.getTransactions = this.getTransactions.bind(this);
+
+    this.state = {
+      allData: [],
+      exchangeRates: [],
+      error: ''
+    };
+  }
+
+  componentDidMount(){
+    this.getTransactions();
+  }
+
+  getTransactions(){
+    ajax(`${GET_TRANSACTIONS}?user_id=${USER_ID}`).then(data => {
+      this.setState({ allData: data.data })
+    })
+  }
+
+  render(props) {
+    console.log(this.state.allData, 'data');
+    return (
+      <div>
+        <div className="transaction-container">
+          <div className="investment-line-container">
+            <TransactionTable allData={this.state.allData}/>
+          </div>
+        </div>
+        <div>
+          <InvestmentForm
+            currencies={this.state.allCurrencies} />
+        </div>
+      </div>
+    )
+  };
+};
+
+export default TransactionContainer;

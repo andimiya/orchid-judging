@@ -6,8 +6,6 @@ import {
   CRYPTO_TYPES_SUM
  } from '../../constants';
 import { ajax } from 'jquery';
-import moment from 'moment';
-import { Link } from 'react-router-dom';
 import InvestmentForm from '../../components/InvestmentForm';
 
 const BTCIcon = require('../../assets/bitcoinIcon.svg');
