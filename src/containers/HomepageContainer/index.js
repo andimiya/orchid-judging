@@ -56,13 +56,14 @@ class HomepageContainer extends React.Component {
   }
 
   getTransactionSums(){
-    ajax(`${CRYPTO_TYPES_SUM}?user_id=${USER_ID}`).then(transactionSums => {
-      this.setState({ transactionSums: transactionSums.data })
+    ajax(`${CRYPTO_TYPES_SUM}?user_id=${USER_ID}`)
+      .then(transactionSums => {
+        this.setState({ transactionSums: transactionSums.data
+      })
     });
   }
 
   render(props) {
-    console.log(this.state.exchangeRates, 'sums');
     return (
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
@@ -77,7 +78,7 @@ class HomepageContainer extends React.Component {
                 {this.state.exchangeRates.map(exchange => {
                   if (currencies.name === exchange.name) {
                     return (
-                      <div>{exchange.price_usd}</div>
+                      <div key={currencies.id}>Current exchange price (USD): {exchange.price_usd}</div>
                     )
                   }
                 })}
@@ -89,7 +90,7 @@ class HomepageContainer extends React.Component {
                         <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
                         {this.state.exchangeRates.map(exchangeRates => {
                           const currentValue = (sums.coin_purchased*exchangeRates.price_usd);
-                          if (currencies.name === exchangeRates.id) {
+                          if (currencies.name.toLowerCase() === exchangeRates.id) {
                             return (
                               <div key={exchangeRates.id}>
                                 <div>Current Market Price: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
