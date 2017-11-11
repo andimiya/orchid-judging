@@ -262,22 +262,18 @@ $background-color-tiles: #FAFAFA;
 }
 
 .notice-container-success {
-  border: 1px solid #469557;
-  margin-bottom: 1rem;
-  width: 100%;
+  margin: 1.5rem;
 
   p {
-    padding: 0.4rem 0.3rem 0.3rem 1.3rem;
+    margin: 0;
     color: #469557;
   }
 }
 
 .notice-container-error {
-  border: 1px solid #d64d3d;
-  margin-bottom: 1rem;
-  width: 100%;
+  margin: 1.5rem;
   p {
-    padding: 0.4rem 0.3rem 0.3rem 1.3rem;
+    margin: 0;
     color: #d64d3d;
   }
 }
