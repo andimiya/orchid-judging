@@ -1,6 +1,5 @@
 import React from 'react';
 import { ajax } from 'jquery';
-import moment from 'moment';
 import { GET_TRANSACTIONS } from '../../constants';
 import InvestmentForm from '../../components/InvestmentForm';
 import TransactionTable from '../../components/TransactionTable';
