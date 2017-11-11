@@ -25,11 +25,13 @@ class HomepageContainer extends React.Component {
 
     this.generateCards = this.generateCards.bind(this);
     this.getTransactionSums = this.getTransactionSums.bind(this);
+    this.getAllCurrencies = this.getAllCurrencies.bind(this);
 
     this.state = {
       cryptoTypes: [],
       transactionSums: [],
       exchangeRates: [],
+      currencies: [],
       error: ''
     };
   }
@@ -37,6 +39,15 @@ class HomepageContainer extends React.Component {
   componentDidMount(){
     this.generateCards();
     this.getTransactionSums();
+    this.getAllCurrencies();
+  }
+
+  getAllCurrencies(){
+    ajax(COINMARKET_API).then(currencies => {
+      this.setState({
+        currencies: currencies
+      });
+    });
   }
 
   generateCards(){
@@ -105,6 +116,7 @@ class HomepageContainer extends React.Component {
           )
         })}
         <InvestmentForm
+          currencies={this.state.currencies}
           getTransactionSums={this.getTransactionSums()}
         />
       </div>

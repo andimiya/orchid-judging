@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import { POST_TRANSACTIONS, COINMARKET_API } from '../constants';
+import { POST_TRANSACTIONS } from '../constants';
 import Notice from './Notice';
 
 class InvestmentForm extends Component {
@@ -12,27 +12,13 @@ class InvestmentForm extends Component {
       exchange_rate: '',
       usd_invested: '',
       sentStatus: '',
-      selectValue: '',
-      currencies: []
+      selectValue: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.getAllCurrencies = this.getAllCurrencies.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
-  }
-
-  componentDidMount(){
-    this.getAllCurrencies();
-  }
-
-  getAllCurrencies(){
-    $.get(COINMARKET_API).then(currencies => {
-      this.setState({
-        currencies: currencies
-      });
-    });
-  }
+  };
 
   handleChange(event) {
     this.setState({
@@ -109,7 +95,7 @@ class InvestmentForm extends Component {
                 name="crypto_id"
               >
               <option name="default" value="default">Select a Currency</option>
-                {this.state.currencies.map((currencies, i) => {
+                {this.props.currencies.map((currencies, i) => {
                   return(
                     <option value={currencies.rank} key={currencies.id}>{currencies.name}</option>
                   )
