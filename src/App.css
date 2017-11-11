@@ -93,16 +93,13 @@
       align-items: center;
       visibility: visible;
       flex: 0 0 100%; }
-      .responsive-container .menu-item-container .menu-item a {
+      .responsive-container .menu-item-container .menu-item a, .responsive-container .menu-item-container .menu-item div {
         text-transform: uppercase;
         text-decoration: none;
         font-size: 0.85rem;
         font-weight: 500;
         letter-spacing: 1.8px;
         color: black; }
-      .responsive-container .menu-item-container .menu-item,
-      .responsive-container .menu-item-container .menu-item a, .responsive-container .menu-item-container .menu-item p:hover {
-        color: white; }
     @media (min-width: 750px) {
       .responsive-container .menu-item-container {
         display: flex;
