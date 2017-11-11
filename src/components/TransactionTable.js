@@ -6,10 +6,12 @@ const TransactionTable = (props) => {
     <div className="transaction-table-container">
       <table className="table table-striped table-sm">
         <thead>
-          <th>Date/Time Entered</th>
-          <th>Currency</th>
-          <th>Amount Invested (USD)</th>
-          <th>Amount of Coin Purchased</th>
+          <tr>
+            <th>Date/Time Entered</th>
+            <th>Currency</th>
+            <th>Amount Invested (USD)</th>
+            <th>Amount of Coin Purchased</th>
+          </tr>
         </thead>
         <tbody>
         {props.allData.map(transactions => {

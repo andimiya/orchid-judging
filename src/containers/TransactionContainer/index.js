@@ -39,7 +39,9 @@ class TransactionContainer extends React.Component {
         </div>
         <div>
           <InvestmentForm
-            currencies={this.state.allCurrencies} />
+            currencies={this.state.allCurrencies}
+            getTransactions={this.getTransactions()}
+          />
         </div>
       </div>
     )

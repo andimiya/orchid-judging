@@ -67,6 +67,7 @@ class InvestmentForm extends Component {
             exchange_rate: '',
             usd_invested: ''
           });
+          this.props.getTransactions;
         } else {
           this.setState({ sentStatus: 'error' });
         }
