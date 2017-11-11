@@ -8,6 +8,8 @@ class InvestmentForm extends Component {
     super(props);
     this.state = {
       crypto_id: '',
+      crypto_symbol: '',
+      crypto_name: '',
       coin_purchased: '',
       exchange_rate: '',
       usd_invested: '',
@@ -53,7 +55,7 @@ class InvestmentForm extends Component {
             exchange_rate: '',
             usd_invested: ''
           });
-          this.props.getTransactions;
+          this.props.getTransactions();
         } else {
           this.setState({ sentStatus: 'error' });
         }
@@ -96,8 +98,9 @@ class InvestmentForm extends Component {
               >
               <option name="default" value="default">Select a Currency</option>
                 {this.props.currencies.map((currencies, i) => {
+                  let things = JSON.stringify('rank': currencies.rank, 'name': currencies.name);
                   return(
-                    <option value={currencies.rank} key={currencies.id}>{currencies.name}</option>
+                    <option value={things} key={currencies.id}>{currencies.name}</option>
                   )
                 })}
               </select>

@@ -52,14 +52,15 @@ class HomepageContainer extends React.Component {
 
   generateCards(){
     ajax(`${CRYPTO_TYPES}?user_id=${USER_ID}`).then(cryptoTypes => {
-      cryptoTypes.data.map((crypto) => {
+      cryptoTypes.data.map(crypto => {
         ajax(`${COINMARKET_API}${crypto.name}`).then(exchangeRates => {
           let exchangeRatesArray = this.state.exchangeRates;
           exchangeRatesArray.push(exchangeRates[0]);
-          this.setState({ exchangeRates: exchangeRatesArray })
+          return this.setState({ exchangeRates: exchangeRatesArray })
         });
+        return this.setState({ error: 'Error returning exchange rates from Coinmarket API' })
       })
-      this.setState({ cryptoTypes: cryptoTypes.data });
+      return this.setState({ cryptoTypes: cryptoTypes.data });
     })
   }
 
@@ -88,6 +89,10 @@ class HomepageContainer extends React.Component {
                     return (
                       <div key={currencies.id}>Current exchange price (USD): {exchange.price_usd}</div>
                     )
+                  } else {
+                    return (
+                      <div key="error" className="error">Error returning exchange rates</div>
+                    )
                   }
                 })}
                 {this.state.transactionSums.map(sums => {
@@ -105,9 +110,18 @@ class HomepageContainer extends React.Component {
                                 <div>Current Value (USD): {currentValue.toFixed(2)}</div>
                               </div>
                             )
+                          } else {
+                            return (
+                              <div key="error">Error returning calculated exchange rates</div>
+                            )
                           }
                         })}
                       </div>
+                    )
+                  }
+                  else {
+                    return (
+                      <div key="error" className="error">Error returning transaction sums from database</div>
                     )
                   }
                 })}
