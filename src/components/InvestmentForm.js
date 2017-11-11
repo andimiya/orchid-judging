@@ -59,7 +59,7 @@ class InvestmentForm extends Component {
       data: data
     })
       .then(data => {
-        if (data.statusCode === 200) {
+        if (data.status === 200) {
           this.setState({
             sentStatus: 'sent',
             crypto_id: '',
@@ -75,7 +75,6 @@ class InvestmentForm extends Component {
   }
 
   render(props) {
-    console.log(this.state.selectValue, 'dropdown');
     return (
       <div className="investment-form-container">
         <div className="form-group">
@@ -84,7 +83,7 @@ class InvestmentForm extends Component {
               case 'sent':
                 return (
                   <Notice
-                    status="Your message has been sent! We'll contact you shortly"
+                    status="Transaction posted successfully"
                     statusClass="success-message"
                     noticeContainerClass="notice-container-success"
                   />

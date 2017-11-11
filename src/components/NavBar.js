@@ -37,7 +37,7 @@ class NavBar extends React.Component {
         <div className="menu-item-container">
           <div className="menu-item">
             <Link to="/work" onClick={this.collapseNav}>
-              <p>Resources</p>
+              <p>Transactions</p>
             </Link>
           </div>
           <div className="menu-item">
