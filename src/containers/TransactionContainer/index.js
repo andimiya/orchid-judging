@@ -31,7 +31,6 @@ class TransactionContainer extends React.Component {
   }
 
   render(props) {
-    console.log(this.state.allData, 'data');
     return (
       <div>
         <div className="transaction-container">

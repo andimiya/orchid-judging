@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   COINMARKET_API,
-  USERS,
   CRYPTO_TYPES,
   CRYPTO_TYPES_SUM
  } from '../../constants';

@@ -15,12 +15,13 @@ const TransactionTable = (props) => {
         </thead>
         <tbody>
         {props.allData.map(transactions => {
+          console.log(transactions);
           return (
-            <tr>
-              <td>{transactions.updated_at}</td>
-              <td>{transactions.crypto_type_id}</td>
-              <td>{transactions.usd_invested}</td>
-              <td>{transactions.coin_purchased}</td>
+            <tr key={transactions.transaction_id}>
+              <td key={transactions.updated_at}>{transactions.updated_at}</td>
+              <td key={transactions.crypto_type_id}>{transactions.crypto_type_id}</td>
+              <td key={transactions.usd_invested}>{transactions.usd_invested}</td>
+              <td key={transactions.coin_purchased}>{transactions.coin_purchased}</td>
             </tr>
           )
         })}

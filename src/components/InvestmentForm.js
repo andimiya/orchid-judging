@@ -28,7 +28,6 @@ class InvestmentForm extends Component {
 
   getAllCurrencies(){
     $.get(COINMARKET_API).then(currencies => {
-      console.log(currencies, 'currencies');
       this.setState({
         currencies: currencies
       });
@@ -50,7 +49,7 @@ class InvestmentForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = {
-      crypto_id: this.state.selectValue,
+      crypto_id: Number(this.state.selectValue),
       coin_purchased: Number(this.state.coin_purchased),
       exchange_rate: Number(this.state.exchange_rate),
       usd_invested: Number(this.state.usd_invested),
@@ -76,9 +75,10 @@ class InvestmentForm extends Component {
   }
 
   render(props) {
+    console.log(this.state.selectValue, 'dropdown');
     return (
       <div className="investment-form-container">
-        <div className="investment-form-inner">
+        <div className="form-group">
           {(() => {
             switch (this.state.sentStatus) {
               case 'sent':
