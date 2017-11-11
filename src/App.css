@@ -177,6 +177,14 @@
 
 .transaction-table-container {
   margin: 6rem; }
+  .transaction-table-container th {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 3rem; }
+  .transaction-table-container td {
+    text-align: center; }
 
 .notice-container-success {
   border: 1px solid #469557;

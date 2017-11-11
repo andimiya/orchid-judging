@@ -243,6 +243,16 @@ $background-color-tiles: #FAFAFA;
 
 .transaction-table-container {
   margin: 6rem;
+  th {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 3rem;
+  }
+  td {
+    text-align: center;
+  }
 }
 
 .notice-container-success {

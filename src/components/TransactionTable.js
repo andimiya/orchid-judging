@@ -6,7 +6,7 @@ const TransactionTable = (props) => {
 
   return (
     <div className="transaction-table-container">
-      <table className="table table-striped table-sm table-bordered">
+      <table className="table table-striped table-sm">
         <thead>
           <th>Date Updated</th>
           <th>Currency</th>
