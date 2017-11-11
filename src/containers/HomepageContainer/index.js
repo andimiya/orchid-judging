@@ -104,7 +104,9 @@ class HomepageContainer extends React.Component {
             </div>
           )
         })}
-        <InvestmentForm />
+        <InvestmentForm
+          getTransactionSums={this.getTransactionSums()}
+        />
       </div>
     )
   };
