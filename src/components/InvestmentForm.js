@@ -51,6 +51,7 @@ class InvestmentForm extends Component {
     })
       .then(data => {
         if (data.status === 200) {
+          this.props.getTransactions;
           this.setState({
             sentStatus: 'sent',
             crypto_id: '',
@@ -58,7 +59,6 @@ class InvestmentForm extends Component {
             exchange_rate: '',
             usd_invested: ''
           });
-          this.props.getTransactions;
         } else {
           this.setState({ sentStatus: 'error' });
         }

@@ -39,8 +39,8 @@ class HomepageContainer extends React.Component {
 
   componentDidMount(){
     this.generateCards();
-    this.getTransactionSums();
     this.getAllCurrencies();
+    this.getTransactionSums();
   }
 
   getAllCurrencies(){
@@ -119,7 +119,7 @@ class HomepageContainer extends React.Component {
         })}
         <InvestmentForm
           currencies={this.state.currencies}
-          getTransactionSums={this.getTransactionSums}
+          getTransactions={this.generateCards}
         />
       </div>
     )
