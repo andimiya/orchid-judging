@@ -31,7 +31,6 @@ class InvestmentForm extends Component {
   }
 
   handleDropdownChange(event) {
-    console.log(event.target.value, 'value');
     this.setState({
       selectValue: event.target.value
     });

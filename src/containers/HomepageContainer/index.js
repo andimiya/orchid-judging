@@ -75,7 +75,6 @@ class HomepageContainer extends React.Component {
   }
 
   render(props) {
-    console.log(this.state.currencies);
     return (
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
