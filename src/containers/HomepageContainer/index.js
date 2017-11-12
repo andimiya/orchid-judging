@@ -43,26 +43,28 @@ class HomepageContainer extends React.Component {
     this.getTransactionSums();
   }
 
+  generateCards(){
+    ajax(`${CRYPTO_TYPES}?user_id=${USER_ID}`)
+      .then(cryptoTypes => {
+      cryptoTypes.data.map(crypto => {
+        ajax(`${COINMARKET_API}${crypto.name}`)
+          .then(exchangeRates => {
+            let exchangeRatesArray = this.state.exchangeRates;
+            exchangeRatesArray.push(exchangeRates[0]);
+            return this.setState({ exchangeRates: exchangeRatesArray })
+          });
+        return this.setState({ error: 'Error returning exchange rates from Coinmarket API' })
+      })
+        return this.setState({ cryptoTypes: cryptoTypes.data });
+      })
+  }
+
   getAllCurrencies(){
     ajax(CURRENCIES).then(currencies => {
       this.setState({
         currencies: currencies.data
       });
     });
-  }
-
-  generateCards(){
-    ajax(`${CRYPTO_TYPES}?user_id=${USER_ID}`).then(cryptoTypes => {
-      cryptoTypes.data.map(crypto => {
-        ajax(`${COINMARKET_API}${crypto.name}`).then(exchangeRates => {
-          let exchangeRatesArray = this.state.exchangeRates;
-          exchangeRatesArray.push(exchangeRates[0]);
-          return this.setState({ exchangeRates: exchangeRatesArray })
-        });
-        return this.setState({ error: 'Error returning exchange rates from Coinmarket API' })
-      })
-      return this.setState({ cryptoTypes: cryptoTypes.data });
-    })
   }
 
   getTransactionSums(){
