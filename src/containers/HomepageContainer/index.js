@@ -14,6 +14,8 @@ const LTCIcon = require('../../assets/litecoinIcon.svg');
 const ETHIcon = require('../../assets/ethereumIcon.svg');
 const XRPIcon = require('../../assets/rippleIcon.svg');
 const BCNIcon = require('../../assets/bytecoinIcon.svg');
+const DOGEIcon = require('../../assets/dogeIcon.svg');
+const genericIcon = require('../../assets/genericIcon.svg');
 
 const icons = {
   BTCIcon: BTCIcon,
@@ -21,7 +23,9 @@ const icons = {
   LTCIcon: LTCIcon,
   ETHIcon: ETHIcon,
   XRPIcon: XRPIcon,
-  BCNIcon: BCNIcon
+  BCNIcon: BCNIcon,
+  DOGEIcon: DOGEIcon,
+  genericIcon: genericIcon
 };
 
 const USER_ID = 1;
@@ -86,10 +90,15 @@ class HomepageContainer extends React.Component {
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
+          console.log(icon, 'icon');
+          let genericIcon = icons[`genericIcon`];
           return (
             <div className="crypto-set">
               <div className="title-container">
-                <img className="image" src={icon} height="80px" alt="currency symbol" />
+                {(icon === undefined)
+                  ? <img className="image" src={genericIcon} height="80px" alt="currency symbol" />
+                  : <img className="image" src={icon} height="80px" alt="currency symbol" />
+                  }
                 <h2>{currencies.name}</h2>
               </div>
               <div className="data-container">
