@@ -151,8 +151,9 @@
       margin-bottom: 0.8rem; }
     .crypto-set .title-container img {
       flex: 0 0 100%;
-      margin-bottom: 0.5rem;
-      margin-top: 0.5rem; }
+      width: 142px;
+      height: 100px;
+      padding: 12px; }
   .crypto-set .data-container {
     padding: 1rem;
     line-height: 1.5rem; }

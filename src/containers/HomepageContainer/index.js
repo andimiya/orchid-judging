@@ -9,13 +9,19 @@ import { ajax } from 'jquery';
 import InvestmentForm from '../../components/InvestmentForm';
 
 const BTCIcon = require('../../assets/bitcoinIcon.svg');
+const BCHIcon = require('../../assets/bitcoinIcon.svg');
 const LTCIcon = require('../../assets/litecoinIcon.svg');
 const ETHIcon = require('../../assets/ethereumIcon.svg');
+const XRPIcon = require('../../assets/rippleIcon.svg');
+const BCNIcon = require('../../assets/bytecoinIcon.svg');
 
 const icons = {
   BTCIcon: BTCIcon,
+  BCHIcon: BCHIcon,
   LTCIcon: LTCIcon,
-  ETHIcon: ETHIcon
+  ETHIcon: ETHIcon,
+  XRPIcon: XRPIcon,
+  BCNIcon: BCNIcon
 };
 
 const USER_ID = 1;
