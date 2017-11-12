@@ -3,6 +3,8 @@ import $ from 'jquery';
 import { POST_TRANSACTIONS } from '../constants';
 import Notice from './Notice';
 
+const USER_ID = 1;
+
 class InvestmentForm extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +41,7 @@ class InvestmentForm extends Component {
     event.preventDefault();
     const data = {
       crypto_id: Number(this.state.selectValue),
+      user_id: USER_ID,
       coin_purchased: Number(this.state.coin_purchased),
       exchange_rate: Number(this.state.exchange_rate),
       usd_invested: Number(this.state.usd_invested),
