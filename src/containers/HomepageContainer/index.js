@@ -45,7 +45,6 @@ class HomepageContainer extends React.Component {
 
   getAllCurrencies(){
     ajax(CURRENCIES).then(currencies => {
-      console.log(currencies, 'get currencies');
       this.setState({
         currencies: currencies.data
       });
@@ -80,7 +79,7 @@ class HomepageContainer extends React.Component {
         {this.state.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
           return (
-            <div key={currencies.id} className="crypto-set">
+            <div className="crypto-set">
               <div className="title-container">
                 <img className="image" src={icon} height="80px" alt="currency symbol" />
                 <h2>{currencies.name}</h2>
@@ -89,18 +88,14 @@ class HomepageContainer extends React.Component {
                 {this.state.exchangeRates.map(exchange => {
                   if (currencies.name === exchange.name) {
                     return (
-                      <div key={currencies.id}>Current exchange price (USD): {exchange.price_usd}</div>
-                    )
-                  } else {
-                    return (
-                      <div key="error" className="error">Error returning exchange rates</div>
+                      <div>Current exchange price (USD): {exchange.price_usd}</div>
                     )
                   }
                 })}
                 {this.state.transactionSums.map(sums => {
-                  if (currencies.id === sums.crypto_id) {
+                  if (currencies.name === sums.name) {
                     return (
-                      <div key={sums.crypto_id}>
+                      <div key={sums.crypto_type_id}>
                         <div>USD Invested: ${sums.usd_invested}</div>
                         <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
                         {this.state.exchangeRates.map(exchangeRates => {
@@ -112,18 +107,9 @@ class HomepageContainer extends React.Component {
                                 <div>Current Value (USD): {currentValue.toFixed(2)}</div>
                               </div>
                             )
-                          } else {
-                            return (
-                              <div key="error">Error returning calculated exchange rates</div>
-                            )
                           }
                         })}
                       </div>
-                    )
-                  }
-                  else {
-                    return (
-                      <div key="error" className="error">Error returning transaction sums from database</div>
                     )
                   }
                 })}
@@ -133,7 +119,7 @@ class HomepageContainer extends React.Component {
         })}
         <InvestmentForm
           currencies={this.state.currencies}
-          getTransactionSums={this.getTransactionSums()}
+          getTransactionSums={this.getTransactionSums}
         />
       </div>
     )
