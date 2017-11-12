@@ -1,6 +1,6 @@
 import React from 'react';
 import { ajax } from 'jquery';
-import { GET_TRANSACTIONS, COINMARKET_API } from '../../constants';
+import { GET_TRANSACTIONS, CURRENCIES } from '../../constants';
 import InvestmentForm from '../../components/InvestmentForm';
 import TransactionTable from '../../components/TransactionTable';
 
@@ -27,7 +27,7 @@ class TransactionContainer extends React.Component {
   }
 
   getAllCurrencies(){
-    ajax(COINMARKET_API).then(currencies => {
+    ajax(CURRENCIES).then(currencies => {
       this.setState({
         currencies: currencies
       });

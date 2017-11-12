@@ -29,6 +29,7 @@ class InvestmentForm extends Component {
   }
 
   handleDropdownChange(event) {
+    console.log(event.target.value, 'value');
     this.setState({
       selectValue: event.target.value
     });
@@ -55,7 +56,7 @@ class InvestmentForm extends Component {
             exchange_rate: '',
             usd_invested: ''
           });
-          this.props.getTransactions();
+          this.props.getTransactions;
         } else {
           this.setState({ sentStatus: 'error' });
         }
@@ -98,9 +99,8 @@ class InvestmentForm extends Component {
               >
               <option name="default" value="default">Select a Currency</option>
                 {this.props.currencies.map((currencies, i) => {
-                  let things = JSON.stringify('rank': currencies.rank, 'name': currencies.name);
                   return(
-                    <option value={things} key={currencies.id}>{currencies.name}</option>
+                    <option value={currencies.id} key={currencies.id}>{currencies.name}</option>
                   )
                 })}
               </select>

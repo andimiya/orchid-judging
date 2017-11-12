@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   COINMARKET_API,
+  CURRENCIES,
   CRYPTO_TYPES,
   CRYPTO_TYPES_SUM
  } from '../../constants';
@@ -43,9 +44,10 @@ class HomepageContainer extends React.Component {
   }
 
   getAllCurrencies(){
-    ajax(COINMARKET_API).then(currencies => {
+    ajax(CURRENCIES).then(currencies => {
+      console.log(currencies, 'get currencies');
       this.setState({
-        currencies: currencies
+        currencies: currencies.data
       });
     });
   }
@@ -73,6 +75,7 @@ class HomepageContainer extends React.Component {
   }
 
   render(props) {
+    console.log(this.state.currencies);
     return (
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
