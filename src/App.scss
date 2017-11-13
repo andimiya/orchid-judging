@@ -240,9 +240,20 @@ $font: 'futura-pt';
     font-weight: 300;
     margin: 0.2rem;
     font-size: 0.8rem;
+    letter-spacing: 0.3px;
   }
   .btn {
     margin: 0.5rem;
+    background-color: $background-color-dark;
+    border: $background-color-dark;
+    color: black;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 400;
+    cursor: pointer;
+  }
+  .btn:hover {
+    color: white;
   }
 
   @include small {

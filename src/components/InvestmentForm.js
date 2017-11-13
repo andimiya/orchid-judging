@@ -134,7 +134,7 @@ class InvestmentForm extends Component {
               <input
                 className="btn btn-primary"
                 type="submit"
-                value="Enter My Investment"
+                value="Enter Investment"
               />
             </form>
           </div>
