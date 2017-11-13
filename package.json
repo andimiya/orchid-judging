@@ -2,7 +2,6 @@
   "name": "crypto-tracker",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://andimiya.github.io/crypto-tracker",
   "engines": {
     "node": "7.9.0",
     "npm": "4.2.0"
