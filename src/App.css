@@ -93,13 +93,15 @@
       align-items: center;
       visibility: visible;
       flex: 0 0 100%; }
-      .responsive-container .menu-item-container .menu-item a, .responsive-container .menu-item-container .menu-item div {
+      .responsive-container .menu-item-container .menu-item a {
         text-transform: uppercase;
         text-decoration: none;
         font-size: 0.85rem;
         font-weight: 500;
         letter-spacing: 1.8px;
         color: black; }
+      .responsive-container .menu-item-container .menu-item a:hover {
+        color: white; }
     @media (min-width: 750px) {
       .responsive-container .menu-item-container {
         display: flex;
@@ -163,18 +165,19 @@
     line-height: 1rem;
     padding: 1rem 1rem 0 1rem; }
 
-.form-container {
-  display: flex;
-  justify-content: center;
-  margin: 2rem; }
-  .form-container form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.form-inline {
+  margin: 2rem 0;
+  justify-content: center; }
+  .form-inline input, .form-inline select {
+    font-family: "futura-pt";
+    font-weight: 300;
+    margin: 0.2rem;
     font-size: 0.8rem; }
-    .form-container form input {
-      padding: 0.3rem;
-      margin: 0.2rem; }
+  .form-inline .btn {
+    margin: 0.5rem; }
+  @media (min-width: 425px) {
+    .form-inline .long {
+      width: 13rem; } }
 
 .transaction-table-container {
   margin: 6rem; }

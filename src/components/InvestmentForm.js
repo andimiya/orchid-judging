@@ -93,11 +93,12 @@ class InvestmentForm extends Component {
             }
           })()}
           <div className="form-container">
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="form-inline">
               <select
                 value={this.state.selectValue}
                 onChange={this.handleDropdownChange}
                 name="crypto_id"
+                className="form-control"
               >
               <option name="default" value="default">Select a Currency</option>
                 {this.props.currencies.map((currencies, i) => {
@@ -112,7 +113,7 @@ class InvestmentForm extends Component {
                 placeholder="Coins Purchased"
                 name="coin_purchased"
                 value={this.state.coin_purchased}
-                className="input"
+                className="form-control"
               />
               <input
                 type="text"
@@ -120,7 +121,7 @@ class InvestmentForm extends Component {
                 placeholder="Exchange Rate Purchased at (USD)"
                 name="exchange_rate"
                 value={this.state.exchange_rate}
-                className="input"
+                className="form-control long"
               />
               <input
                 type="text"
@@ -128,10 +129,10 @@ class InvestmentForm extends Component {
                 placeholder="Amount Invested (USD)"
                 name="usd_invested"
                 value={this.state.usd_invested}
-                className="input"
+                className="form-control"
               />
               <input
-                className="contact-button"
+                className="btn btn-primary"
                 type="submit"
                 value="Enter My Investment"
               />

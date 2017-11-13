@@ -25,6 +25,7 @@ $text-color-dark: black;
 $text-color-h2: #68c9ba;
 $text-link: #5db2a6;
 $background-color-tiles: #FAFAFA;
+$font: 'futura-pt';
 
 #app-container {
   font-family: 'futura-pt';
@@ -137,7 +138,7 @@ $background-color-tiles: #FAFAFA;
       visibility: visible;
       flex: 0 0 100%;
 
-      a,div {
+      a {
         text-transform: uppercase;
         text-decoration: none;
         font-size: 0.85rem;
@@ -146,8 +147,8 @@ $background-color-tiles: #FAFAFA;
         color: $text-color-dark;
       }
 
-      a,div:hover {
-        // color: white;
+      a:hover {
+        color: white;
       }
     }
 
@@ -230,20 +231,23 @@ $background-color-tiles: #FAFAFA;
   }
 }
 
-.form-container {
-  display: flex;
+.form-inline {
+  margin: 2rem 0;
   justify-content: center;
-  margin: 2rem;
 
-  form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  input, select {
+    font-family: $font;
+    font-weight: 300;
+    margin: 0.2rem;
     font-size: 0.8rem;
+  }
+  .btn {
+    margin: 0.5rem;
+  }
 
-    input {
-      padding: 0.3rem;
-      margin: 0.2rem;
+  @include small {
+    .long {
+      width: 13rem;
     }
   }
 }
