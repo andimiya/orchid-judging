@@ -58,10 +58,12 @@ $font: 'futura-pt';
 
 .name-container {
   display: flex;
-  padding-left: 3rem;
-  flex: 0 0 40%;
+  padding-left: 1.5rem;
+  flex: 0 0 45%;
   align-items: center;
-
+  @include medium {
+    padding-left: 3rem;
+  }
   a {
     text-transform: uppercase;
     text-decoration: none;
@@ -100,6 +102,7 @@ $font: 'futura-pt';
       font-weight: 500;
       letter-spacing: 1.8px;
       color: $text-color-dark;
+      margin: 0;
     },
     a,p:hover {
       color: white;
