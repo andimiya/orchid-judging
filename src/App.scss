@@ -172,7 +172,7 @@ $font: 'futura-pt';
 }
 
 .outer {
-  margin: 6rem 3rem 3rem 3rem;
+  margin: 3rem;
 }
 
 .crypto-container {
@@ -184,11 +184,11 @@ $font: 'futura-pt';
 }
 
 .crypto-set {
-  padding: 1.5rem;
+  padding: 0.5rem;
   margin: 1rem;
   border: 1px solid #bdbdbd;
   border-radius: 2px;
-  flex: 0 0 21%;
+  flex: 0 0 30%;
 
   a {
     text-decoration: none;
@@ -215,7 +215,7 @@ $font: 'futura-pt';
       flex: 0 0 100%;
       width: 142px;
       height: 100px;
-      padding: 12px;
+      padding: 1.3rem;
     }
   }
   .data-container {
