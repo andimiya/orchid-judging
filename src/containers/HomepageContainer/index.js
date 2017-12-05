@@ -57,7 +57,9 @@ class HomepageContainer extends React.Component {
     ajax(`${CRYPTO_TYPES}?user_id=${USER_ID}`)
       .then(cryptoTypes => {
       cryptoTypes.data.map(crypto => {
-        ajax(`${COINMARKET_API}${crypto.name}`)
+        let cryptoNameString = crypto.name;
+        cryptoNameString = cryptoNameString.replace(/\s+/g, '-').toLowerCase();
+        ajax(`${COINMARKET_API}${cryptoNameString}`)
           .then(exchangeRates => {
             let exchangeRatesArray = this.state.exchangeRates;
             exchangeRatesArray.push(exchangeRates[0]);
@@ -90,15 +92,10 @@ class HomepageContainer extends React.Component {
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
-          console.log(icon, 'icon');
-          let genericIcon = icons[`genericIcon`];
           return (
             <div className="crypto-set">
               <div className="title-container">
-                {(icon === undefined)
-                  ? <img className="image" src={genericIcon} height="80px" alt="currency symbol" />
-                  : <img className="image" src={icon} height="80px" alt="currency symbol" />
-                  }
+                <img className="image" src={icon} height="80px" alt="currency symbol" />
                 <h2>{currencies.name}</h2>
               </div>
               <div className="data-container">
@@ -112,7 +109,7 @@ class HomepageContainer extends React.Component {
                 {this.state.transactionSums.map(sums => {
                   if (currencies.name === sums.name) {
                     return (
-                      <div key={sums.crypto_type_id}>
+                      <div>
                         <div>USD Invested: ${sums.usd_invested}</div>
                         <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
                         {this.state.exchangeRates.map(exchangeRates => {
