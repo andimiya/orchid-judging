@@ -100,34 +100,34 @@ class HomepageContainer extends React.Component {
               </div>
               <div className="data-container">
                 {this.state.exchangeRates.map(exchange => {
-                  if (currencies.name === exchange.name) {
-                    return (
+                  if (currencies.name !== exchange.name) {
+                    return null;
+                  } return (
                       <div key={exchange.id}>Current exchange price (USD): {exchange.price_usd}</div>
                     )
-                  }
                 })}
                 {this.state.transactionSums.map(sums => {
-                  if (currencies.name === sums.name) {
-                    return (
+                  if (currencies.name !== sums.name) {
+                    return null;
+                  } return (
                       <div key={sums.name}>
                         <div>USD Invested: ${sums.usd_invested}</div>
                         <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
                         {this.state.exchangeRates.map(exchangeRates => {
                           const currencyNameToLowerCase = currencies.name.replace(/\s+/g, '-').toLowerCase();
                           const currentValue = (sums.coin_purchased*exchangeRates.price_usd);
-                          if (currencyNameToLowerCase === exchangeRates.id) {
-                            return (
+                          if (currencyNameToLowerCase !== exchangeRates.id) {
+                            return null;
+                          } return (
                               <div key={exchangeRates.id}>
                                 <div>Current Market Price: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
                                 <div>Current Value (USD): {currentValue.toFixed(2)}</div>
                               </div>
                             )
-                          }
                         })}
                       </div>
                     )
-                  }
-                })}
+                  })}
               </div>
             </div>
           )
