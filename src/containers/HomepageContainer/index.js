@@ -93,7 +93,7 @@ class HomepageContainer extends React.Component {
         {this.state.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
           return (
-            <div className="crypto-set">
+            <div key={currencies.symbol} className="crypto-set">
               <div className="title-container">
                 <img className="image" src={icon} height="80px" alt="currency symbol" />
                 <h2>{currencies.name}</h2>
@@ -102,19 +102,20 @@ class HomepageContainer extends React.Component {
                 {this.state.exchangeRates.map(exchange => {
                   if (currencies.name === exchange.name) {
                     return (
-                      <div>Current exchange price (USD): {exchange.price_usd}</div>
+                      <div key={exchange.id}>Current exchange price (USD): {exchange.price_usd}</div>
                     )
                   }
                 })}
                 {this.state.transactionSums.map(sums => {
                   if (currencies.name === sums.name) {
                     return (
-                      <div>
+                      <div key={sums.name}>
                         <div>USD Invested: ${sums.usd_invested}</div>
                         <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
                         {this.state.exchangeRates.map(exchangeRates => {
+                          const currencyNameToLowerCase = currencies.name.replace(/\s+/g, '-').toLowerCase();
                           const currentValue = (sums.coin_purchased*exchangeRates.price_usd);
-                          if (currencies.name.toLowerCase() === exchangeRates.id) {
+                          if (currencyNameToLowerCase === exchangeRates.id) {
                             return (
                               <div key={exchangeRates.id}>
                                 <div>Current Market Price: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
