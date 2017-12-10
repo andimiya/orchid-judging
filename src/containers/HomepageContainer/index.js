@@ -59,11 +59,9 @@ class HomepageContainer extends React.Component {
       cryptoTypes.data.map(crypto => {
         let cryptoNameString = crypto.name;
         cryptoNameString = cryptoNameString.replace(/\s+/g, '-').toLowerCase();
-        ajax(`${COINMARKET_API}${cryptoNameString}`)
+        ajax(`${COINMARKET_API}`)
           .then(exchangeRates => {
-            let exchangeRatesArray = this.state.exchangeRates;
-            exchangeRatesArray.push(exchangeRates[0]);
-            return this.setState({ exchangeRates: exchangeRatesArray })
+            return this.setState({ exchangeRates: exchangeRates })
           });
         return this.setState({ error: 'Error returning exchange rates from Coinmarket API' })
       })
