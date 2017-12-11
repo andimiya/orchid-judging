@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+const deleteIcon = require('../assets/delete.svg');
 
 const TransactionTable = (props) => {
   return (
@@ -7,10 +8,10 @@ const TransactionTable = (props) => {
       <table className="table table-striped table-sm">
         <thead>
           <tr>
-            <th>Date/Time Entered</th>
-            <th>Currency</th>
-            <th>Amount Invested (USD)</th>
-            <th>Amount of Coin Purchased</th>
+            <th className="align-middle">Date/Time Entered</th>
+            <th className="align-middle">Currency</th>
+            <th className="align-middle">Amount Invested (USD)</th>
+            <th className="align-middle">Amount of Coin Purchased</th>
           </tr>
         </thead>
         <tbody>
@@ -21,6 +22,11 @@ const TransactionTable = (props) => {
               <td>{transactions.name}</td>
               <td>{transactions.usd_invested}</td>
               <td>{transactions.coin_purchased}</td>
+              <td>
+                <a onClick={props.onClick}>
+                  <img className="delete-button" id={transactions.transaction_id} src={deleteIcon} alt="Delete Transaction" />
+                </a>
+              </td>
             </tr>
           )
         })}

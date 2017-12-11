@@ -263,17 +263,37 @@ $font: 'futura-pt';
 }
 
 .transaction-table-container {
-  margin: 6rem;
+  margin: 4rem 3rem 4rem 3rem;
+
   th {
     text-transform: uppercase;
     font-weight: 500;
     font-size: 0.9rem;
     text-align: center;
-    line-height: 3rem;
   }
+
   td {
     text-align: center;
+    vertical-align: middle;
   }
+
+  img {
+    width: 20px;
+  }
+
+  img {
+    visibility: hidden;
+  }
+
+  a:hover {
+    img {
+      visibility: visible;
+    }
+  }
+}
+
+.delete-button {
+  width: 100px;
 }
 
 .notice-container-success {

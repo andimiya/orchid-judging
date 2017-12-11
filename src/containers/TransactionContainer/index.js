@@ -1,6 +1,6 @@
 import React from 'react';
 import { ajax } from 'jquery';
-import { GET_TRANSACTIONS, CURRENCIES } from '../../constants';
+import { GET_TRANSACTIONS, DELETE_TRANSACTIONS, CURRENCIES } from '../../constants';
 import InvestmentForm from '../../components/InvestmentForm';
 import TransactionTable from '../../components/TransactionTable';
 
@@ -40,12 +40,23 @@ class TransactionContainer extends React.Component {
     })
   }
 
+  deleteTransaction(e){
+    e.preventDefault();
+    ajax({
+      url: `${DELETE_TRANSACTIONS}${e.target.id}`,
+      type: 'DELETE'
+    })
+  }
+
   render(props) {
     return (
       <div>
         <div className="transaction-container">
           <div className="investment-line-container">
-            <TransactionTable allData={this.state.allData}/>
+            <TransactionTable
+              allData={this.state.allData}
+              onClick={this.deleteTransaction}
+            />
           </div>
         </div>
         <div>
