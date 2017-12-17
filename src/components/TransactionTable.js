@@ -12,6 +12,7 @@ const TransactionTable = (props) => {
             <th className="align-middle">Currency</th>
             <th className="align-middle">Amount Invested (USD)</th>
             <th className="align-middle">Amount of Coin Purchased</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -24,7 +25,12 @@ const TransactionTable = (props) => {
               <td>{transactions.coin_purchased}</td>
               <td>
                 <a onClick={props.onClick}>
-                  <img className="delete-button" id={transactions.transaction_id} src={deleteIcon} alt="Delete Transaction" />
+                  <img
+                    className="delete-button"
+                    id={transactions.transaction_id}
+                    src={deleteIcon}
+                    alt="Delete Transaction"
+                  />
                 </a>
               </td>
             </tr>

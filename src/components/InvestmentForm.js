@@ -51,7 +51,7 @@ class InvestmentForm extends Component {
     })
       .then(data => {
         if (data.status === 200) {
-          this.props.getTransactions;
+          this.props.getTransactions();
           this.setState({
             sentStatus: 'sent',
             crypto_id: '',

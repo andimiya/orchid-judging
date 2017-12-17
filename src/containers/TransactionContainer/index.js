@@ -12,6 +12,7 @@ class TransactionContainer extends React.Component {
 
     this.getTransactions = this.getTransactions.bind(this);
     this.getAllCurrencies = this.getAllCurrencies.bind(this);
+    this.deleteTransaction = this.deleteTransaction.bind(this);
 
     this.state = {
       allData: [],
@@ -45,6 +46,8 @@ class TransactionContainer extends React.Component {
     ajax({
       url: `${DELETE_TRANSACTIONS}${e.target.id}`,
       type: 'DELETE'
+    }).done(() => {
+      this.getTransactions();
     })
   }
 
@@ -62,7 +65,7 @@ class TransactionContainer extends React.Component {
         <div>
           <InvestmentForm
             currencies={this.state.currencies}
-            getTransactions={this.getTransactions()}
+            getTransactions={this.getTransactions}
           />
         </div>
       </div>
