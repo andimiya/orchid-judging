@@ -129,6 +129,7 @@ class HomepageContainer extends React.Component {
         <InvestmentForm
           currencies={this.state.currencies}
           getTransactions={this.generateCards}
+          getTransactionSums={this.getTransactionSums}
         />
       </div>
     )
