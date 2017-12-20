@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { $ } from 'jquery';
 import Notice from './Notice';
-import { Link } from 'react-router-dom';
 
-class LoginForm extends Component {
+class CreateAccountForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       emailAddress: '',
+      firstName: '',
+      lastName: '',
       password: '',
       sentStatus: '',
     };
@@ -28,7 +29,9 @@ class LoginForm extends Component {
       // url: COINMARKET_API,
       data: JSON.stringify({
         emailAddress: this.state.emailAddress,
-        password: this.state.firstName
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -40,6 +43,8 @@ class LoginForm extends Component {
           this.setState({
             sentStatus: 'sent',
             emailAddress: '',
+            firstName: '',
+            lastName: '',
             password: ''
           });
         } else {
@@ -83,6 +88,22 @@ class LoginForm extends Component {
               <input
                 type="text"
                 onChange={this.handleChange}
+                placeholder="First Name"
+                name="firstName"
+                value={this.state.firstName}
+                className="form-control"
+              />
+              <input
+                type="text"
+                onChange={this.handleChange}
+                placeholder="Last Name"
+                name="lastName"
+                value={this.state.lastName}
+                className="form-control"
+              />
+              <input
+                type="text"
+                onChange={this.handleChange}
                 placeholder="Email Address"
                 name="emailAddress"
                 value={this.state.emailAddress}
@@ -99,15 +120,14 @@ class LoginForm extends Component {
               <input
                 className="btn btn-primary"
                 type="submit"
-                value="Log In"
+                value="Create Account"
               />
             </form>
           </div>
         </div>
-        <Link to="create-account">Create Account</Link>
       </div>
     );
   }
 }
 
-export default LoginForm;
+export default CreateAccountForm;

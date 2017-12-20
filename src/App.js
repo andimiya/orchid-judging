@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import HomepageContainer from './containers/HomepageContainer';
 import TransactionContainer from './containers/TransactionContainer';
 import LoginContainer from './containers/LoginContainer';
+import CreateAccountContainer from './containers/CreateAccountContainer';
 import Footer from './components/Footer';
 
 const App = () =>
@@ -11,9 +12,10 @@ const App = () =>
     <BrowserRouter>
       <div className="app">
         <NavBar />
+          <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/" component={HomepageContainer} />
           <Route exact path="/transactions" component={TransactionContainer} />
-          <Route exact path="/login" component={LoginContainer} />
+          <Route exact path="/create-account" component={CreateAccountContainer} />
         <Footer />
       </div>
     </BrowserRouter>
