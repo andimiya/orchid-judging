@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import DatePicker from 'react-datepicker';
 import { POST_TRANSACTIONS } from '../constants';
+import moment from 'moment';
 import Notice from './Notice';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 const USER_ID = 1;
 
 class InvestmentForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       crypto_id: '',
       crypto_symbol: '',
@@ -16,17 +21,26 @@ class InvestmentForm extends Component {
       exchange_rate: '',
       usd_invested: '',
       sentStatus: '',
-      selectValue: ''
+      selectValue: '',
+      startDate: moment()
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeEvent = this.handleChangeEvent.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
   };
 
-  handleChange(event) {
+  handleChange(date) {
     this.setState({
-      [event.target.name]: event.target.value
+      // [event.target.name]: event.target.value,
+      startDate: date
+    });
+  }
+
+  handleChangeEvent(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -70,6 +84,7 @@ class InvestmentForm extends Component {
   render(props) {
     return (
       <div className="investment-form-container">
+
         <div className="form-group">
           {(() => {
             switch (this.state.sentStatus) {
@@ -94,7 +109,17 @@ class InvestmentForm extends Component {
             }
           })()}
           <div className="form-container">
+
             <form onSubmit={this.handleSubmit} className="form-inline">
+              <DatePicker
+                selected={this.state.startDate}
+                onChange={this.handleChange}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={30}
+                dateFormat="LLL"
+                className="form-control"
+              />
               <select
                 value={this.state.selectValue}
                 onChange={this.handleDropdownChange}
@@ -110,7 +135,7 @@ class InvestmentForm extends Component {
               </select>
               <input
                 type="number"
-                onChange={this.handleChange}
+                onChange={this.handleChangeEvent}
                 placeholder="Coins Purchased"
                 name="coin_purchased"
                 value={this.state.coin_purchased}
@@ -118,7 +143,7 @@ class InvestmentForm extends Component {
               />
               <input
                 type="text"
-                onChange={this.handleChange}
+                onChange={this.handleChangeEvent}
                 placeholder="Exchange Rate Purchased at (USD)"
                 name="exchange_rate"
                 value={this.state.exchange_rate}
@@ -126,7 +151,7 @@ class InvestmentForm extends Component {
               />
               <input
                 type="text"
-                onChange={this.handleChange}
+                onChange={this.handleChangeEvent}
                 placeholder="Amount Invested (USD)"
                 name="usd_invested"
                 value={this.state.usd_invested}
