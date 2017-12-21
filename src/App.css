@@ -128,11 +128,15 @@
   justify-content: center; }
 
 .crypto-set {
-  padding: 0.5rem;
-  margin: 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
+  margin: 0 0.5rem 2rem 0.5rem;
   border: 1px solid #bdbdbd;
   border-radius: 2px;
-  flex: 0 0 30%; }
+  flex: 0 0 100%; }
+  @media (min-width: 750px) {
+    .crypto-set {
+      flex: 0 0 30%;
+      margin: 0 1rem 2rem 1rem; } }
   .crypto-set a {
     text-decoration: none;
     color: black; }
@@ -189,22 +193,27 @@
     .form-inline .long {
       width: 13rem; } }
 
-.transaction-table-container {
-  margin: 4rem 3rem 4rem 3rem; }
-  .transaction-table-container th {
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 0.9rem;
-    text-align: center; }
-  .transaction-table-container td {
-    text-align: center;
-    vertical-align: middle; }
-  .transaction-table-container img {
-    width: 20px; }
-  .transaction-table-container img {
-    visibility: hidden; }
-  .transaction-table-container a:hover img {
-    visibility: visible; }
+.transaction-table-container th {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0.8rem 0; }
+
+.transaction-table-container td {
+  font-size: 0.85rem;
+  text-align: center;
+  vertical-align: middle;
+  padding-right: 10px; }
+
+.transaction-table-container img {
+  width: 20px; }
+
+.transaction-table-container img {
+  visibility: hidden; }
+
+.transaction-table-container a:hover img {
+  visibility: visible; }
 
 .delete-button {
   width: 100px; }

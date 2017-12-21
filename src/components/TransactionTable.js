@@ -4,15 +4,15 @@ const deleteIcon = require('../assets/delete.svg');
 
 const TransactionTable = (props) => {
   return (
-    <div className="transaction-table-container">
-      <table className="table table-striped table-sm">
+    <div className="transaction-table-container container">
+      <table className="table table-striped table-responsive table-sm">
         <thead>
           <tr>
             <th className="align-middle">Date/Time Entered</th>
-            <th className="align-middle">Currency</th>
-            <th className="align-middle">Amount Invested (USD)</th>
-            <th className="align-middle">Amount of Coin Purchased</th>
-              <th className="align-middle">Date/Time Purchased</th>
+            <th className="align-middle">Coin</th>
+            <th className="align-middle">USD Invested</th>
+            <th className="align-middle">Amount of Coin</th>
+            <th className="align-middle">Date Purchased</th>
             <th></th>
           </tr>
         </thead>

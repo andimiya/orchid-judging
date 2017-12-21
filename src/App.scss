@@ -184,11 +184,16 @@ $font: 'futura-pt';
 }
 
 .crypto-set {
-  padding: 0.5rem;
-  margin: 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
+  margin: 0 0.5rem 2rem 0.5rem;
   border: 1px solid #bdbdbd;
   border-radius: 2px;
-  flex: 0 0 30%;
+  flex: 0 0 100%;
+
+  @include medium {
+    flex: 0 0 30%;
+    margin: 0 1rem 2rem 1rem;
+  }
 
   a {
     text-decoration: none;
@@ -263,18 +268,20 @@ $font: 'futura-pt';
 }
 
 .transaction-table-container {
-  margin: 4rem 3rem 4rem 3rem;
 
   th {
     text-transform: uppercase;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     text-align: center;
+    padding: 0.8rem 0;
   }
 
   td {
+    font-size: 0.85rem;
     text-align: center;
     vertical-align: middle;
+    padding-right: 10px;
   }
 
   img {

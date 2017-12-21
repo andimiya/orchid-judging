@@ -86,6 +86,9 @@ class HomepageContainer extends React.Component {
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
+          if (!icon) {
+            icon = genericIcon;
+          }
           return (
             <div key={currencies.symbol} className="crypto-set">
               <div className="title-container">
