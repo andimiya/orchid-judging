@@ -12,6 +12,7 @@ const TransactionTable = (props) => {
             <th className="align-middle">Currency</th>
             <th className="align-middle">Amount Invested (USD)</th>
             <th className="align-middle">Amount of Coin Purchased</th>
+              <th className="align-middle">Date/Time Purchased</th>
             <th></th>
           </tr>
         </thead>
@@ -23,6 +24,7 @@ const TransactionTable = (props) => {
               <td>{transactions.name}</td>
               <td>{transactions.usd_invested}</td>
               <td>{transactions.coin_purchased}</td>
+              <td>{transactions.purchased_at}</td>
               <td>
                 <a onClick={props.onClick}>
                   <img

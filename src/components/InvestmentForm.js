@@ -20,6 +20,7 @@ class InvestmentForm extends Component {
       coin_purchased: '',
       exchange_rate: '',
       usd_invested: '',
+      purchased_at: '',
       sentStatus: '',
       selectValue: '',
       startDate: moment()
@@ -33,7 +34,6 @@ class InvestmentForm extends Component {
 
   handleChange(date) {
     this.setState({
-      // [event.target.name]: event.target.value,
       startDate: date
     });
   }
@@ -58,6 +58,7 @@ class InvestmentForm extends Component {
       coin_purchased: Number(this.state.coin_purchased),
       exchange_rate: Number(this.state.exchange_rate),
       usd_invested: Number(this.state.usd_invested),
+      purchased_at: moment(this.state.startDate._d).unix()
     };
     $.post({
       url: POST_TRANSACTIONS,
@@ -72,7 +73,8 @@ class InvestmentForm extends Component {
             crypto_id: '',
             coin_purchased: '',
             exchange_rate: '',
-            usd_invested: ''
+            usd_invested: '',
+            startDate: moment()
           });
         } else {
           this.setState({ sentStatus: 'error' });
@@ -84,7 +86,6 @@ class InvestmentForm extends Component {
   render(props) {
     return (
       <div className="investment-form-container">
-
         <div className="form-group">
           {(() => {
             switch (this.state.sentStatus) {
@@ -109,7 +110,6 @@ class InvestmentForm extends Component {
             }
           })()}
           <div className="form-container">
-
             <form onSubmit={this.handleSubmit} className="form-inline">
               <DatePicker
                 selected={this.state.startDate}
