@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import DatePicker from 'react-datepicker';
-import { POST_TRANSACTIONS } from '../constants';
+import { POST_TRANSACTIONS, HISTORICAL_EXCHANGE } from '../constants';
 import moment from 'moment';
 import Notice from './Notice';
 
@@ -15,7 +15,6 @@ class InvestmentForm extends Component {
 
     this.state = {
       crypto_id: '',
-      crypto_symbol: '',
       crypto_name: '',
       coin_purchased: '',
       exchange_rate: '',
@@ -30,6 +29,7 @@ class InvestmentForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEvent = this.handleChangeEvent.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.findExchange = this.findExchange.bind(this);
   };
 
   handleChange(date) {
@@ -83,7 +83,20 @@ class InvestmentForm extends Component {
       .catch(() => this.setState({ sentStatus: 'error' }));
   }
 
+  findExchange(event) {
+    let value = this.state.selectValue;
+    event.preventDefault();
+    $.get(`${HISTORICAL_EXCHANGE}?symbol=${this.state.selectValue}&purchased_at=${moment(this.state.startDate._d).unix()}`)
+    .then((data) => {
+      for (var key in data) {
+        let symbol = data[key];
+        this.setState({ exchange_rate: symbol.USD })
+      }
+    })
+  }
+
   render(props) {
+    // console.log(this.props.currencies, 'props');
     return (
       <div className="investment-form-container">
         <div className="form-group">
@@ -110,7 +123,20 @@ class InvestmentForm extends Component {
             }
           })()}
           <div className="form-container">
-            <form onSubmit={this.handleSubmit} className="form-inline">
+            <form onSubmit={this.findExchange} className="form-inline">
+              <select
+                value={this.state.selectValue}
+                onChange={this.handleDropdownChange}
+                name="crypto_id"
+                className="form-control"
+              >
+              <option name="default" value="default">Select a Currency</option>
+                {this.props.currencies.map((currencies, i) => {
+                  return(
+                    <option value={currencies.symbol} key={currencies.id}>{currencies.name}</option>
+                  )
+                })}
+              </select>
               <DatePicker
                 selected={this.state.startDate}
                 onChange={this.handleChange}
@@ -120,6 +146,14 @@ class InvestmentForm extends Component {
                 dateFormat="LLL"
                 className="form-control"
               />
+              <input
+                className="btn btn-primary"
+                type="submit"
+                value="Find Historical Exchange"
+              />
+            </form>
+
+            <form onSubmit={this.handleSubmit} className="form-inline">
               <select
                 value={this.state.selectValue}
                 onChange={this.handleDropdownChange}
