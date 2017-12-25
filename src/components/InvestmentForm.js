@@ -51,11 +51,13 @@ class InvestmentForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    let exchangeRate = (this.state.usd_invested / this.state.coin_purchased);
+    console.log(exchangeRate, 'exchange rate');
     const data = {
       crypto_id: Number(this.state.selectValue),
       user_id: USER_ID,
       coin_purchased: Number(this.state.coin_purchased),
-      exchange_rate: Number(this.state.exchange_rate),
+      exchange_rate: Number(exchangeRate),
       usd_invested: Number(this.state.usd_invested),
       purchased_at: moment(this.state.startDate._d).unix()
     };
@@ -122,6 +124,69 @@ class InvestmentForm extends Component {
           })()}
           <div className="form-container-outer">
             <div className="form-container">
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-description">Enter a Transaction in the form below to see it on your transaction record and to see a sum of your earnings/losses on the homepage summary</div>
+                <div className="form-group">
+                  <select
+                    value={this.state.selectValue}
+                    onChange={this.handleDropdownChange}
+                    name="crypto_id"
+                    className="form-control"
+                  >
+                  <option name="default" value="default">Select a Currency</option>
+                    {this.props.currencies.map((currencies, i) => {
+                      return(
+                        <option
+                          value={currencies.id}
+                          key={currencies.id}>{currencies.name}
+                        </option>
+                      )
+                    })}
+                  </select>
+              </div>
+              <div className="form-group">
+                <input
+                  type="number"
+                  onChange={this.handleChangeEvent}
+                  placeholder="Coins Purchased"
+                  name="coin_purchased"
+                  value={this.state.coin_purchased}
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  onChange={this.handleChangeEvent}
+                  placeholder="Amount Invested (USD)"
+                  name="usd_invested"
+                  value={this.state.usd_invested}
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <label>Date/Time Purchased</label>
+                <DatePicker
+                  selected={this.state.startDate}
+                  onChange={this.handleChange}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={30}
+                  dateFormat="LLL"
+                  className="form-control"
+                />
+              </div>
+              <div>
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Enter Transaction"
+                />
+              </div>
+              </form>
+            </div>
+            <div className="form-container">
+              <div className="form-description">Use this form to look up a historical exchange rate for any crypto currency and any date. This form doesn't add anything to your transaction record.</div>
               <form onSubmit={this.findExchange}>
                 <div className="form-group">
                   <select
@@ -156,65 +221,6 @@ class InvestmentForm extends Component {
                     value="Find Historical Exchange"
                   />
                 </div>
-              </form>
-            </div>
-            <div className="form-container">
-              <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <select
-                    value={this.state.selectValue}
-                    onChange={this.handleDropdownChange}
-                    name="crypto_id"
-                    className="form-control"
-                  >
-                  <option name="default" value="default">Select a Currency</option>
-                    {this.props.currencies.map((currencies, i) => {
-                      return(
-                        <option
-                          value={currencies.id}
-                          key={currencies.id}>{currencies.name}
-                        </option>
-                      )
-                    })}
-                  </select>
-              </div>
-              <div className="form-group">
-                <input
-                  type="number"
-                  onChange={this.handleChangeEvent}
-                  placeholder="Coins Purchased"
-                  name="coin_purchased"
-                  value={this.state.coin_purchased}
-                  className="form-control"
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  onChange={this.handleChangeEvent}
-                  placeholder="Exchange Rate Purchased at (USD)"
-                  name="exchange_rate"
-                  value={this.state.exchange_rate}
-                  className="form-control long"
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  onChange={this.handleChangeEvent}
-                  placeholder="Amount Invested (USD)"
-                  name="usd_invested"
-                  value={this.state.usd_invested}
-                  className="form-control"
-                />
-              </div>
-              <div>
-                <input
-                  className="btn btn-primary"
-                  type="submit"
-                  value="Enter Investment"
-                />
-              </div>
               </form>
             </div>
           </div>

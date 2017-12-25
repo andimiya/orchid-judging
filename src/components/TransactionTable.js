@@ -11,6 +11,7 @@ const TransactionTable = (props) => {
             <th className="align-middle">Date/Time Entered</th>
             <th className="align-middle">Coin</th>
             <th className="align-middle">USD Invested</th>
+            <th className="align-middle">Exchange Rate</th>
             <th className="align-middle">Amount of Coin</th>
             <th className="align-middle">Date Purchased</th>
             <th></th>
@@ -23,6 +24,7 @@ const TransactionTable = (props) => {
               <td key={transactions.updated_at}>{moment.utc(transactions.updated_at).format('MMM DD, YYYY H:mm')}</td>
               <td>{transactions.name}</td>
               <td>{transactions.usd_invested}</td>
+              <td>{transactions.exchange_rate}</td>
               <td>{transactions.coin_purchased}</td>
               <td>{moment.unix(transactions.purchased_at).format('MMM DD, YYYY H:mm')}</td>
               <td>
