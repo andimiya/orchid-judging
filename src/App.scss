@@ -235,66 +235,67 @@ $font: 'futura-pt';
   }
 }
 
-.form-inline {
-  margin: 2rem 0;
-  justify-content: center;
-
-  input, select {
-    font-family: $font;
-    font-weight: 300;
-    margin: 0.2rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.3px;
-  }
-  .btn {
-    margin: 0.5rem;
-    background-color: $background-color-dark;
-    border: $background-color-dark;
-    color: black;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    font-weight: 400;
-    cursor: pointer;
-  }
-  .btn:hover {
-    color: white;
-  }
-
-  @include small {
-    .long {
-      width: 13rem;
-    }
-  }
+.form-container {
+  border: 1px solid red;
+  margin: 2rem 4rem;
+  width: 20rem;
 }
 
-.transaction-table-container {
+.form-control {
+  font-family: $font;
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
 
-  th {
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 0.75rem;
-    text-align: center;
-    padding: 0.8rem 0;
-  }
+.btn {
+  background-color: $background-color-dark;
+  border: $background-color-dark;
+  color: black;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-weight: 400;
+  cursor: pointer;
+}
+.btn:hover {
+  color: white;
+  background-color: $background-color-dark;
+}
 
-  td {
-    font-size: 0.85rem;
-    text-align: center;
-    vertical-align: middle;
-    padding-right: 10px;
-  }
+.transaction-container {
+  border: 1px solid red;
+  margin: 2rem 4rem;
 
-  img {
-    width: 20px;
-  }
+  .table-container {
 
-  img {
-    visibility: hidden;
-  }
+    th {
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 1rem;
+    }
 
-  a:hover {
+    td {
+      font-size: 0.9rem;
+      text-align: center;
+      vertical-align: middle;
+      padding: 0.5rem;
+    }
+
     img {
-      visibility: visible;
+      width: 20px;
+    }
+
+    img {
+      visibility: hidden;
+    }
+
+    a:hover {
+
+      img {
+        visibility: visible;
+      }
     }
   }
 }

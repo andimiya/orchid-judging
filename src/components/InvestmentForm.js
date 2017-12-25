@@ -15,7 +15,6 @@ class InvestmentForm extends Component {
 
     this.state = {
       crypto_id: '',
-      crypto_name: '',
       coin_purchased: '',
       exchange_rate: '',
       usd_invested: '',
@@ -96,7 +95,6 @@ class InvestmentForm extends Component {
   }
 
   render(props) {
-    // console.log(this.props.currencies, 'props');
     return (
       <div className="investment-form-container">
         <div className="form-group">
@@ -122,81 +120,103 @@ class InvestmentForm extends Component {
                 return '';
             }
           })()}
-          <div className="form-container">
-            <form onSubmit={this.findExchange} className="form-inline">
-              <select
-                value={this.state.selectValue}
-                onChange={this.handleDropdownChange}
-                name="crypto_id"
-                className="form-control"
-              >
-              <option name="default" value="default">Select a Currency</option>
-                {this.props.currencies.map((currencies, i) => {
-                  return(
-                    <option value={currencies.symbol} key={currencies.id}>{currencies.name}</option>
-                  )
-                })}
-              </select>
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={this.handleChange}
-                showTimeSelect
-                timeFormat="HH:mm"
-                timeIntervals={30}
-                dateFormat="LLL"
-                className="form-control"
-              />
-              <input
-                className="btn btn-primary"
-                type="submit"
-                value="Find Historical Exchange"
-              />
-            </form>
-
-            <form onSubmit={this.handleSubmit} className="form-inline">
-              <select
-                value={this.state.selectValue}
-                onChange={this.handleDropdownChange}
-                name="crypto_id"
-                className="form-control"
-              >
-              <option name="default" value="default">Select a Currency</option>
-                {this.props.currencies.map((currencies, i) => {
-                  return(
-                    <option value={currencies.id} key={currencies.id}>{currencies.name}</option>
-                  )
-                })}
-              </select>
-              <input
-                type="number"
-                onChange={this.handleChangeEvent}
-                placeholder="Coins Purchased"
-                name="coin_purchased"
-                value={this.state.coin_purchased}
-                className="form-control"
-              />
-              <input
-                type="text"
-                onChange={this.handleChangeEvent}
-                placeholder="Exchange Rate Purchased at (USD)"
-                name="exchange_rate"
-                value={this.state.exchange_rate}
-                className="form-control long"
-              />
-              <input
-                type="text"
-                onChange={this.handleChangeEvent}
-                placeholder="Amount Invested (USD)"
-                name="usd_invested"
-                value={this.state.usd_invested}
-                className="form-control"
-              />
-              <input
-                className="btn btn-primary"
-                type="submit"
-                value="Enter Investment"
-              />
-            </form>
+          <div className="form-container-outer">
+            <div className="form-container">
+              <form onSubmit={this.findExchange}>
+                <div className="form-group">
+                  <select
+                    value={this.state.selectValue}
+                    onChange={this.handleDropdownChange}
+                    name="crypto_id"
+                    className="form-control"
+                  >
+                  <option name="default" value="default">Select a Currency</option>
+                    {this.props.currencies.map((currencies, i) => {
+                      return(
+                        <option value={currencies.symbol} key={currencies.id}>{currencies.name}</option>
+                      )
+                    })}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <DatePicker
+                    selected={this.state.startDate}
+                    onChange={this.handleChange}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={30}
+                    dateFormat="LLL"
+                    className="form-control"
+                  />
+                </div>
+                <div className="form group">
+                  <input
+                    className="btn btn-primary"
+                    type="submit"
+                    value="Find Historical Exchange"
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="form-container">
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <select
+                    value={this.state.selectValue}
+                    onChange={this.handleDropdownChange}
+                    name="crypto_id"
+                    className="form-control"
+                  >
+                  <option name="default" value="default">Select a Currency</option>
+                    {this.props.currencies.map((currencies, i) => {
+                      return(
+                        <option
+                          value={currencies.id}
+                          key={currencies.id}>{currencies.name}
+                        </option>
+                      )
+                    })}
+                  </select>
+              </div>
+              <div className="form-group">
+                <input
+                  type="number"
+                  onChange={this.handleChangeEvent}
+                  placeholder="Coins Purchased"
+                  name="coin_purchased"
+                  value={this.state.coin_purchased}
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  onChange={this.handleChangeEvent}
+                  placeholder="Exchange Rate Purchased at (USD)"
+                  name="exchange_rate"
+                  value={this.state.exchange_rate}
+                  className="form-control long"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  onChange={this.handleChangeEvent}
+                  placeholder="Amount Invested (USD)"
+                  name="usd_invested"
+                  value={this.state.usd_invested}
+                  className="form-control"
+                />
+              </div>
+              <div>
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Enter Investment"
+                />
+              </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

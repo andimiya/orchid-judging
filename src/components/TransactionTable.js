@@ -4,8 +4,8 @@ const deleteIcon = require('../assets/delete.svg');
 
 const TransactionTable = (props) => {
   return (
-    <div className="transaction-table-container container">
-      <table className="table table-striped table-responsive table-sm">
+    <div className="table-container">
+      <table className="table-striped table-responsive">
         <thead>
           <tr>
             <th className="align-middle">Date/Time Entered</th>
@@ -20,11 +20,11 @@ const TransactionTable = (props) => {
         {props.allData.map(transactions => {
           return (
             <tr key={transactions.transaction_id}>
-              <td key={transactions.updated_at}>{moment.utc(transactions.updated_at).format('MMM DD, YYYY - hh:mm a')}</td>
+              <td key={transactions.updated_at}>{moment.utc(transactions.updated_at).format('MMM DD, YYYY H:mm')}</td>
               <td>{transactions.name}</td>
               <td>{transactions.usd_invested}</td>
               <td>{transactions.coin_purchased}</td>
-              <td>{transactions.purchased_at}</td>
+              <td>{moment.unix(transactions.purchased_at).format('MMM DD, YYYY H:mm')}</td>
               <td>
                 <a onClick={props.onClick}>
                   <img

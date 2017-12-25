@@ -53,21 +53,15 @@ class TransactionContainer extends React.Component {
 
   render(props) {
     return (
-      <div>
-        <div className="transaction-container">
-          <div className="investment-line-container">
-            <TransactionTable
-              allData={this.state.allData}
-              onClick={this.deleteTransaction}
-            />
-          </div>
-        </div>
-        <div>
-          <InvestmentForm
-            currencies={this.state.currencies}
-            getTransactions={this.getTransactions}
-          />
-        </div>
+      <div className="transaction-container">
+        <TransactionTable
+          allData={this.state.allData}
+          onClick={this.deleteTransaction}
+        />
+        <InvestmentForm
+          currencies={this.state.currencies}
+          getTransactions={this.getTransactions}
+        />
       </div>
     )
   };

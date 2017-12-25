@@ -169,51 +169,50 @@
     line-height: 1rem;
     padding: 1rem 1rem 0 1rem; }
 
-.form-inline {
-  margin: 2rem 0;
-  justify-content: center; }
-  .form-inline input, .form-inline select {
-    font-family: "futura-pt";
-    font-weight: 300;
-    margin: 0.2rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.3px; }
-  .form-inline .btn {
-    margin: 0.5rem;
-    background-color: #75d6c7;
-    border: #75d6c7;
-    color: black;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    font-weight: 400;
-    cursor: pointer; }
-  .form-inline .btn:hover {
-    color: white; }
-  @media (min-width: 425px) {
-    .form-inline .long {
-      width: 13rem; } }
+.form-container {
+  border: 1px solid red;
+  margin: 2rem 4rem;
+  width: 20rem; }
 
-.transaction-table-container th {
+.form-control {
+  font-family: "futura-pt";
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.3px; }
+
+.btn {
+  background-color: #75d6c7;
+  border: #75d6c7;
+  color: black;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  font-weight: 500;
-  font-size: 0.75rem;
-  text-align: center;
-  padding: 0.8rem 0; }
+  font-weight: 400;
+  cursor: pointer; }
 
-.transaction-table-container td {
-  font-size: 0.85rem;
-  text-align: center;
-  vertical-align: middle;
-  padding-right: 10px; }
+.btn:hover {
+  color: white;
+  background-color: #75d6c7; }
 
-.transaction-table-container img {
-  width: 20px; }
-
-.transaction-table-container img {
-  visibility: hidden; }
-
-.transaction-table-container a:hover img {
-  visibility: visible; }
+.transaction-container {
+  border: 1px solid red;
+  margin: 2rem 4rem; }
+  .transaction-container .table-container th {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 1rem; }
+  .transaction-container .table-container td {
+    font-size: 0.9rem;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem; }
+  .transaction-container .table-container img {
+    width: 20px; }
+  .transaction-container .table-container img {
+    visibility: hidden; }
+  .transaction-container .table-container a:hover img {
+    visibility: visible; }
 
 .delete-button {
   width: 100px; }
