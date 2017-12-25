@@ -52,7 +52,6 @@ class InvestmentForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     let exchangeRate = (this.state.usd_invested / this.state.coin_purchased);
-    console.log(exchangeRate, 'exchange rate');
     const data = {
       crypto_id: Number(this.state.selectValue),
       user_id: USER_ID,
@@ -66,7 +65,10 @@ class InvestmentForm extends Component {
       data: data
     })
       .then(data => {
+        console.log(data, 'data');
+        console.log(data.status, 'data');
         if (data.status === 200) {
+          console.log('yes');
           this.props.getTransactions();
           this.props.getTransactionSums();
           this.setState({
@@ -97,6 +99,7 @@ class InvestmentForm extends Component {
   }
 
   render(props) {
+    console.log(this.state.sentStatus, 'sent status');
     return (
       <div className="investment-form-container">
         <div className="form-group">

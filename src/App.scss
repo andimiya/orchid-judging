@@ -236,11 +236,11 @@ $font: 'futura-pt';
 }
 
 .form-container {
-  margin: 2rem 4rem 4rem 4rem;
-  width: 20rem;
+  margin: 4rem 1.5rem 1.5rem 1.5rem;
 
   @include medium {
     width: 35rem;
+    margin: 4rem 4rem 4rem 4rem;
   }
 
   .form-description {
@@ -274,9 +274,12 @@ $font: 'futura-pt';
   background-color: $background-color-dark;
 }
 
-.transaction-container {
-  border: 1px solid red;
-  margin: 2rem 4rem;
+.transaction-table-container {
+  margin: 1.5rem;
+
+  @include medium {
+    margin: 2rem 4rem;
+  }
 
   .table-container {
 

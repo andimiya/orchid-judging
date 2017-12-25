@@ -170,11 +170,11 @@
     padding: 1rem 1rem 0 1rem; }
 
 .form-container {
-  margin: 2rem 4rem 4rem 4rem;
-  width: 20rem; }
+  margin: 4rem 1.5rem 1.5rem 1.5rem; }
   @media (min-width: 750px) {
     .form-container {
-      width: 35rem; } }
+      width: 35rem;
+      margin: 4rem 4rem 4rem 4rem; } }
   .form-container .form-description {
     margin-bottom: 0.8rem; }
   .form-container label {
@@ -201,25 +201,27 @@
   color: white;
   background-color: #75d6c7; }
 
-.transaction-container {
-  border: 1px solid red;
-  margin: 2rem 4rem; }
-  .transaction-container .table-container th {
+.transaction-table-container {
+  margin: 1.5rem; }
+  @media (min-width: 750px) {
+    .transaction-table-container {
+      margin: 2rem 4rem; } }
+  .transaction-table-container .table-container th {
     text-transform: uppercase;
     font-weight: 500;
     font-size: 0.8rem;
     text-align: center;
     padding: 1rem; }
-  .transaction-container .table-container td {
+  .transaction-table-container .table-container td {
     font-size: 0.9rem;
     text-align: center;
     vertical-align: middle;
     padding: 0.5rem; }
-  .transaction-container .table-container img {
+  .transaction-table-container .table-container img {
     width: 20px; }
-  .transaction-container .table-container img {
+  .transaction-table-container .table-container img {
     visibility: hidden; }
-  .transaction-container .table-container a:hover img {
+  .transaction-table-container .table-container a:hover img {
     visibility: visible; }
 
 .delete-button {
