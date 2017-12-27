@@ -17,6 +17,9 @@ class InvestmentForm extends Component {
       crypto_id: '',
       coin_purchased: '',
       exchange_rate: '',
+      hist_exchange: '',
+      hist_timestamp: '',
+      hist_symbol: '',
       usd_invested: '',
       purchased_at: '',
       sentStatus: '',
@@ -65,10 +68,7 @@ class InvestmentForm extends Component {
       data: data
     })
       .then(data => {
-        console.log(data, 'data');
-        console.log(data.status, 'data');
         if (data.status === 200) {
-          console.log('yes');
           this.props.getTransactions();
           this.props.getTransactionSums();
           this.setState({
@@ -93,13 +93,16 @@ class InvestmentForm extends Component {
     .then((data) => {
       for (var key in data) {
         let symbol = data[key];
-        this.setState({ exchange_rate: symbol.USD })
+        this.setState({
+          hist_exchange: symbol.USD,
+          hist_timestamp: this.state.startDate._d,
+          hist_symbol: this.state.selectValue
+        })
       }
     })
   }
 
   render(props) {
-    console.log(this.state.sentStatus, 'sent status');
     return (
       <div className="investment-form-container">
         <div className="form-group">
@@ -173,7 +176,6 @@ class InvestmentForm extends Component {
                   selected={this.state.startDate}
                   onChange={this.handleChange}
                   showTimeSelect
-                  timeFormat="HH:mm"
                   timeIntervals={30}
                   dateFormat="LLL"
                   className="form-control"
@@ -225,6 +227,17 @@ class InvestmentForm extends Component {
                   />
                 </div>
               </form>
+              <div className="historical-exchange-container">
+              {
+                (!this.state.hist_exchange)
+                ? <div></div>
+                : <div>
+                    <div>Crypto Currency: {this.state.hist_symbol}</div>
+                    <div>Exchange Rate to USD: {this.state.hist_exchange}</div>
+                    <div>Timestamp: {moment(this.state.hist_timestamp).format('MMM DD, YYYY H:m').toString()}</div>
+                  </div>
+              }
+              </div>
             </div>
           </div>
         </div>
