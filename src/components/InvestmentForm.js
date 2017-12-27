@@ -87,7 +87,6 @@ class InvestmentForm extends Component {
   }
 
   findExchange(event) {
-    let value = this.state.selectValue;
     event.preventDefault();
     $.get(`${HISTORICAL_EXCHANGE}?symbol=${this.state.selectValue}&purchased_at=${moment(this.state.startDate._d).unix()}`)
     .then((data) => {

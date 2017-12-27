@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import { LOGIN } from '../constants';
 import Notice from './Notice';
 import { Link } from 'react-router-dom';
 
@@ -24,30 +25,28 @@ class LoginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const options = {
-      data: JSON.stringify({
-        emailAddress: this.state.emailAddress,
-        password: this.state.firstName
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const data = {
+      user: this.state.emailAddress,
+      password: this.state.firstName
     };
-    $.post(options)
-      .then(data => {
-        if (data.statusCode === 200) {
-          this.setState({
-            sentStatus: 'sent',
-            emailAddress: '',
-            password: ''
-          });
-        } else {
-          this.setState({
-            sentStatus: 'error',
-          });
-        }
-      })
-      .catch(() => this.setState({ sentStatus: 'error' }));
+    $.post({
+      url: LOGIN,
+      data: data
+    })
+    .then(data => {
+      if (data.statusCode === 200) {
+        this.setState({
+          sentStatus: 'sent',
+          emailAddress: '',
+          password: ''
+        });
+      } else {
+        this.setState({
+          sentStatus: 'error',
+        });
+      }
+    })
+    .catch(() => this.setState({ sentStatus: 'error' }));
   }
 
   render() {

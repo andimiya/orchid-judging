@@ -37,9 +37,7 @@ class CreateAccountForm extends Component {
       data: data
     })
     .then(data => {
-      console.log(data, 'data');
-      console.log(data.statusCode, 'status');
-      if (data.statusCode === 200) {
+      if (data.status === 200) {
         this.setState({
           sentStatus: 'sent',
           emailAddress: '',
@@ -65,7 +63,7 @@ class CreateAccountForm extends Component {
               case 'sent':
                 return (
                   <Notice
-                    status="Your message has been sent! We'll contact you shortly"
+                    status="Success! Account Has Been Created"
                     statusClass="success-message"
                     noticeContainerClass="notice-container-success"
                   />
