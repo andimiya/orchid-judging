@@ -17,7 +17,6 @@ const App = () =>
           <Route exact path="/" component={HomepageContainer} />
           <Route exact path="/transactions" component={TransactionContainer} />
           <Route exact path="/create-account" component={CreateAccountContainer} />
-          <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/new-investments" component={NewInvestments} />
         <Footer />
       </div>

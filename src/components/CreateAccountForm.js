@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { $ } from 'jquery';
+import $ from 'jquery';
+import { CREATE_NEW_USER } from '../constants';
 import Notice from './Notice';
 
 class CreateAccountForm extends Component {
@@ -25,35 +26,34 @@ class CreateAccountForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const options = {
-      // url: COINMARKET_API,
-      data: JSON.stringify({
-        emailAddress: this.state.emailAddress,
-        password: this.state.password,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const data = {
+      email: this.state.emailAddress,
+      password: this.state.password,
+      first_name: this.state.firstName,
+      last_name: this.state.lastName
     };
-    $.post(options)
-      .then(data => {
-        if (data.statusCode === 200) {
-          this.setState({
-            sentStatus: 'sent',
-            emailAddress: '',
-            firstName: '',
-            lastName: '',
-            password: ''
-          });
-        } else {
-          this.setState({
-            sentStatus: 'error',
-          });
-        }
-      })
-      .catch(() => this.setState({ sentStatus: 'error' }));
+    $.post({
+      url: CREATE_NEW_USER,
+      data: data
+    })
+    .then(data => {
+      console.log(data, 'data');
+      console.log(data.statusCode, 'status');
+      if (data.statusCode === 200) {
+        this.setState({
+          sentStatus: 'sent',
+          emailAddress: '',
+          firstName: '',
+          lastName: '',
+          password: ''
+        });
+      } else {
+        this.setState({
+          sentStatus: 'error',
+        });
+      }
+    })
+    .catch(() => this.setState({ sentStatus: 'error' }));
   }
 
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { $ } from 'jquery';
+import $ from 'jquery';
 import Notice from './Notice';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,6 @@ class LoginForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const options = {
-      // url: COINMARKET_API,
       data: JSON.stringify({
         emailAddress: this.state.emailAddress,
         password: this.state.firstName
