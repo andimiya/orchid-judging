@@ -41,6 +41,11 @@ class NavBar extends React.Component {
             </Link>
           </div>
           <div className="menu-item">
+            <Link to="/new-investments" onClick={this.collapseNav}>
+              <p>Add New</p>
+            </Link>
+          </div>
+          <div className="menu-item">
             <Link to="/login" onClick={this.collapseNav}>
               <p>Login</p>
             </Link>
@@ -48,7 +53,7 @@ class NavBar extends React.Component {
         </div>
         <div className="hamburger">
           <div onClick={this.handleClick}>
-            <img src={hamburger} alt="Work, Resume, Contact" width="40px"onClick={this.handleClick} />
+            <img src={hamburger} alt="Work, Resume, Contact" width="40px" onClick={this.handleClick} />
           </div>
         </div>
       </div>
