@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { $ } from 'jquery';
+import $ from 'jquery';
+import { LOGIN } from '../constants';
 import Notice from './Notice';
+import { Link } from 'react-router-dom';
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       emailAddress: '',
-      firstName: '',
-      lastName: '',
+      password: '',
       sentStatus: '',
     };
 
@@ -24,93 +25,85 @@ class LoginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const options = {
-      // url: COINMARKET_API,
-      data: JSON.stringify({
-        emailAddress: this.state.emailAddress,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const data = {
+      username: this.state.emailAddress,
+      password: this.state.password
     };
-    $.post(options)
-      .then(data => {
-        if (data.statusCode === 200) {
-          this.setState({
-            sentStatus: 'sent',
-            emailAddress: '',
-            firstName: '',
-            lastName: ''
-          });
-        } else {
-          this.setState({
-            sentStatus: 'error',
-          });
-        }
-      })
-      .catch(() => this.setState({ sentStatus: 'error' }));
+    $.post({
+      url: LOGIN,
+      data: data
+    })
+    .then(data => {
+      if (data.statusCode === 200) {
+        this.setState({
+          sentStatus: 'sent',
+          emailAddress: '',
+          password: ''
+        });
+      } else {
+        this.setState({
+          sentStatus: 'error',
+        });
+      }
+    })
+    .catch(() => this.setState({ sentStatus: 'error' }));
   }
 
   render() {
     return (
       <div className="login-form-container">
-        <div className="form-container">
-          {(() => {
-            switch (this.state.sentStatus) {
-              case 'sent':
-                return (
-                  <Notice
-                    status="Your message has been sent! We'll contact you shortly"
-                    statusClass="success-message"
-                    noticeContainerClass="notice-container-success"
-                  />
-                );
-              case 'error':
-                return (
-                  <Notice
-                    status="An error occured, please try again"
-                    noticeContainerClass="notice-container-error"
-                    statusClass="error-message"
-                  />
-                );
-              default:
-                return '';
-            }
-          })()}
+        {(() => {
+          switch (this.state.sentStatus) {
+            case 'sent':
+              return (
+                <Notice
+                  status="Your message has been sent! We'll contact you shortly"
+                  statusClass="success-message"
+                  noticeContainerClass="notice-container-success"
+                />
+              );
+            case 'error':
+              return (
+                <Notice
+                  status="An error occured, please try again"
+                  noticeContainerClass="notice-container-error"
+                  statusClass="error-message"
+                />
+              );
+            default:
+              return '';
+          }
+        })()}
+        <div className="form-container-outer">
           <div className="form-container">
-            <form onSubmit={this.handleSubmit}
-              className="form-inline">
-              <input
-                type="text"
-                onChange={this.handleChange}
-                placeholder="Email Address"
-                name="emailAddress"
-                value={this.state.emailAddress}
-                className="form-control"
-              />
-              <input
-                type="text"
-                onChange={this.handleChange}
-                placeholder="First Name"
-                name="firstName"
-                value={this.state.firstName}
-                className="form-control"
-              />
-              <input
-                type="text"
-                onChange={this.handleChange}
-                placeholder="Last Name"
-                name="lastName"
-                value={this.state.lastName}
-                className="form-control"
-              />
-              <input
-                className="btn btn-primary"
-                type="submit"
-                value="Log In"
-              />
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="email"
+                  onChange={this.handleChange}
+                  placeholder="Email Address"
+                  name="emailAddress"
+                  value={this.state.emailAddress}
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  onChange={this.handleChange}
+                  placeholder="Password"
+                  name="password"
+                  value={this.state.password}
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Log In"
+                />
+              </div>
             </form>
           </div>
         </div>
