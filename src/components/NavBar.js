@@ -50,6 +50,11 @@ class NavBar extends React.Component {
               <p>Login</p>
             </Link>
           </div>
+          <div className="menu-item">
+            <Link to="/create-account" onClick={this.collapseNav}>
+              <p>New Account</p>
+            </Link>
+          </div>
         </div>
         <div className="hamburger">
           <div onClick={this.handleClick}>

@@ -26,8 +26,8 @@ class LoginForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = {
-      user: this.state.emailAddress,
-      password: this.state.firstName
+      username: this.state.emailAddress,
+      password: this.state.password
     };
     $.post({
       url: LOGIN,
@@ -52,57 +52,61 @@ class LoginForm extends Component {
   render() {
     return (
       <div className="login-form-container">
-        <div className="form-container">
-          {(() => {
-            switch (this.state.sentStatus) {
-              case 'sent':
-                return (
-                  <Notice
-                    status="Your message has been sent! We'll contact you shortly"
-                    statusClass="success-message"
-                    noticeContainerClass="notice-container-success"
-                  />
-                );
-              case 'error':
-                return (
-                  <Notice
-                    status="An error occured, please try again"
-                    noticeContainerClass="notice-container-error"
-                    statusClass="error-message"
-                  />
-                );
-              default:
-                return '';
-            }
-          })()}
+        {(() => {
+          switch (this.state.sentStatus) {
+            case 'sent':
+              return (
+                <Notice
+                  status="Your message has been sent! We'll contact you shortly"
+                  statusClass="success-message"
+                  noticeContainerClass="notice-container-success"
+                />
+              );
+            case 'error':
+              return (
+                <Notice
+                  status="An error occured, please try again"
+                  noticeContainerClass="notice-container-error"
+                  statusClass="error-message"
+                />
+              );
+            default:
+              return '';
+          }
+        })()}
+        <div className="form-container-outer">
           <div className="form-container">
-            <form onSubmit={this.handleSubmit}
-              className="form-inline">
-              <input
-                type="text"
-                onChange={this.handleChange}
-                placeholder="Email Address"
-                name="emailAddress"
-                value={this.state.emailAddress}
-                className="form-control"
-              />
-              <input
-                type="text"
-                onChange={this.handleChange}
-                placeholder="Password"
-                name="password"
-                value={this.state.password}
-                className="form-control"
-              />
-              <input
-                className="btn btn-primary"
-                type="submit"
-                value="Log In"
-              />
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="email"
+                  onChange={this.handleChange}
+                  placeholder="Email Address"
+                  name="emailAddress"
+                  value={this.state.emailAddress}
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  onChange={this.handleChange}
+                  placeholder="Password"
+                  name="password"
+                  value={this.state.password}
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Log In"
+                />
+              </div>
             </form>
           </div>
         </div>
-        <Link to="create-account">Create Account</Link>
       </div>
     );
   }
