@@ -30,7 +30,7 @@ class TransactionContainer extends React.Component {
   getAllCurrencies(){
     ajax(CURRENCIES).then(currencies => {
       this.setState({
-        currencies: currencies.data
+        currencies: currencies.data.rows
       });
     });
   }
