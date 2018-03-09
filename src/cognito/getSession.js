@@ -1,5 +1,10 @@
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
-const { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } = process.env;
+import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
+
+console.log(COGNITO_USER_POOL_ID);
+console.log(COGNITO_CLIENT_ID);
+// export COGNITO_USER_POOL_ID=us-west-2_xK1ujwtLI
+// export COGNITO_CLIENT_ID=3efkim5qu47rhmart6li1jc8jh
 
 /*
  * Check localStorage for a user session

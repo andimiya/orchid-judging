@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import EmailSentIcon from '../assets/images/email-sent-icon';
 import Page from '../components/Page';
 import { emailResetPasswordCode } from '../redux/auth';

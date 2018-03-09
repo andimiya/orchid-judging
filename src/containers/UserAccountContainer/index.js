@@ -7,7 +7,7 @@ import {
   getCognitoUser,
   updateCognitoUserPassword,
 } from '../redux/auth';
-import { validators } from '../utils';
+// import { validators } from '../utils';
 
 function mapStateToProps(state) {
   return {
@@ -82,18 +82,18 @@ class UserAccountContainer extends Component {
   };
 
   updateUserAccount = (email, firstName) => {
-    const { isValidEmail } = validators;
+    // const { isValidEmail } = validators;
 
     let userAttributes = [];
-    if (email) {
-      if (!isValidEmail(email)) {
+    // if (email) {
+    //   if (!isValidEmail(email)) {
         return this.setState({ error: 'Please Provide A Valid Email' });
-      }
-      userAttributes = [...userAttributes, { Name: 'email', Value: email }];
-    }
-    if (firstName) {
-      userAttributes = [...userAttributes, { Name: 'name', Value: firstName }];
-    }
+      // }
+    //   userAttributes = [...userAttributes, { Name: 'email', Value: email }];
+    // // }
+    // if (firstName) {
+    //   userAttributes = [...userAttributes, { Name: 'name', Value: firstName }];
+    // }
     this.props
       .updateCognitoUser(userAttributes)
       .then(result => {

@@ -4,7 +4,7 @@ import LoginForm from '../../components/LoginForm';
 import Page from '../../components/Page';
 import { authenticateCognitoUser, getCognitoUser } from '../redux/auth';
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { validators } from '../utils/validators';
 
 function mapStateToProps(state) {
