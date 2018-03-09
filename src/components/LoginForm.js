@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import { LOGIN } from '../constants';
 import Notice from './Notice';
-import { Link } from 'react-router-dom';
 
 class LoginForm extends Component {
   constructor(props) {

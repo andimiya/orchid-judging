@@ -1,5 +1,5 @@
 import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
-const { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } = process.env;
+import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
 
 /*
  * Resend a confirmation email to the requesting user

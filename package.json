@@ -24,7 +24,9 @@
     "react-loading": "0.1.4",
     "react-redux": "5.0.7",
     "react-router-dom": "4.2.2",
-    "redux": "3.7.2"
+    "redux": "3.7.2",
+    "redux-reset": "0.3.0",
+    "redux-thunk": "2.2.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"

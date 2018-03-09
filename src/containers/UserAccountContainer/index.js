@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Page from '../components/Page';
-import UserAccountForm from '../components/UserAccountForm';
+import Page from '../../components/Page';
+import UserAccountForm from '../../components/UserAccountForm';
 import {
   updateCognitoUser,
   getCognitoUser,
   updateCognitoUserPassword,
-} from '../redux/auth';
+} from '../../redux/auth';
 // import { validators } from '../utils';
 
 function mapStateToProps(state) {

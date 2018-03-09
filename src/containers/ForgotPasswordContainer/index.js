@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import EmailSentIcon from '../assets/images/email-sent-icon';
-import Page from '../components/Page';
-import { emailResetPasswordCode } from '../redux/auth';
+// import EmailSentIcon from '../assets/images/email-sent-icon';
+import Page from '../../components/Page';
+import { emailResetPasswordCode } from '../../redux/auth';
 
 function mapStateToProps(state) {
   return state;
@@ -41,7 +41,6 @@ class ForgotPasswordContainer extends Component {
       return (
         <div className="forgot-password__form">
           <div className="forgot-password__sent-message">
-            <EmailSentIcon className="forgot-password__sent-icon" />
             {resendEmail ? (
               <p className="forgot-password__sent-text">
                 Your account has not yet been confirmed. A confirmation email to

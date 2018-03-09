@@ -6,7 +6,7 @@ import TransactionTable from '../../components/TransactionTable';
 
 const USER_ID = 1;
 
-class TransactionContainer extends React.Component {
+class TransactionContainer extends Component {
   constructor(props) {
     super(props);
 

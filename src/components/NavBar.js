@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 const hamburger = require('../assets/hamburger.svg');
 
-class NavBar extends React.Component {
+class NavBar extends Component {
   constructor(props) {
     super(props);
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Page from '../components/Page';
-import CognitoService from '../cognito';
+import Page from '../../components/Page';
+import CognitoService from '../../cognito';
 import { Link } from 'react-router-dom';
 
 class UserConfirmedContainer extends Component {

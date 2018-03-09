@@ -33,26 +33,13 @@ class Page extends Component {
   
   render() {
     const {
-      headerSideContent,
-      hideSmallSearchBar,
-      isLoading = false,
-      navMode,
-      noScroll,
-      searchResults,
-      searchTerm,
-      showLargeSearchBar,
-      title,
       user,
       userIsLoggedIn,
     } = this.props;
 
-    const noScrollClass = noScroll ? 'no-scroll' : '';
     return (
-      <div className={`page ${noScrollClass}`}>
-        <div className="page__content">
-          
-          {this.props.children}
-        </div>
+      <div className="page__content">
+        {this.props.children}
       </div>
     );
   }

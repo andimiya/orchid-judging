@@ -3,7 +3,7 @@ import { ajax } from 'jquery';
 import { CURRENCIES } from '../../constants';
 import InvestmentForm from '../../components/InvestmentForm';
 
-class NewInvestmentsContainer extends React.Component {
+class NewInvestmentsContainer extends Component {
   constructor(props) {
     super(props);
 

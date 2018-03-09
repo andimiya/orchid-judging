@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Page from '../components/Page';
-import { resetUserPassword } from '../redux/auth';
+import Page from '../../components/Page';
+import { resetUserPassword } from '../../redux/auth';
 
 function mapStateToProps(state) {
   return {

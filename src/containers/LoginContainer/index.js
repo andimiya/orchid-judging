@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import Page from '../../components/Page';
-import { authenticateCognitoUser, getCognitoUser } from '../redux/auth';
+import { authenticateCognitoUser, getCognitoUser } from '../../redux/auth';
 
-import { Link } from 'react-router-dom';
-import { validators } from '../utils/validators';
+import { validators } from '../../utils';
 
 function mapStateToProps(state) {
   return {

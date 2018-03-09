@@ -1,7 +1,7 @@
 /* xhr function used for all API requests */
 import $ from 'jquery';
 import CognitoService from '../cognito';
-const { INFERNO_APP_API_ENDPOINT } = process.env;
+import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID, INFERNO_APP_API_ENDPOINT } from '../constants';
 
 function apiService({
   endpoint = INFERNO_APP_API_ENDPOINT,

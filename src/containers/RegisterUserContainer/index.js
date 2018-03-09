@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Page from '../components/Page';
+import Page from '../../components/Page';
 import RegisterUserForm from '../components/RegisterUserForm';
-import { registerCognitoUser } from '../redux/auth';
+import { registerCognitoUser } from '../../redux/auth';
 import { validators } from '../utils';
 
 function mapStateToProps(state) {

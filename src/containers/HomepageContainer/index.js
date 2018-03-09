@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Page from '../../components/Page';
+
 import {
   COINMARKET_API,
   CURRENCIES,
@@ -30,7 +32,7 @@ const icons = {
 
 const USER_ID = 1;
 
-class HomepageContainer extends React.Component {
+class HomepageContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -83,60 +85,63 @@ class HomepageContainer extends React.Component {
 
   render(props) {
     return (
-      <div className="crypto-container outer">
-        {this.state.cryptoTypes.map(currencies => {
-          let icon = icons[`${currencies.symbol}Icon`];
-          if (!icon) {
-            icon = genericIcon;
-          }
-          return (
-            <div key={currencies.symbol} className="crypto-set">
-              <div className="title-container">
-                <img className="image" src={icon} height="80px" alt="currency symbol" />
-                <h2>{currencies.name}</h2>
-              </div>
-              <div className="data-container">
-                {this.state.exchangeRates.map(exchange => {
-                  if (currencies.name !== exchange.name) {
-                    return null;
-                  } return (
-                      <div key={exchange.id}>Current exchange price (USD): {exchange.price_usd}</div>
-                    )
-                })}
-                {this.state.transactionSums.map(sums => {
-                  if (currencies.name !== sums.name) {
-                    return null;
-                  } return (
-                      <div key={sums.name}>
-                        <div>USD Invested: ${sums.usd_invested}</div>
-                        <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
-                        {this.state.exchangeRates.map(exchangeRates => {
-                          const currencyNameToLowerCase = currencies.name.replace(/\s+/g, '-').toLowerCase();
-                          const currentValue = (sums.coin_purchased*exchangeRates.price_usd);
-                          if (currencyNameToLowerCase !== exchangeRates.id) {
-                            return null;
-                          } return (
-                              <div key={exchangeRates.id}>
-                                <div>Current Market Price: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
-                                <div>Current Value (USD): {currentValue.toFixed(2)}</div>
-                              </div>
-                            )
-                        })}
-                      </div>
-                    )
+      <Page>
+        <div className="crypto-container outer">
+          {this.state.cryptoTypes.map(currencies => {
+            let icon = icons[`${currencies.symbol}Icon`];
+            if (!icon) {
+              icon = genericIcon;
+            }
+            return (
+              <div key={currencies.symbol} className="crypto-set">
+                <div className="title-container">
+                  <img className="image" src={icon} height="80px" alt="currency symbol" />
+                  <h2>{currencies.name}</h2>
+                </div>
+                <div className="data-container">
+                  {this.state.exchangeRates.map(exchange => {
+                    if (currencies.name !== exchange.name) {
+                      return null;
+                    } return (
+                        <div key={exchange.id}>Current exchange price (USD): {exchange.price_usd}</div>
+                      )
                   })}
+                  {this.state.transactionSums.map(sums => {
+                    if (currencies.name !== sums.name) {
+                      return null;
+                    } return (
+                        <div key={sums.name}>
+                          <div>USD Invested: ${sums.usd_invested}</div>
+                          <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
+                          {this.state.exchangeRates.map(exchangeRates => {
+                            const currencyNameToLowerCase = currencies.name.replace(/\s+/g, '-').toLowerCase();
+                            const currentValue = (sums.coin_purchased*exchangeRates.price_usd);
+                            if (currencyNameToLowerCase !== exchangeRates.id) {
+                              return null;
+                            } return (
+                                <div key={exchangeRates.id}>
+                                  <div>Current Market Price: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
+                                  <div>Current Value (USD): {currentValue.toFixed(2)}</div>
+                                </div>
+                              )
+                          })}
+                        </div>
+                      )
+                    })}
+                </div>
               </div>
-            </div>
-          )
-        })}
-        <InvestmentForm
-          currencies={this.state.currencies}
-          getTransactions={this.generateCards}
-          getTransactionSums={this.getTransactionSums}
-        />
-      </div>
+            )
+          })}
+          <InvestmentForm
+            currencies={this.state.currencies}
+            getTransactions={this.generateCards}
+            getTransactionSums={this.getTransactionSums}
+          />
+        </div>
+      </Page>
     )
   };
 };
+
 
 export default HomepageContainer;
