@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 const instagramSVG = require('../assets/instagram.svg');
 const githubSVG = require('../assets/github.svg');
 const linkedinSVG = require('../assets/linkedin.svg');

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   COINMARKET_API,
   CURRENCIES,
@@ -68,7 +68,7 @@ class HomepageContainer extends React.Component {
   getAllCurrencies(){
     ajax(CURRENCIES).then(currencies => {
       this.setState({
-        currencies: currencies.data.rows
+        currencies: currencies.data
       });
     });
   }

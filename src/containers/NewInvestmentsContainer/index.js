@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { ajax } from 'jquery';
 import { CURRENCIES } from '../../constants';
 import InvestmentForm from '../../components/InvestmentForm';
 
-class NewInvestments extends React.Component {
+class NewInvestmentsContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,7 +21,7 @@ class NewInvestments extends React.Component {
   getAllCurrencies(){
     ajax(CURRENCIES).then(currencies => {
       this.setState({
-        currencies: currencies.data.rows
+        currencies: currencies.data
       });
     });
   }
@@ -38,4 +38,4 @@ class NewInvestments extends React.Component {
   };
 };
 
-export default NewInvestments;
+export default NewInvestmentsContainer;

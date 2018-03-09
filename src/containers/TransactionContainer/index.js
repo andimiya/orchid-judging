@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { ajax } from 'jquery';
 import { GET_TRANSACTIONS, DELETE_TRANSACTIONS, CURRENCIES } from '../../constants';
 import InvestmentForm from '../../components/InvestmentForm';
@@ -30,7 +30,7 @@ class TransactionContainer extends React.Component {
   getAllCurrencies(){
     ajax(CURRENCIES).then(currencies => {
       this.setState({
-        currencies: currencies.data.rows
+        currencies: currencies.data
       });
     });
   }
