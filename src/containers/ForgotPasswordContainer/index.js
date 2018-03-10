@@ -61,13 +61,18 @@ class ForgotPasswordContainer extends Component {
         <p className="forgot-password__instructions">
           We’ll send a code for you to reset your password to the email below
         </p>
-        <form onsubmit={this.sendResetCode}>
-          <label className="form__field">
-            <span className="form__label-text">Email Address</span>
-            <input className="form__input" name="email" type="text" />
+        <form onSubmit={this.sendResetCode}>
+          <div className="form-group">
+            <input 
+              type="text"
+              name="email"
+              placeholder="Email Address"
+              className="form-control"
+              required
+            />
+          </div>
             {error && <div className="form__error">{error}</div>}
-          </label>
-          <button className="button button--form" type="submit">
+          <button className="btn" type="submit">
             Reset My Password
           </button>
         </form>
@@ -81,7 +86,7 @@ class ForgotPasswordContainer extends Component {
   render() {
     return (
       <Page>
-        <div>
+        <div className="outer">
           <h1 className="section__title">Forgot Your Password?</h1>
           {this.renderBody()}
         </div>

@@ -46,47 +46,46 @@ class ResetPasswordContainer extends Component {
   };
 
   render() {
-    const { isLoading } = this.state;
     return (
-      <Page isLoading={isLoading}>
-        <h1 className="section__title">Reset Your Password</h1>
-        <p className="forgot-password__instructions">
-          Enter your new password below.
-        </p>
-        <p className="forgot-password__subtext">Passwords must be at least 8 characters long and contain both upper and lowercase letters.</p>
-        <div className="password-reset__form">
-          <form onsubmit={this.handlePasswordReset}>
-            <label className="form__field">
-              <span className="form__label-text">New Password</span>
+      <Page>
+        <div className="outer">
+          <h1>Reset Your Password</h1>
+          <p>
+            Enter your new password below.
+          </p>
+          <p>Passwords must be at least 8 characters long and contain both upper and lowercase letters.</p>
+          <div className="password-reset__form">
+            <form onSubmit={this.handlePasswordReset}>
+              <div className="form-group">
+                <label>New Password</label>
+                <input
+                  className="form-control"
+                  name="passwordOne"
+                  type="password"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Retype Password</label>
+                <input
+                  className="form-control"
+                  name="passwordTwo"
+                  type="password"
+                  required
+                />
+              </div>
+              {this.state.error && (
+                <p className="form__error">{this.state.error}</p>
+              )}
               <input
-                className="form__input"
-                name="passwordOne"
-                type="password"
+                name="verificationCode"
+                type="hidden"
                 required
               />
-            </label>
-            <label className="form__field">
-              <span className="form__label-text">Retype Password</span>
-              <input
-                className="form__input"
-                name="passwordTwo"
-                type="password"
-                required
-              />
-            </label>
-            {this.state.error && (
-              <p className="form__error">{this.state.error}</p>
-            )}
-            <input
-              name="verificationCode"
-              type="hidden"
-              value={this.props.params.verificationCode}
-              required
-            />
-            <button className="button button--form" type="submit">
-              Confirm New Password
-            </button>
-          </form>
+              <button className="btn" type="submit">Reset Password
+              </button>
+            </form>
+          </div>
         </div>
       </Page>
     );
