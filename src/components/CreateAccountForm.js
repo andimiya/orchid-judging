@@ -55,6 +55,9 @@ class CreateAccountForm extends Component {
   }
 
   render() {
+    
+    const { handleRegistration } = this.props;
+
     return (
       <div className="login-form-container">
         <div className="form-container">
@@ -81,7 +84,7 @@ class CreateAccountForm extends Component {
             }
           })()}
           <div className="form-container">
-            <form onSubmit={this.handleSubmit}
+            <form onSubmit={handleRegistration}
               className="form-inline">
               <input
                 type="text"

@@ -1,4 +1,4 @@
-import Component from 'inferno-component';
+import React, { Component } from 'react';
 
 class RegisterUserForm extends Component {
   render() {

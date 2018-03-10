@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import Page from '../../components/Page';
+import { Link } from 'react-router-dom';
 import { authenticateCognitoUser, getCognitoUser } from '../../redux/auth';
 
 import { validators } from '../../utils';
@@ -56,8 +57,10 @@ class LoginContainer extends Component {
   render() {
     return (
       <Page>
-        <div>
+        <div className="outer">
+          <h1>Log In to Your Account</h1>
           <LoginForm />
+          <Link to="/forgot-password">Forgot Password</Link>
         </div>
       </Page>
     );
