@@ -26,29 +26,35 @@ class CreateAccountContainer extends Component {
   };
 
   handleRegistration = e => {
+    console.log(e.target.email.value, 'event');
     e.preventDefault();
-    this.setState({ error: null, isLoading: true }, () => {
+
+    // this.setState({ error: null, isLoading: true }, () => {
       const { isValidEmail } = validators;
       const { email, firstName, passwordOne, passwordTwo } = e.target;
-
-      if (!this.passwordsMatch(passwordOne, passwordTwo)) {
-        return this.setState({
-          error: 'Both Passwords Must Match',
-          isLoading: false,
-        });
-      }
-      if (!isValidEmail(email.value)) {
-        return this.setState({
-          error: 'Please Provide A Valid Email',
-          isLoading: false,
-        });
-      }
+      console.log(email, 'email');
+      // 
+      // if (!this.passwordsMatch(passwordOne, passwordTwo)) {
+      //   return this.setState({
+      //     error: 'Both Passwords Must Match',
+      //     isLoading: false,
+      //   });
+      // }
+      // if (!isValidEmail(email.value)) {
+      //   return this.setState({
+      //     error: 'Please Provide A Valid Email',
+      //     isLoading: false,
+      //   });
+      // }
 
       const userInformation = {
         email: email.value.toLowerCase(),
         password: passwordOne.value,
         firstName: firstName.value
       };
+      
+      console.log(userInformation, 'userinfo');
+      
       return this.props
         .registerCognitoUser(userInformation)
         .then(() => {
@@ -57,13 +63,13 @@ class CreateAccountContainer extends Component {
         .catch(err => {
           this.setState({ error: err.message, isLoading: false });
         });
-    });
+    // });
   };
 
   render() {
     const { isLoading } = this.state;
     return (
-      <Page isLoading={isLoading} title="Create a new account">
+      <Page>
         <div className="register__container">
           {this.state.successfullyCreatedUser ? (
             <div className="register__success">

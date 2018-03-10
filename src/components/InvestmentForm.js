@@ -101,7 +101,8 @@ class InvestmentForm extends Component {
     })
   }
 
-  render(props) {
+  render() {
+    console.log(this.props.currencies);
     return (
       <div className="investment-form-container">
         <div className="form-group">

@@ -42,12 +42,12 @@ class CreateAccountForm extends Component {
             <label>Minimum 8 characters, upper and lower case</label>
             <input 
               type="password"
-              name="passwordOne"
+              name="passwordTwo"
               placeholder="Re-enter password"
               className="form-control"
               required
             />
-          </div>
+        </div>
           <button className="btn" type="submit">Create Account</button>
         </form>
       </div>
