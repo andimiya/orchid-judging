@@ -79,20 +79,16 @@ class LoginForm extends Component {
               <div className="form-group">
                 <input
                   type="email"
-                  onChange={this.handleChange}
                   placeholder="Email Address"
                   name="emailAddress"
-                  value={this.state.emailAddress}
                   className="form-control"
                 />
               </div>
               <div className="form-group">
                 <input
                   type="password"
-                  onChange={this.handleChange}
                   placeholder="Password"
                   name="password"
-                  value={this.state.password}
                   className="form-control"
                 />
               </div>

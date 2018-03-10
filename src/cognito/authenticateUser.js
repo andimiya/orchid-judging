@@ -15,14 +15,7 @@ export default credentials => {
   return new Promise((resolve, reject) => {
     // Validation Checks //
     let validationError = null;
-    if (!credentials || (!credentials.userName && !credentials.password)) {
-      validationError = new Error('Missing userName or password');
-      return reject(validationError);
-    }
-    if (!COGNITO_USER_POOL_ID || !COGNITO_CLIENT_ID) {
-      validationError = new Error('Missing user_pool_id or cognito_client_id');
-      return reject(validationError);
-    }
+
     const { userName, password } = credentials;
 
     const authenticationData = {
@@ -45,9 +38,11 @@ export default credentials => {
 
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: result => {
+        console.log(result, 'result');
         return resolve(result);
       },
       onFailure: err => {
+        console.log(err, 'error');
         return reject(err);
       },
     });

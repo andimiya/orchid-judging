@@ -41,17 +41,11 @@ class LoginContainer extends Component {
     return this.props
       .authenticateCognitoUser(credentials)
       .then(result => {
-        this.props.getCognitoUser().then(userInfo => {
-          // Set user display name in local storage so it does not have
-          // to be fetched every time the user navigates to a new page
-          window.localStorage.setItem('manomanoDisplayName', userInfo.name);
-          // Redirects user to the home page
-          this.context.router.push('/');
-        });
+        this.props.history.push('/homepage')
       })
       .catch(err => {
         this.setState({ error: err.message });
-      });
+      })
   };
 
   render() {
@@ -59,7 +53,31 @@ class LoginContainer extends Component {
       <Page>
         <div className="outer">
           <h1>Log In to Your Account</h1>
-          <LoginForm />
+          <form onSubmit={this.handleLogin}>
+            <div className="form-group">
+              <input
+                type="email"
+                placeholder="Email Address"
+                name="email"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <input
+                className="btn btn-primary"
+                type="submit"
+                value="Log In"
+              />
+            </div>
+          </form>
           <Link to="/forgot-password">Forgot Password</Link>
         </div>
       </Page>
