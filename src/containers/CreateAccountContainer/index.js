@@ -15,74 +15,65 @@ class CreateAccountContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emailAddress: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      sentStatus: '',
+      error: null,
+      isLoading: false,
+      successfullyCreatedUser: false,
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
+  passwordsMatch = (passwordOne, passwordTwo) => {
+    return passwordOne.value === passwordTwo.value;
+  };
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const data = {
-      email: this.state.emailAddress,
-      password: this.state.password,
-      first_name: this.state.firstName,
-      last_name: this.state.lastName
-    };
-    $.post({
-      url: CREATE_NEW_USER,
-      data: data
-    })
-    .then(data => {
-      if (data.status === 200) {
-        this.setState({
-          sentStatus: 'sent',
-          emailAddress: '',
-          firstName: '',
-          lastName: '',
-          password: ''
-        });
-      } else {
-        this.setState({
-          sentStatus: 'error',
+  handleRegistration = e => {
+    e.preventDefault();
+    this.setState({ error: null, isLoading: true }, () => {
+      const { isValidEmail } = validators;
+      const { email, firstName, passwordOne, passwordTwo } = e.target;
+
+      if (!this.passwordsMatch(passwordOne, passwordTwo)) {
+        return this.setState({
+          error: 'Both Passwords Must Match',
+          isLoading: false,
         });
       }
-    })
-    .catch(() => this.setState({ sentStatus: 'error' }));
-  }
+      if (!isValidEmail(email.value)) {
+        return this.setState({
+          error: 'Please Provide A Valid Email',
+          isLoading: false,
+        });
+      }
+
+      const userInformation = {
+        email: email.value.toLowerCase(),
+        password: passwordOne.value,
+        firstName: firstName.value
+      };
+      return this.props
+        .registerCognitoUser(userInformation)
+        .then(() => {
+          this.setState({ successfullyCreatedUser: true, isLoading: false });
+        })
+        .catch(err => {
+          this.setState({ error: err.message, isLoading: false });
+        });
+    });
+  };
 
   render() {
     const { isLoading } = this.state;
     return (
-      <Page title="Create a new account">
+      <Page isLoading={isLoading} title="Create a new account">
         <div className="register__container">
           {this.state.successfullyCreatedUser ? (
             <div className="register__success">
-              <h4 className="section__title">Ua hoʻokino ʻia kāu moʻokāki<br />Your Account Has Been Created!</h4>
+              <h4 className="section__title">Your Account Has Been Created!</h4>
               <p className="register__instructions">
                 Check your email for a link we sent to verify your
                 account&mdash;
               </p>
               <div className="register__details">
-                <span>Once your account is verified you can start</span>
-                <ul>
-                  <li>&ndash; Creating flashcard decks</li>
-                  <li>&ndash; Saving important words</li>
-                  <li>
-                    &ndash; Practicing and playing through your flashcard decks
-                  </li>
-                </ul>
+                <span>Once your account is verified you can use the app</span>
               </div>
               <p className="register__action-text">
                 Check Your Email to Activate Your Account

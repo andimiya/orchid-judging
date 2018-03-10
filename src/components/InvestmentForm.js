@@ -61,7 +61,7 @@ class InvestmentForm extends Component {
       coin_purchased: Number(this.state.coin_purchased),
       exchange_rate: Number(exchangeRate),
       usd_invested: Number(this.state.usd_invested),
-      purchased_at: moment(this.state.startDate._d).unix()
+      purchased_at: moment(this.state.startDate._d).format("YYYY-MM-DD HH:mm:ss")
     };
     $.post({
       url: POST_TRANSACTIONS,
