@@ -18,6 +18,8 @@ class CreateAccountForm extends Component {
               className="form-control"
               required
             />
+          </div>
+          <div className="form-group">
             <input 
               type="text"
               name="firstName"
@@ -25,6 +27,8 @@ class CreateAccountForm extends Component {
               className="form-control"
               required
             />
+          </div>
+          <div className="form-group">
             <label>Minimum 8 characters, upper and lower case</label>
             <input 
               type="password"
@@ -33,6 +37,8 @@ class CreateAccountForm extends Component {
               className="form-control"
               required
             />
+          </div>
+          <div className="form-group">
             <label>Minimum 8 characters, upper and lower case</label>
             <input 
               type="password"
@@ -41,8 +47,8 @@ class CreateAccountForm extends Component {
               className="form-control"
               required
             />
-            <button className="button button--form"type="submit">Create Account</button>
           </div>
+          <button className="btn" type="submit">Create Account</button>
         </form>
       </div>
     );
