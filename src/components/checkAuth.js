@@ -4,14 +4,15 @@ import { Redirect } from 'react-router-dom';
 import { getCognitoUser } from '../redux/auth';
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    isLoggedIn: state.auth.userIsLoggedIn
+  };
 }
 
 export class AuthWrapper extends React.Component {
 
   render() {
-    let isLoggedIn = this.props.auth.userIsLoggedIn;
-    if (!isLoggedIn) {
+    if (!this.props.isLoggedIn) {
       return (
         <Redirect to="/login" />
       )
