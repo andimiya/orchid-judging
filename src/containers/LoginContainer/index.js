@@ -8,16 +8,14 @@ import { authenticateCognitoUser, getCognitoUser } from '../../redux/auth';
 import { validators } from '../../utils';
 
 function mapStateToProps(state) {
-  return {
-    userInformation: state.auth.userInformation,
-  };
+  return state;
 }
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
+      error: null
     };
   }
 
