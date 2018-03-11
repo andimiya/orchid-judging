@@ -26,44 +26,25 @@ class CreateAccountContainer extends Component {
   };
 
   handleRegistration = e => {
-    console.log(e.target.email.value, 'event');
     e.preventDefault();
 
-    // this.setState({ error: null, isLoading: true }, () => {
-      const { isValidEmail } = validators;
-      const { email, firstName, passwordOne, passwordTwo } = e.target;
-      console.log(email, 'email');
-      // 
-      // if (!this.passwordsMatch(passwordOne, passwordTwo)) {
-      //   return this.setState({
-      //     error: 'Both Passwords Must Match',
-      //     isLoading: false,
-      //   });
-      // }
-      // if (!isValidEmail(email.value)) {
-      //   return this.setState({
-      //     error: 'Please Provide A Valid Email',
-      //     isLoading: false,
-      //   });
-      // }
+    const { isValidEmail } = validators;
+    const { email, firstName, passwordOne, passwordTwo } = e.target;
 
-      const userInformation = {
-        email: email.value.toLowerCase(),
-        password: passwordOne.value,
-        firstName: firstName.value
-      };
-      
-      console.log(userInformation, 'userinfo');
-      
-      return this.props
-        .registerCognitoUser(userInformation)
-        .then(() => {
-          this.setState({ successfullyCreatedUser: true, isLoading: false });
-        })
-        .catch(err => {
-          this.setState({ error: err.message, isLoading: false });
-        });
-    // });
+    const userInformation = {
+      email: email.value.toLowerCase(),
+      password: passwordOne.value,
+      firstName: firstName.value
+    };
+          
+    return this.props
+      .registerCognitoUser(userInformation)
+      .then(() => {
+        this.setState({ successfullyCreatedUser: true, isLoading: false });
+      })
+      .catch(err => {
+        this.setState({ error: err.message, isLoading: false });
+      });
   };
 
   render() {

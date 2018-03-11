@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import { getCognitoUser } from '../redux/auth';
 
 function mapStateToProps(state) {
-  console.log(state.auth.userIsLoggedIn, 'state checkauth');
   return state;
 }
 
