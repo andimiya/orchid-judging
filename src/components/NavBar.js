@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getCognitoUser } from '../redux/auth';
 const hamburger = require('../assets/hamburger.svg');
+
+function mapStateToProps(state) {
+  return {
+    isLoggedIn: state.auth.userIsLoggedIn.toString()
+  };
+}
 
 class NavBar extends Component {
   constructor(props) {
@@ -47,27 +55,27 @@ class NavBar extends Component {
         <div className="menu-item-container">
           <div className="menu-item">
             <Link to="/transactions" onClick={this.collapseNav}>
-              <p>Transactions</p>
+              <p className={this.props.isLoggedIn}>Transactions</p>
             </Link>
           </div>
           <div className="menu-item">
             <Link to="/new-investments" onClick={this.collapseNav}>
-              <p>Add New</p>
+              <p className={this.props.isLoggedIn}>Add New</p>
             </Link>
           </div>
           <div className="menu-item">
             <Link to="/login" onClick={this.collapseNav}>
-              <p>Login</p>
+              <p className={this.props.isLoggedIn}>Login</p>
             </Link>
           </div>
           <div className="menu-item">
             <Link to="/create-account" onClick={this.collapseNav}>
-              <p>New Account</p>
+              <p className={this.props.isLoggedIn}>New Account</p>
             </Link>
           </div>
           <div className="menu-item">
             <Link to="/" onClick={this.logoutCurrentUser}>
-              <p>Log Out</p>
+              <p className={this.props.isLoggedIn}>Log Out</p>
             </Link>
           </div>
         </div>
@@ -81,4 +89,6 @@ class NavBar extends Component {
   }
 };
 
-export default NavBar;
+export default connect(mapStateToProps, {
+  getCognitoUser
+})(NavBar);
