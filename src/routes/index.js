@@ -31,14 +31,13 @@ const Routes = props => {
           <Route exact path="/forgot-password" component={ForgotPasswordContainer} />
           <Route exact path="/create-account" component={CreateAccountContainer} />
           <Route exact path="/reset-password" component={ResetPasswordContainer} />
-          <Route exact path="/homepage" component={HomepageContainer} />
+
         </Switch>
-        
+        <AuthRoutes path="/homepage" component={HomepageContainer} />
         <AuthRoutes path="/transactions" component={TransactionContainer} />
-          
-        <Route exact path="/account" component={UserAccountContainer} />
-        <Route exact path="/new-investments" component={NewInvestmentsContainer} />
-        <Route exact path="/confirm" component={UserConfirmedContainer} />
+        <AuthRoutes path="/account" component={UserAccountContainer} />
+        <AuthRoutes path="/new-investments" component={NewInvestmentsContainer} />
+        <AuthRoutes path="/confirm" component={UserConfirmedContainer} />
       <Footer />
     </div>
   );

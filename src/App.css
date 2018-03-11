@@ -73,6 +73,9 @@
       .menu-item a, .menu-item p:hover {
         color: white; } }
 
+.false {
+  display: none; }
+
 .responsive-container {
   background-color: #75d6c7;
   opacity: 0.8;

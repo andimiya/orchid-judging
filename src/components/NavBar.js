@@ -22,7 +22,7 @@ class NavBar extends Component {
       navClass: 'navbar-container'
     };
   }
-
+  
   handleClick(){
     if (this.state.navClass === 'navbar-container') {
       this.setState ({ navClass: 'responsive-container' })
@@ -45,6 +45,47 @@ class NavBar extends Component {
   };
 
   render() {
+    console.log(this.props.isLoggedIn, 'is logged in');
+    
+    let menuProperties = [
+      { 
+        menuItemContainerClass: "menu-item",
+        linkTo: "/transactions",
+        onClick: this.collapseNav,
+        navDisplayText: "Transactions",
+        isLoggedInClass: this.props.isLoggedIn
+      },
+      { 
+        menuItemContainerClass: "menu-item",
+        linkTo: "/new-investments",
+        onClick: this.collapseNav,
+        navDisplayText: "Add New",
+        isLoggedInClass: this.props.isLoggedIn,
+      },
+      { 
+        menuItemContainerClass: "menu-item",
+        linkTo: "/create-account",
+        onClick: this.collapseNav,
+        navDisplayText: "Create Account",
+        isLoggedInClass: this.props.isLoggedIn,
+      },
+      { 
+        menuItemContainerClass: "menu-item",
+        linkTo: "/login",
+        onClick: this.collapseNav,
+        navDisplayText: "Log In",
+        isLoggedInClass: this.props.isLoggedIn,
+      },
+      { 
+        menuItemContainerClass: "menu-item",
+        linkTo: "/",
+        onClick: this.logoutCurrentUser,
+        navDisplayText: "Log Out",
+        isLoggedInClass: this.props.isLoggedIn,
+        
+      },
+    ]
+
     return (
       <div className={this.state.navClass}>
         <div className="name-container">
@@ -52,38 +93,25 @@ class NavBar extends Component {
             <p>Crypto Tracker</p>
           </Link>
         </div>
+        
         <div className="menu-item-container">
-          <div className={"menu-item " +  this.props.isLoggedIn}>
-            <Link to="/transactions" onClick={this.collapseNav}>
-              <p className={this.props.isLoggedIn}>Transactions</p>
-            </Link>
-          </div>
-          <div className={"menu-item " +  this.props.isLoggedIn}>
-            <Link to="/new-investments" onClick={this.collapseNav}>
-              <p className={this.props.isLoggedIn}>Add New</p>
-            </Link>
-          </div>
-          <div className={"menu-item " +  this.props.isLoggedIn}>
-            <Link to="/login" onClick={this.collapseNav}>
-              <p className={this.props.isLoggedIn}>Login</p>
-            </Link>
-          </div>
-          <div className={"menu-item " +  this.props.isLoggedIn}>
-            <Link to="/create-account" onClick={this.collapseNav}>
-              <p>New Account</p>
-            </Link>
-          </div>
-          <div className={"menu-item " +  this.props.isLoggedIn}>
-            <Link to="/" onClick={this.logoutCurrentUser}>
-              <p className={this.props.isLoggedIn}>Log Out</p>
-            </Link>
-          </div>
+          {menuProperties.map(properties => {
+            return (
+              <div key={properties.linkTo} className={properties.menuItemContainerClass}>
+                <Link to={properties.linkTo} onClick={properties.onClick}>
+                  <p>{properties.navDisplayText}</p>
+                </Link>
+              </div>
+            )
+          })}
         </div>
-        <div className="hamburger">
-          <div onClick={this.handleClick}>
-            <img src={hamburger} alt="Work, Resume, Contact" width="40px" onClick={this.handleClick} />
+            
+          <div className="hamburger">
+            <div onClick={this.handleClick}>
+              <img src={hamburger} alt="Work, Resume, Contact" width="40px" onClick={this.handleClick} />
+            </div>
           </div>
-        </div>
+        
       </div>
     );
   }
