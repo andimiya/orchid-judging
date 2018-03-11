@@ -8,6 +8,7 @@ class NavBar extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.collapseNav = this.collapseNav.bind(this);
+    this.logoutCurrentUser = this.logoutCurrentUser.bind(this);
 
     this.state = {
       navClass: 'navbar-container'
@@ -25,6 +26,17 @@ class NavBar extends Component {
   collapseNav(){
     this.setState ({ navClass: 'navbar-container'})
   }
+  
+  logoutCurrentUser = () => {
+    if (this.props.userIsLoggedIn) {
+      this.props
+        .logoutUserSession()
+        .then(() => {
+          this.props.history.push('/homepage')
+        })
+        .catch(err => {});
+    }
+  };
 
   render() {
     return (
@@ -53,6 +65,11 @@ class NavBar extends Component {
           <div className="menu-item">
             <Link to="/create-account" onClick={this.collapseNav}>
               <p>New Account</p>
+            </Link>
+          </div>
+          <div className="menu-item">
+            <Link to="/" onClick={this.logoutCurrentUser}>
+              <p>Log Out</p>
             </Link>
           </div>
         </div>

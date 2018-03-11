@@ -77,11 +77,15 @@ class ResetPasswordContainer extends Component {
               {this.state.error && (
                 <p className="form__error">{this.state.error}</p>
               )}
-              <input
-                name="verificationCode"
-                type="hidden"
-                required
-              />
+              <div className="form-group">
+                <label>Verification Code</label>
+                <input
+                  className="form-control"
+                  name="verificationCode"
+                  type="number"
+                  required
+                />
+              </div>
               <button className="btn" type="submit">Reset Password
               </button>
             </form>
