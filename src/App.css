@@ -8,7 +8,10 @@
   justify-content: space-between;
   background-color: #75d6c7;
   opacity: 0.8;
-  height: 3.5rem; }
+  height: 3.5rem;
+  font-family: "futura-pt";
+  font-weight: 300;
+  letter-spacing: 0.3px; }
   .navbar-container a {
     padding-top: 1rem; }
 
@@ -74,7 +77,10 @@
   background-color: #75d6c7;
   opacity: 0.8;
   padding: 1rem 1rem 0.5rem 1rem;
-  width: 100%; }
+  width: 100%;
+  font-family: "futura-pt";
+  font-weight: 300;
+  letter-spacing: 0.3px; }
   .responsive-container .name-container {
     display: flex;
     justify-content: center;
@@ -118,7 +124,10 @@
         visibility: visible; } }
 
 .outer {
-  margin: 3rem; }
+  margin: 3rem;
+  font-family: "futura-pt";
+  font-weight: 300;
+  letter-spacing: 0.3px; }
 
 .crypto-container {
   display: flex;
@@ -168,6 +177,11 @@
     color: gray;
     line-height: 1rem;
     padding: 1rem 1rem 0 1rem; }
+
+form {
+  font-family: "futura-pt";
+  font-weight: 300;
+  letter-spacing: 0.3px; }
 
 .form-container {
   margin: 4rem 1.5rem 1.5rem 1.5rem; }

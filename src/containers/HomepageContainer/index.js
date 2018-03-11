@@ -84,6 +84,7 @@ class HomepageContainer extends Component {
   }
 
   render(props) {
+    console.log(this.state.currencies, 'currencies home');
     return (
       <Page>
         <div className="crypto-container outer">

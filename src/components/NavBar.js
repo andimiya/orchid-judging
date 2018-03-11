@@ -42,7 +42,7 @@ class NavBar extends Component {
     return (
       <div className={this.state.navClass}>
         <div className="name-container">
-          <Link to="/" onClick={this.collapseNav}>
+          <Link to="/homepage" onClick={this.collapseNav}>
             <p>Crypto Tracker</p>
           </Link>
         </div>
