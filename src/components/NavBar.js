@@ -28,14 +28,12 @@ class NavBar extends Component {
   }
   
   logoutCurrentUser = () => {
-    if (this.props.userIsLoggedIn) {
-      this.props
-        .logoutUserSession()
-        .then(() => {
-          this.props.history.push('/homepage')
-        })
-        .catch(err => {});
-    }
+    this.props
+      .logoutUserSession()
+      .then(() => {
+        this.props.history.push('/homepage')
+      })
+      .catch(err => {});
   };
 
   render() {
