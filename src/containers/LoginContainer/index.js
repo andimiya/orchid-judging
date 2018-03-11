@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LoginForm from '../../components/LoginForm';
 import Page from '../../components/Page';
 import { Link } from 'react-router-dom';
 import { authenticateCognitoUser, getCognitoUser } from '../../redux/auth';

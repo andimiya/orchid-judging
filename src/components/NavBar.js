@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCognitoUser } from '../redux/auth';
+import { getCognitoUser, logoutUserSession } from '../redux/auth';
 const hamburger = require('../assets/hamburger.svg');
 
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.auth.userIsLoggedIn.toString()
+    isLoggedIn: state.auth.userIsLoggedIn
   };
 }
 
@@ -22,7 +22,7 @@ class NavBar extends Component {
       navClass: 'navbar-container'
     };
   }
-  
+
   handleClick(){
     if (this.state.navClass === 'navbar-container') {
       this.setState ({ navClass: 'responsive-container' })
@@ -34,55 +34,56 @@ class NavBar extends Component {
   collapseNav(){
     this.setState ({ navClass: 'navbar-container'})
   }
-  
+
   logoutCurrentUser = () => {
-    this.props
-      .logoutUserSession()
-      .then(() => {
-        this.props.history.push('/homepage')
-      })
-      .catch(err => {});
+    if (this.props.isLoggedIn){
+      this.props
+        .logoutUserSession()
+        .then(() => {
+          this.props.history.push('/homepage')
+        })
+        .catch(err => {});
+    } else {
+      return;
+    }
   };
 
   render() {
-    console.log(this.props.isLoggedIn, 'is logged in');
-    
     let menuProperties = [
-      { 
+      {
         menuItemContainerClass: "menu-item",
         linkTo: "/transactions",
         onClick: this.collapseNav,
         navDisplayText: "Transactions",
         isLoggedInClass: this.props.isLoggedIn
       },
-      { 
+      {
         menuItemContainerClass: "menu-item",
         linkTo: "/new-investments",
         onClick: this.collapseNav,
         navDisplayText: "Add New",
         isLoggedInClass: this.props.isLoggedIn,
       },
-      { 
+      {
         menuItemContainerClass: "menu-item",
         linkTo: "/create-account",
         onClick: this.collapseNav,
         navDisplayText: "Create Account",
         isLoggedInClass: this.props.isLoggedIn,
       },
-      { 
+      {
         menuItemContainerClass: "menu-item",
         linkTo: "/login",
         onClick: this.collapseNav,
         navDisplayText: "Log In",
         isLoggedInClass: this.props.isLoggedIn,
       },
-      { 
+      {
         menuItemContainerClass: "menu-item",
         linkTo: "/",
         onClick: this.logoutCurrentUser,
         navDisplayText: "Log Out",
-        isLoggedInClass: this.props.isLoggedIn,
-        
+        isLoggedInClass: this.props.isLoggedIn
       },
     ]
 
@@ -93,7 +94,7 @@ class NavBar extends Component {
             <p>Crypto Tracker</p>
           </Link>
         </div>
-        
+
         <div className="menu-item-container">
           {menuProperties.map(properties => {
             return (
@@ -105,18 +106,18 @@ class NavBar extends Component {
             )
           })}
         </div>
-            
+
           <div className="hamburger">
             <div onClick={this.handleClick}>
               <img src={hamburger} alt="Work, Resume, Contact" width="40px" onClick={this.handleClick} />
             </div>
           </div>
-        
+
       </div>
     );
   }
 };
 
 export default connect(mapStateToProps, {
-  getCognitoUser
+  getCognitoUser, logoutUserSession
 })(NavBar);
