@@ -53,27 +53,27 @@ class NavBar extends Component {
           </Link>
         </div>
         <div className="menu-item-container">
-          <div className="menu-item">
+          <div className={"menu-item " +  this.props.isLoggedIn}>
             <Link to="/transactions" onClick={this.collapseNav}>
               <p className={this.props.isLoggedIn}>Transactions</p>
             </Link>
           </div>
-          <div className="menu-item">
+          <div className={"menu-item " +  this.props.isLoggedIn}>
             <Link to="/new-investments" onClick={this.collapseNav}>
               <p className={this.props.isLoggedIn}>Add New</p>
             </Link>
           </div>
-          <div className="menu-item">
+          <div className={"menu-item " +  this.props.isLoggedIn}>
             <Link to="/login" onClick={this.collapseNav}>
               <p className={this.props.isLoggedIn}>Login</p>
             </Link>
           </div>
-          <div className="menu-item">
+          <div className={"menu-item " +  this.props.isLoggedIn}>
             <Link to="/create-account" onClick={this.collapseNav}>
-              <p className={this.props.isLoggedIn}>New Account</p>
+              <p>New Account</p>
             </Link>
           </div>
-          <div className="menu-item">
+          <div className={"menu-item " +  this.props.isLoggedIn}>
             <Link to="/" onClick={this.logoutCurrentUser}>
               <p className={this.props.isLoggedIn}>Log Out</p>
             </Link>
