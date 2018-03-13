@@ -21,6 +21,7 @@ class NavBar extends Component {
     this.state = {
       navClass: 'navbar-container'
     };
+    let loggedIn = null;
   }
 
   handleClick(){
@@ -49,20 +50,21 @@ class NavBar extends Component {
   };
 
   render() {
+
     let menuProperties = [
       {
         menuItemContainerClass: "menu-item",
         linkTo: "/transactions",
         onClick: this.collapseNav,
         navDisplayText: "Transactions",
-        isLoggedInClass: this.props.isLoggedIn
+        showWhenLoggedIn: true
       },
       {
         menuItemContainerClass: "menu-item",
         linkTo: "/new-investments",
         onClick: this.collapseNav,
         navDisplayText: "Add New",
-        isLoggedInClass: this.props.isLoggedIn,
+        showWhenLoggedIn: true
       },
       {
         menuItemContainerClass: "menu-item",
@@ -70,20 +72,21 @@ class NavBar extends Component {
         onClick: this.collapseNav,
         navDisplayText: "Create Account",
         isLoggedInClass: this.props.isLoggedIn,
+        showWhenLoggedIn: false
       },
       {
         menuItemContainerClass: "menu-item",
         linkTo: "/login",
         onClick: this.collapseNav,
         navDisplayText: "Log In",
-        isLoggedInClass: this.props.isLoggedIn,
+        showWhenLoggedIn: false
       },
       {
         menuItemContainerClass: "menu-item",
         linkTo: "/",
         onClick: this.logoutCurrentUser,
         navDisplayText: "Log Out",
-        isLoggedInClass: this.props.isLoggedIn
+        showWhenLoggedIn: true
       },
     ]
 
@@ -96,15 +99,17 @@ class NavBar extends Component {
         </div>
 
         <div className="menu-item-container">
-          {menuProperties.map(properties => {
-            return (
-              <div key={properties.linkTo} className={properties.menuItemContainerClass}>
-                <Link to={properties.linkTo} onClick={properties.onClick}>
-                  <p>{properties.navDisplayText}</p>
-                </Link>
-              </div>
-            )
-          })}
+          {menuProperties.filter((menuProperties) => {
+            return menuProperties.showWhenLoggedIn === this.props.isLoggedIn;
+            }).map(properties => {
+              return (
+                <div key={properties.linkTo} className={properties.menuItemContainerClass}>
+                  <Link to={properties.linkTo} onClick={properties.onClick}>
+                    <p>{properties.navDisplayText}</p>
+                  </Link>
+                </div>
+              )
+            })};
         </div>
 
           <div className="hamburger">
