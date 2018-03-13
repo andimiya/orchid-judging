@@ -39,6 +39,10 @@ $font: 'futura-pt';
   background-color: $background-color-dark;
   opacity: 0.8;
   height: 3.5rem;
+  font-family: $font;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+
   a {
     padding-top: 1rem;
   }
@@ -103,6 +107,7 @@ $font: 'futura-pt';
       letter-spacing: 1.8px;
       color: $text-color-dark;
       margin: 0;
+
     },
     a,p:hover {
       color: white;
@@ -110,16 +115,24 @@ $font: 'futura-pt';
   }
 }
 
+.false {
+  display: none;
+}
+
 .responsive-container {
   background-color: $background-color-dark;
   opacity: 0.8;
   padding: 1rem 1rem 0.5rem 1rem;
   width: 100%;
+  font-family: $font;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 
   .name-container {
     display: flex;
     justify-content: center;
     padding: 0;
+
     @include medium {
       justify-content: flex-start;
       padding-left: 3rem;
@@ -173,6 +186,9 @@ $font: 'futura-pt';
 
 .outer {
   margin: 3rem;
+  font-family: $font;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 }
 
 .crypto-container {
@@ -233,6 +249,12 @@ $font: 'futura-pt';
     line-height: 1rem;
     padding: 1rem 1rem 0 1rem;
   }
+}
+
+form {
+  font-family: $font;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 }
 
 .form-container {

@@ -1,20 +1,83 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Page from '../../components/Page';
 import CreateAccountForm from '../../components/CreateAccountForm';
+import { registerCognitoUser } from '../../redux/auth';
+import { validators } from '../../utils';
+
+function mapStateToProps(state) {
+  return {
+    state,
+  };
+}
 
 class CreateAccountContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      error: null,
+      isLoading: false,
+      successfullyCreatedUser: false,
+    };
   }
 
+  passwordsMatch = (passwordOne, passwordTwo) => {
+    return passwordOne.value === passwordTwo.value;
+  };
+
+  handleRegistration = e => {
+    e.preventDefault();
+
+    const { isValidEmail } = validators;
+    const { email, firstName, passwordOne, passwordTwo } = e.target;
+
+    const userInformation = {
+      email: email.value.toLowerCase(),
+      password: passwordOne.value,
+      firstName: firstName.value
+    };
+          
+    return this.props
+      .registerCognitoUser(userInformation)
+      .then(() => {
+        this.setState({ successfullyCreatedUser: true, isLoading: false });
+      })
+      .catch(err => {
+        this.setState({ error: err.message, isLoading: false });
+      });
+  };
+
   render() {
+    const { isLoading } = this.state;
     return (
-      <div className="create-account-container">
-        <div className="create-account-container-inner">
-          <CreateAccountForm />
+      <Page>
+        <div className="register__container">
+          {this.state.successfullyCreatedUser ? (
+            <div className="register__success">
+              <h4 className="section__title">Your Account Has Been Created!</h4>
+              <p className="register__instructions">
+                Check your email for a link we sent to verify your
+                account&mdash;
+              </p>
+              <div className="register__details">
+                <span>Once your account is verified you can use the app</span>
+              </div>
+              <p className="register__action-text">
+                Check Your Email to Activate Your Account
+              </p>
+            </div>
+          ) : (
+            <div>
+              <CreateAccountForm
+                handleRegistration={this.handleRegistration}
+                error={this.state.error}
+              />
+            </div>
+          )}
         </div>
-      </div>
+      </Page>
     );
   }
 }
 
-export default CreateAccountContainer;
+export default connect(mapStateToProps, { registerCognitoUser })(CreateAccountContainer);
