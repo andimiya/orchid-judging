@@ -32,12 +32,13 @@ class CreateAccountContainer extends Component {
     e.preventDefault();
 
     const { isValidEmail } = validators;
-    const { email, firstName, passwordOne, passwordTwo } = e.target;
+    const { email, firstName, lastName, passwordOne, passwordTwo } = e.target;
 
     const userInformation = {
       email: email.value.toLowerCase(),
       password: passwordOne.value,
-      firstName: firstName.value
+      firstName: firstName.value,
+      lastName: lastName.value
     };
           
     return this.props
@@ -56,6 +57,7 @@ class CreateAccountContainer extends Component {
           url: CREATE_NEW_USER,
           data: {
             first_name: userInformation.firstName,
+            last_name: userInformation.lastName,
             email: userInformation.email
           }
         })

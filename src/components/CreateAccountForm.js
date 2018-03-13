@@ -29,6 +29,14 @@ class CreateAccountForm extends Component {
             />
           </div>
           <div className="form-group">
+            <input 
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
             <label>Minimum 8 characters, upper and lower case</label>
             <input 
               type="password"

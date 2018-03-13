@@ -32,7 +32,7 @@ export default userInformation => {
       return reject(validationError);
     }
 
-    const { firstName, email, password, school } = userInformation;
+    const { firstName, lastName, email, password } = userInformation;
 
     // Cognito //
     if (!COGNITO_USER_POOL_ID || !COGNITO_CLIENT_ID) {
@@ -52,6 +52,7 @@ export default userInformation => {
       Value: email,
     };
     const attributeEmail = new CognitoUserAttribute(dataEmail);
+
     const dataName = {
       Name: 'name',
       Value: firstName,
@@ -59,6 +60,15 @@ export default userInformation => {
     const attributeName = new CognitoUserAttribute(dataName);
 
     attributeList.push(attributeEmail, attributeName);
+
+    if (lastName) {
+      const dataLastName = {
+        Name: 'custom:lastName',
+        Value: lastName
+      };
+      const attributeLastName = new CognitoUserAttribute(dataLastName);
+      attributeList.push(attributeLastName);
+    }
 
     userPool.signUp(email, password, attributeList, null, (err, result) => {
       if (err) {

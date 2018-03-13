@@ -2,7 +2,7 @@ import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import getSession from './getSession';
 
 /*
- * Update a user's attributes such as email, first name, school etc
+ * Update a user's attributes such as email, first name, last name, etc
  *
  * @param {Array} updatedAttributes - The updated user attributes, each with a Value and Name key
  * @returns {String} userObject - The Cognito User object
