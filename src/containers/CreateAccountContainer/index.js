@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 import Page from '../../components/Page';
 import CreateAccountForm from '../../components/CreateAccountForm';
+import { CREATE_NEW_USER } from '../../constants';
 import { registerCognitoUser } from '../../redux/auth';
 import { validators } from '../../utils';
 
@@ -16,14 +18,15 @@ class CreateAccountContainer extends Component {
     super(props);
     this.state = {
       error: null,
-      isLoading: false,
-      successfullyCreatedUser: false,
-    };
+      userAddedSuccessfully: false,
+      successfullyCreatedUser: false
+    };    
   }
 
   passwordsMatch = (passwordOne, passwordTwo) => {
     return passwordOne.value === passwordTwo.value;
   };
+  
 
   handleRegistration = e => {
     e.preventDefault();
@@ -40,15 +43,36 @@ class CreateAccountContainer extends Component {
     return this.props
       .registerCognitoUser(userInformation)
       .then(() => {
-        this.setState({ successfullyCreatedUser: true, isLoading: false });
+        this.setState({ 
+          successfullyCreatedUser: true, 
+          isLoading: false
+        });
       })
       .catch(err => {
         this.setState({ error: err.message, isLoading: false });
-      });
+      })
+      .then(() => {
+        $.post({
+          url: CREATE_NEW_USER,
+          data: {
+            first_name: userInformation.firstName,
+            email: userInformation.email
+          }
+        })
+          .then(data => {
+            if (data.status === 200) {
+              this.setState({
+                userAddedSuccessfully: true
+              });
+            } else {
+              this.setState({ sentStatus: 'error' });
+            }
+          })
+          .catch(() => this.setState({ sentStatus: 'error' }));
+      })
   };
 
   render() {
-    const { isLoading } = this.state;
     return (
       <Page>
         <div className="register__container">

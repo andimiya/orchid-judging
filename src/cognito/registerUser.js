@@ -2,6 +2,7 @@ import {
   CognitoUserAttribute,
   CognitoUserPool,
 } from 'amazon-cognito-identity-js';
+import { connect } from 'react-redux';
 import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
 
 /*
@@ -12,7 +13,7 @@ import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
 */
 export default userInformation => {
   return new Promise((resolve, reject) => {
-    console.log(userInformation, 'user information');
+
     // Validation Checks //
     let validationError = null;
     if (!COGNITO_USER_POOL_ID || !COGNITO_CLIENT_ID) {
@@ -59,21 +60,10 @@ export default userInformation => {
 
     attributeList.push(attributeEmail, attributeName);
 
-    if (school) {
-      const dataSchool = {
-        Name: 'custom:school',
-        Value: school,
-      };
-      const attributeSchool = new CognitoUserAttribute(dataSchool);
-      attributeList.push(attributeSchool);
-    }
-
     userPool.signUp(email, password, attributeList, null, (err, result) => {
       if (err) {
-        console.log(err, 'error cognito');
         return reject(err);
       }
-      console.log(result, 'cognito');
       return resolve(result);
     });
   });
