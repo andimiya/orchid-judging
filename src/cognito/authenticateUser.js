@@ -38,11 +38,9 @@ export default credentials => {
 
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: result => {
-        console.log(result, 'result');
         return resolve(result);
       },
       onFailure: err => {
-        console.log(err, 'error');
         return reject(err);
       },
     });

@@ -77,7 +77,7 @@ class CreateAccountContainer extends Component {
   render() {
     return (
       <Page>
-        <div className="register__container">
+        <div className="register__container outer">
           {this.state.successfullyCreatedUser ? (
             <div className="register__success">
               <h4 className="section__title">Your Account Has Been Created!</h4>

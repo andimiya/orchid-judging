@@ -63,7 +63,7 @@ export default userInformation => {
 
     if (lastName) {
       const dataLastName = {
-        Name: 'custom:lastName',
+        Name: 'family_name',
         Value: lastName
       };
       const attributeLastName = new CognitoUserAttribute(dataLastName);

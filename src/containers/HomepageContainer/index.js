@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
+import { connect } from 'react-redux';
+import { getCognitoUser } from '../../redux/auth';
 
 import {
+  USERS,
   COINMARKET_API,
   CURRENCIES,
   CRYPTO_TYPES,
   CRYPTO_TYPES_SUM
  } from '../../constants';
+ 
 import { ajax } from 'jquery';
 import InvestmentForm from '../../components/InvestmentForm';
 
@@ -30,12 +34,18 @@ const icons = {
   genericIcon: genericIcon
 };
 
-const USER_ID = 1;
+function mapStateToProps(state) {
+  return {
+    isLoggedIn: state.auth.userIsLoggedIn,
+    userInformation: state.auth.userInformation
+  };
+}
 
 class HomepageContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.getUserId = this.getUserId.bind(this);
     this.generateCards = this.generateCards.bind(this);
     this.getTransactionSums = this.getTransactionSums.bind(this);
     this.getAllCurrencies = this.getAllCurrencies.bind(this);
@@ -45,18 +55,29 @@ class HomepageContainer extends Component {
       transactionSums: [],
       exchangeRates: [],
       currencies: [],
+      user_id: null,
       error: ''
-    };
+    };    
   }
 
   componentDidMount(){
-    this.generateCards();
+    this.getUserId();
     this.getAllCurrencies();
     this.getTransactionSums();
   }
+  
+  getUserId(){
+    let user_email = this.props.userInformation.email;
+    ajax(`${USERS}?email=${user_email}`)
+      .then(cryptoTypes => {
+        this.setState({ user_id: cryptoTypes.data[0].id })
+        .generateCards();
+      })
+  }
 
   generateCards(){
-    ajax(`${CRYPTO_TYPES}?user_id=${USER_ID}`)
+    let user_id = this.state.user_id;
+    ajax(`${CRYPTO_TYPES}?user_id=${user_id}`)
       .then(cryptoTypes => {
         ajax(`${COINMARKET_API}`)
           .then(exchangeRates => {
@@ -76,7 +97,7 @@ class HomepageContainer extends Component {
   }
 
   getTransactionSums(){
-    ajax(`${CRYPTO_TYPES_SUM}?user_id=${USER_ID}`)
+    ajax(`${CRYPTO_TYPES_SUM}?user_id=${this.state.user_id}`)
       .then(transactionSums => {
         this.setState({ transactionSums: transactionSums.data
       })
@@ -136,6 +157,7 @@ class HomepageContainer extends Component {
             currencies={this.state.currencies}
             getTransactions={this.generateCards}
             getTransactionSums={this.getTransactionSums}
+            userId={this.state.user_id}
           />
         </div>
       </Page>
@@ -143,5 +165,6 @@ class HomepageContainer extends Component {
   };
 };
 
-
-export default HomepageContainer;
+export default connect(mapStateToProps, {
+  getCognitoUser
+})(HomepageContainer);

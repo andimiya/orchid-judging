@@ -7,8 +7,6 @@ import Notice from './Notice';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-const USER_ID = 1;
-
 class InvestmentForm extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +55,7 @@ class InvestmentForm extends Component {
     let exchangeRate = (this.state.usd_invested / this.state.coin_purchased);
     const data = {
       crypto_id: Number(this.state.selectValue),
-      user_id: USER_ID,
+      user_id: this.props.userId,
       coin_purchased: Number(this.state.coin_purchased),
       exchange_rate: Number(exchangeRate),
       usd_invested: Number(this.state.usd_invested),

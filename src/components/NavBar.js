@@ -109,7 +109,7 @@ class NavBar extends Component {
                   </Link>
                 </div>
               )
-            })};
+            })}
         </div>
 
           <div className="hamburger">

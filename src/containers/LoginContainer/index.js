@@ -50,6 +50,9 @@ class LoginContainer extends Component {
       <Page>
         <div className="outer">
           <h1>Log In to Your Account</h1>
+          <div className="form__error">
+          {this.state.error && <p>{this.state.error}</p>}
+          </div>
           <form onSubmit={this.handleLogin}>
             <div className="form-group">
               <input

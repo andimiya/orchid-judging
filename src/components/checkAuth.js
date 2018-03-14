@@ -12,7 +12,6 @@ function mapStateToProps(state) {
 export class AuthWrapper extends React.Component {
 
   render() {
-    console.log(this.props.children, 'children');
     if (!this.props.isLoggedIn) {
       return (
         <Redirect to="/login" />
