@@ -37,16 +37,15 @@ class NavBar extends Component {
   }
 
   logoutCurrentUser = () => {
-    if (this.props.isLoggedIn){
+    // if (this.props.isLoggedIn){
       this.props
         .logoutUserSession()
         .then(() => {
-          this.props.history.push('/homepage')
+          // window.location.reload(); 
+          this.props.history.push('/homepage');
         })
         .catch(err => {});
-    } else {
-      return;
-    }
+    // }
   };
 
   render() {
@@ -87,13 +86,13 @@ class NavBar extends Component {
         onClick: this.logoutCurrentUser,
         navDisplayText: "Log Out",
         showWhenLoggedIn: true
-      },
+      }
     ]
 
     return (
       <div className={this.state.navClass}>
         <div className="name-container">
-          <Link to="/homepage" onClick={this.collapseNav}>
+          <Link to="/" onClick={this.collapseNav}>
             <p>Crypto Tracker</p>
           </Link>
         </div>
