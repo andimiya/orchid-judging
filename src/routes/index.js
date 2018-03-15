@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { PrivateRoute } from 'react-router';
 import NavBar from '../components/NavBar';
+import MktgPageContainer from '../containers/MktgPageContainer';
 import HomepageContainer from '../containers/HomepageContainer';
 import TransactionContainer from '../containers/TransactionContainer';
 import LoginContainer from '../containers/LoginContainer';
@@ -30,8 +31,8 @@ const Routes = props => {
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/forgot-password" component={ForgotPasswordContainer} />
           <Route exact path="/create-account" component={CreateAccountContainer} />
-          <Route exact path="/reset-password" component={ResetPasswordContainer} />
-
+          <Route exact path="/reset-password" component={ResetPasswordContainer} />            
+          <Route exact path="/" component={MktgPageContainer} />            
         </Switch>
         <AuthRoutes path="/homepage" component={HomepageContainer} />
         <AuthRoutes path="/transactions" component={TransactionContainer} />
