@@ -70,8 +70,7 @@ class HomepageContainer extends Component {
     let user_email = this.props.userInformation.email;
     ajax(`${USERS}?email=${user_email}`)
       .then(cryptoTypes => {
-        this.setState({ user_id: cryptoTypes.data[0].id })
-        .generateCards();
+        this.setState({ user_id: cryptoTypes.data[0].id }, this.generateCards)
       })
   }
 
