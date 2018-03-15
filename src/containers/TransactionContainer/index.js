@@ -44,9 +44,7 @@ class TransactionContainer extends Component {
     let user_email = this.props.userInformation.email;
     ajax(`${USERS}?email=${user_email}`)
       .then(cryptoTypes => {
-        console.log(cryptoTypes, 'cryptotypes');
-        this.setState({ user_id: cryptoTypes.data[0].id })
-        .getTransactions();
+        this.setState({ user_id: cryptoTypes.data[0].id }, this.getTransactions)
       })
   }
 
@@ -59,7 +57,6 @@ class TransactionContainer extends Component {
   }
 
   getTransactions(){
-    console.log('transactions');
     let user_id = this.state.user_id;
     ajax(`${GET_TRANSACTIONS}?user_id=${user_id}`).then(data => {
       this.setState({ allData: data.data })
@@ -77,7 +74,6 @@ class TransactionContainer extends Component {
   }
 
   render(props) {
-    console.log(this.state, 'state');
     return (
       <div className="transaction-container-outer">
         <div className="transaction-table-container">
