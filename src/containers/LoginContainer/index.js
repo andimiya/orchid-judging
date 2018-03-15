@@ -38,7 +38,7 @@ class LoginContainer extends Component {
     return this.props
       .authenticateCognitoUser(credentials)
       .then(result => {
-        this.props.history.push('/homepage')
+        this.props.history.push('/transactions')
       })
       .catch(err => {
         this.setState({ error: err.message });
@@ -78,7 +78,6 @@ class LoginContainer extends Component {
               />
             </div>
           </form>
-          <Link to="/forgot-password">Forgot Password</Link>
         </div>
       </Page>
     );
