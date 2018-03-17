@@ -82,15 +82,11 @@ class CreateAccountContainer extends Component {
             <div className="register__success">
               <h4 className="section__title">Your Account Has Been Created!</h4>
               <p className="register__instructions">
-                Check your email for a link we sent to verify your
-                account&mdash;
-              </p>
-              <div className="register__details">
-                <span>Once your account is verified you can use the app</span>
-              </div>
-              <p className="register__action-text">
                 Check Your Email to Activate Your Account
               </p>
+              <div className="register__details">
+                <span>Once your account is verified, you'll be able to log in and use the app</span>
+              </div>
             </div>
           ) : (
             <div>
