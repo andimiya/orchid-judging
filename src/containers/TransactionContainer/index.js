@@ -75,7 +75,7 @@ class TransactionContainer extends Component {
 
   render(props) {
     return (
-      <div className="transaction-container-outer">
+      <div className="transaction-container outer">
         <div className="transaction-table-container">
           <TransactionTable
             allData={this.state.allData}

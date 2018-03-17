@@ -34,7 +34,7 @@ const Routes = props => {
           <Route exact path="/reset-password" component={ResetPasswordContainer} />            
           <Route exact path="/" component={MktgPageContainer} />            
         </Switch>
-        <AuthRoutes path="/homepage" component={HomepageContainer} />
+        <AuthRoutes path="/summary" component={HomepageContainer} />
         <AuthRoutes path="/transactions" component={TransactionContainer} />
         <AuthRoutes path="/account" component={UserAccountContainer} />
         <AuthRoutes path="/new-investments" component={NewInvestmentsContainer} />
