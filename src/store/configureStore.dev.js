@@ -9,7 +9,7 @@ const middleware = [thunk];
 const finalCreateStore = compose(
   applyMiddleware(...middleware),
   reduxReset(),
-  (window.devToolsExtension) ? window.devToolsExtension() : f => f
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 export default function configureStore(preloadedState) {

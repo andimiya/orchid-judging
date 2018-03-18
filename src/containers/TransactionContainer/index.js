@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { ajax } from 'jquery';
 import {
   USERS,
-  GET_TRANSACTIONS, 
-  DELETE_TRANSACTIONS, 
-  CURRENCIES 
+  GET_TRANSACTIONS,
+  DELETE_TRANSACTIONS,
+  CURRENCIES
 } from '../../constants';
 import { connect } from 'react-redux';
 import { getCognitoUser } from '../../redux/auth';
@@ -20,7 +20,7 @@ function mapStateToProps(state) {
 class TransactionContainer extends Component {
   constructor(props) {
     super(props);
-    
+
     this.getUserId = this.getUserId.bind(this);
     this.getAllCurrencies = this.getAllCurrencies.bind(this);
     this.deleteTransaction = this.deleteTransaction.bind(this);
@@ -34,21 +34,19 @@ class TransactionContainer extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getUserId();
     this.getAllCurrencies();
-    
-  }
-  
-  getUserId(){
-    let user_email = this.props.userInformation.email;
-    ajax(`${USERS}?email=${user_email}`)
-      .then(cryptoTypes => {
-        this.setState({ user_id: cryptoTypes.data[0].id }, this.getTransactions)
-      })
   }
 
-  getAllCurrencies(){
+  getUserId() {
+    let user_email = this.props.userInformation.email;
+    ajax(`${USERS}?email=${user_email}`).then(cryptoTypes => {
+      this.setState({ user_id: cryptoTypes.data[0].id }, this.getTransactions);
+    });
+  }
+
+  getAllCurrencies() {
     ajax(CURRENCIES).then(currencies => {
       this.setState({
         currencies: currencies.data
@@ -56,21 +54,21 @@ class TransactionContainer extends Component {
     });
   }
 
-  getTransactions(){
+  getTransactions() {
     let user_id = this.state.user_id;
     ajax(`${GET_TRANSACTIONS}?user_id=${user_id}`).then(data => {
-      this.setState({ allData: data.data })
-    })
+      this.setState({ allData: data.data });
+    });
   }
 
-  deleteTransaction(e){
+  deleteTransaction(e) {
     e.preventDefault();
     ajax({
       url: `${DELETE_TRANSACTIONS}/${e.target.id}`,
       type: 'DELETE'
     }).done(() => {
       this.getTransactions();
-    })
+    });
   }
 
   render(props) {
@@ -86,15 +84,13 @@ class TransactionContainer extends Component {
           <InvestmentForm
             currencies={this.state.currencies}
             getTransactions={this.getTransactions}
-            
             userId={this.state.user_id}
           />
         </div>
       </div>
-    )
-  };
-};
-
+    );
+  }
+}
 
 export default connect(mapStateToProps, {
   getCognitoUser

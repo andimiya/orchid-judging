@@ -13,12 +13,12 @@ function forgotPassword(email) {
   return new Promise((resolve, reject) => {
     const poolData = {
       UserPoolId: COGNITO_USER_POOL_ID,
-      ClientId: COGNITO_CLIENT_ID,
+      ClientId: COGNITO_CLIENT_ID
     };
     const userPool = new CognitoUserPool(poolData);
     const userData = {
       Username: email,
-      Pool: userPool,
+      Pool: userPool
     };
 
     const cognitoUser = new CognitoUser(userData);
@@ -39,7 +39,7 @@ function forgotPassword(email) {
             });
         }
         return reject(err);
-      },
+      }
     });
   });
 }
@@ -59,12 +59,12 @@ function confirmPassword(username, verificationCode, newPassword) {
     }
     const poolData = {
       UserPoolId: COGNITO_USER_POOL_ID,
-      ClientId: COGNITO_CLIENT_ID,
+      ClientId: COGNITO_CLIENT_ID
     };
     const userPool = new CognitoUserPool(poolData);
     const userData = {
       Username: username,
-      Pool: userPool,
+      Pool: userPool
     };
     const cognitoUser = new CognitoUser(userData);
     cognitoUser.confirmPassword(verificationCode, newPassword, {
@@ -73,7 +73,7 @@ function confirmPassword(username, verificationCode, newPassword) {
       },
       onSuccess() {
         return resolve();
-      },
+      }
     });
   });
 }

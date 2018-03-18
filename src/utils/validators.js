@@ -13,5 +13,5 @@ const isValidEmail = email => {
 };
 
 export default {
-  isValidEmail,
+  isValidEmail
 };

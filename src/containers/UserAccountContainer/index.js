@@ -5,20 +5,20 @@ import UserAccountForm from '../../components/UserAccountForm';
 import {
   updateCognitoUser,
   getCognitoUser,
-  updateCognitoUserPassword,
+  updateCognitoUserPassword
 } from '../../redux/auth';
 // import { validators } from '../utils';
 
 function mapStateToProps(state) {
   return {
     userInformation: state.auth.userInformation,
-    userIsLoggedIn: state.auth.userIsLoggedIn,
+    userIsLoggedIn: state.auth.userIsLoggedIn
   };
 }
 
 const editableReset = {
   firstName: false,
-  email: false,
+  email: false
 };
 
 class UserAccountContainer extends Component {
@@ -29,12 +29,12 @@ class UserAccountContainer extends Component {
       accountUpdated: false,
       accountForm: {
         email: '',
-        firstName: '',
+        firstName: ''
       },
       editable: {
         firstName: false,
-        email: false,
-      },
+        email: false
+      }
     };
   }
 
@@ -43,7 +43,7 @@ class UserAccountContainer extends Component {
       .getCognitoUser()
       .then(userInfo => {
         return this.setState({
-          accountForm: { email: userInfo.email, firstName: userInfo.name },
+          accountForm: { email: userInfo.email, firstName: userInfo.name }
         });
       })
       .catch(err => {
@@ -57,7 +57,7 @@ class UserAccountContainer extends Component {
     const key = e.target.name;
 
     return this.setState({
-      editable: { ...this.state.editable, [key]: true },
+      editable: { ...this.state.editable, [key]: true }
     });
   };
 
@@ -67,7 +67,7 @@ class UserAccountContainer extends Component {
     }
     if (!currentPassword) {
       return this.setState({
-        error: 'You must enter your current password to change it',
+        error: 'You must enter your current password to change it'
       });
     }
 
@@ -87,8 +87,8 @@ class UserAccountContainer extends Component {
     let userAttributes = [];
     // if (email) {
     //   if (!isValidEmail(email)) {
-        return this.setState({ error: 'Please Provide A Valid Email' });
-      // }
+    return this.setState({ error: 'Please Provide A Valid Email' });
+    // }
     //   userAttributes = [...userAttributes, { Name: 'email', Value: email }];
     // // }
     // if (firstName) {
@@ -113,7 +113,7 @@ class UserAccountContainer extends Component {
       firstName,
       passwordOne,
       passwordTwo,
-      currentPassword,
+      currentPassword
     } = e.target;
     const newPassword = passwordOne.value;
     const retypedPassword = passwordTwo.value;
@@ -125,7 +125,7 @@ class UserAccountContainer extends Component {
       this.updateUserPassword(
         newPassword,
         retypedPassword,
-        currentPassword.value,
+        currentPassword.value
       );
     }
 
@@ -141,8 +141,8 @@ class UserAccountContainer extends Component {
     this.setState({
       accountForm: {
         ...this.state.accountForm,
-        [e.target.name]: e.target.value,
-      },
+        [e.target.name]: e.target.value
+      }
     });
   };
 
@@ -173,5 +173,5 @@ class UserAccountContainer extends Component {
 export default connect(mapStateToProps, {
   updateCognitoUser,
   getCognitoUser,
-  updateCognitoUserPassword,
+  updateCognitoUserPassword
 })(UserAccountContainer);

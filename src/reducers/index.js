@@ -6,7 +6,7 @@ import { default as auth } from '../redux/auth';
 const rootReducer = combineReducers({
   // decks,
   // words,
-  auth,
+  auth
 });
 
 export default rootReducer;

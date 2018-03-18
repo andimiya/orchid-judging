@@ -8,7 +8,7 @@ import { getCognitoUser, verifyUserLoggedIn } from '../redux/auth';
 function mapStateToProps(state) {
   return {
     user: state.auth.userInformation,
-    userIsLoggedIn: state.auth.userIsLoggedIn,
+    userIsLoggedIn: state.auth.userIsLoggedIn
   };
 }
 
@@ -16,7 +16,7 @@ class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: null,
+      errorMessage: null
     };
   }
 
@@ -30,18 +30,11 @@ class Page extends Component {
         this.setState({ errorMessage: err });
       });
   }
-  
-  render() {
-    const {
-      user,
-      userIsLoggedIn,
-    } = this.props;
 
-    return (
-      <div className="page__content">
-        {this.props.children}
-      </div>
-    );
+  render() {
+    const { user, userIsLoggedIn } = this.props;
+
+    return <div className="page__content">{this.props.children}</div>;
   }
 }
 

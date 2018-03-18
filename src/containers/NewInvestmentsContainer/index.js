@@ -14,11 +14,11 @@ class NewInvestmentsContainer extends React.Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getAllCurrencies();
   }
 
-  getAllCurrencies(){
+  getAllCurrencies() {
     ajax(CURRENCIES).then(currencies => {
       this.setState({
         currencies: currencies.data
@@ -29,13 +29,10 @@ class NewInvestmentsContainer extends React.Component {
   render(props) {
     return (
       <div className="crypto-container">
-
-        <InvestmentForm
-          currencies={this.state.currencies}
-        />
+        <InvestmentForm currencies={this.state.currencies} />
       </div>
-    )
-  };
-};
+    );
+  }
+}
 
 export default NewInvestmentsContainer;

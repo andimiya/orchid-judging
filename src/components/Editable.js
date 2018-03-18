@@ -9,7 +9,7 @@ class Editable extends Component {
       required,
       value,
       onClick,
-      onChange,
+      onChange
     } = this.props;
     return (
       <label className="form__field account-form__field">

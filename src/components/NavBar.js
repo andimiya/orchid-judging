@@ -24,45 +24,44 @@ class NavBar extends Component {
     let loggedIn = null;
   }
 
-  handleClick(){
+  handleClick() {
     if (this.state.navClass === 'navbar-container') {
-      this.setState ({ navClass: 'responsive-container' })
+      this.setState({ navClass: 'responsive-container' });
     } else {
-      this.setState ({ navClass: 'navbar-container' })
+      this.setState({ navClass: 'navbar-container' });
     }
   }
 
-  collapseNav(){
-    this.setState ({ navClass: 'navbar-container'})
+  collapseNav() {
+    this.setState({ navClass: 'navbar-container' });
   }
 
   logoutCurrentUser = () => {
     // if (this.props.isLoggedIn){
-      this.props
-        .logoutUserSession()
-        .then(() => {
-          // window.location.reload(); 
-          this.props.history.push('/homepage');
-        })
-        .catch(err => {});
+    this.props
+      .logoutUserSession()
+      .then(() => {
+        // window.location.reload();
+        this.props.history.push('/homepage');
+      })
+      .catch(err => {});
     // }
   };
 
   render() {
-
     let menuProperties = [
       {
-        menuItemContainerClass: "menu-item",
-        linkTo: "/summary",
+        menuItemContainerClass: 'menu-item',
+        linkTo: '/summary',
         onClick: this.collapseNav,
-        navDisplayText: "Summary",
+        navDisplayText: 'Summary',
         showWhenLoggedIn: true
       },
       {
-        menuItemContainerClass: "menu-item",
-        linkTo: "/transactions",
+        menuItemContainerClass: 'menu-item',
+        linkTo: '/transactions',
         onClick: this.collapseNav,
-        navDisplayText: "Transactions",
+        navDisplayText: 'Transactions',
         showWhenLoggedIn: true
       },
       // {
@@ -73,28 +72,28 @@ class NavBar extends Component {
       //   showWhenLoggedIn: true
       // },
       {
-        menuItemContainerClass: "menu-item",
-        linkTo: "/create-account",
+        menuItemContainerClass: 'menu-item',
+        linkTo: '/create-account',
         onClick: this.collapseNav,
-        navDisplayText: "Create Account",
+        navDisplayText: 'Create Account',
         isLoggedInClass: this.props.isLoggedIn,
         showWhenLoggedIn: false
       },
       {
-        menuItemContainerClass: "menu-item",
-        linkTo: "/login",
+        menuItemContainerClass: 'menu-item',
+        linkTo: '/login',
         onClick: this.collapseNav,
-        navDisplayText: "Log In",
+        navDisplayText: 'Log In',
         showWhenLoggedIn: false
       },
       {
-        menuItemContainerClass: "menu-item",
-        linkTo: "/",
+        menuItemContainerClass: 'menu-item',
+        linkTo: '/',
         onClick: this.logoutCurrentUser,
-        navDisplayText: "Log Out",
+        navDisplayText: 'Log Out',
         showWhenLoggedIn: true
       }
-    ]
+    ];
 
     return (
       <div className={this.state.navClass}>
@@ -105,30 +104,40 @@ class NavBar extends Component {
         </div>
 
         <div className="menu-item-container">
-          {menuProperties.filter((menuProperties) => {
-            return menuProperties.showWhenLoggedIn === this.props.isLoggedIn;
-            }).map(properties => {
+          {menuProperties
+            .filter(menuProperties => {
+              return menuProperties.showWhenLoggedIn === this.props.isLoggedIn;
+            })
+            .map(properties => {
               return (
-                <div key={properties.linkTo} className={properties.menuItemContainerClass}>
+                <div
+                  key={properties.linkTo}
+                  className={properties.menuItemContainerClass}
+                >
                   <Link to={properties.linkTo} onClick={properties.onClick}>
                     <p>{properties.navDisplayText}</p>
                   </Link>
                 </div>
-              )
+              );
             })}
         </div>
 
-          <div className="hamburger">
-            <div onClick={this.handleClick}>
-              <img src={hamburger} alt="Work, Resume, Contact" width="40px" onClick={this.handleClick} />
-            </div>
+        <div className="hamburger">
+          <div onClick={this.handleClick}>
+            <img
+              src={hamburger}
+              alt="Work, Resume, Contact"
+              width="40px"
+              onClick={this.handleClick}
+            />
           </div>
-
+        </div>
       </div>
     );
   }
-};
+}
 
 export default connect(mapStateToProps, {
-  getCognitoUser, logoutUserSession
+  getCognitoUser,
+  logoutUserSession
 })(NavBar);

@@ -10,7 +10,7 @@ export default () => {
     let error = null;
     const poolData = {
       UserPoolId: COGNITO_USER_POOL_ID,
-      ClientId: COGNITO_CLIENT_ID,
+      ClientId: COGNITO_CLIENT_ID
     };
     if (!COGNITO_USER_POOL_ID || !COGNITO_CLIENT_ID) {
       error = new Error('Missing user_pool_id or cognito_client_id');

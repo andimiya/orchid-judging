@@ -9,8 +9,8 @@ import {
   CURRENCIES,
   CRYPTO_TYPES,
   CRYPTO_TYPES_SUM
- } from '../../constants';
- 
+} from '../../constants';
+
 import { ajax } from 'jquery';
 import InvestmentForm from '../../components/InvestmentForm';
 
@@ -57,37 +57,36 @@ class HomepageContainer extends Component {
       currencies: [],
       user_id: null,
       error: ''
-    };    
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getUserId();
     this.getAllCurrencies();
     this.getTransactionSums();
   }
-  
-  getUserId(){
+
+  getUserId() {
     let user_email = this.props.userInformation.email;
-    ajax(`${USERS}?email=${user_email}`)
-      .then(cryptoTypes => {
-        this.setState({ user_id: cryptoTypes.data[0].id }, this.generateCards)
-      })
+    ajax(`${USERS}?email=${user_email}`).then(cryptoTypes => {
+      this.setState({ user_id: cryptoTypes.data[0].id }, this.generateCards);
+    });
   }
 
-  generateCards(){
+  generateCards() {
     let user_id = this.state.user_id;
-    ajax(`${CRYPTO_TYPES}?user_id=${user_id}`)
-      .then(cryptoTypes => {
-        ajax(`${COINMARKET_API}`)
-          .then(exchangeRates => {
-            return this.setState({ exchangeRates: exchangeRates });
-          });
-        this.setState({ error: 'Error returning exchange rates from Coinmarket API' });
-        this.setState({ cryptoTypes: cryptoTypes.data });
+    ajax(`${CRYPTO_TYPES}?user_id=${user_id}`).then(cryptoTypes => {
+      ajax(`${COINMARKET_API}`).then(exchangeRates => {
+        return this.setState({ exchangeRates: exchangeRates });
       });
+      this.setState({
+        error: 'Error returning exchange rates from Coinmarket API'
+      });
+      this.setState({ cryptoTypes: cryptoTypes.data });
+    });
   }
 
-  getAllCurrencies(){
+  getAllCurrencies() {
     ajax(CURRENCIES).then(currencies => {
       this.setState({
         currencies: currencies.data
@@ -95,12 +94,14 @@ class HomepageContainer extends Component {
     });
   }
 
-  getTransactionSums(){
-    ajax(`${CRYPTO_TYPES_SUM}?user_id=${this.state.user_id}`)
-      .then(transactionSums => {
-        this.setState({ transactionSums: transactionSums.data
-      })
-    });
+  getTransactionSums() {
+    ajax(`${CRYPTO_TYPES_SUM}?user_id=${this.state.user_id}`).then(
+      transactionSums => {
+        this.setState({
+          transactionSums: transactionSums.data
+        });
+      }
+    );
   }
 
   render(props) {
@@ -115,42 +116,62 @@ class HomepageContainer extends Component {
             return (
               <div key={currencies.symbol} className="crypto-set">
                 <div className="title-container">
-                  <img className="image" src={icon} height="80px" alt="currency symbol" />
+                  <img
+                    className="image"
+                    src={icon}
+                    height="80px"
+                    alt="currency symbol"
+                  />
                   <h2>{currencies.name}</h2>
                 </div>
                 <div className="data-container">
                   {this.state.exchangeRates.map(exchange => {
                     if (currencies.name !== exchange.name) {
                       return null;
-                    } return (
-                        <div key={exchange.id}>Current exchange price (USD): {exchange.price_usd}</div>
-                      )
+                    }
+                    return (
+                      <div key={exchange.id}>
+                        Current exchange price (USD): {exchange.price_usd}
+                      </div>
+                    );
                   })}
                   {this.state.transactionSums.map(sums => {
                     if (currencies.name !== sums.name) {
                       return null;
-                    } return (
-                        <div key={sums.name}>
-                          <div>USD Invested: ${sums.usd_invested}</div>
-                          <div>Coins Owned: {sums.coin_purchased} {currencies.name}</div>
-                          {this.state.exchangeRates.map(exchangeRates => {
-                            const currencyNameToLowerCase = currencies.name.replace(/\s+/g, '-').toLowerCase();
-                            const currentValue = (sums.coin_purchased*exchangeRates.price_usd);
-                            if (currencyNameToLowerCase !== exchangeRates.id) {
-                              return null;
-                            } return (
-                                <div key={exchangeRates.id}>
-                                  <div>Current Market Price: USD per {exchangeRates.name}: {exchangeRates.price_usd}</div>
-                                  <div>Current Value (USD): {currentValue.toFixed(2)}</div>
-                                </div>
-                              )
-                          })}
+                    }
+                    return (
+                      <div key={sums.name}>
+                        <div>USD Invested: ${sums.usd_invested}</div>
+                        <div>
+                          Coins Owned: {sums.coin_purchased} {currencies.name}
                         </div>
-                      )
-                    })}
+                        {this.state.exchangeRates.map(exchangeRates => {
+                          const currencyNameToLowerCase = currencies.name
+                            .replace(/\s+/g, '-')
+                            .toLowerCase();
+                          const currentValue =
+                            sums.coin_purchased * exchangeRates.price_usd;
+                          if (currencyNameToLowerCase !== exchangeRates.id) {
+                            return null;
+                          }
+                          return (
+                            <div key={exchangeRates.id}>
+                              <div>
+                                Current Market Price: USD per{' '}
+                                {exchangeRates.name}: {exchangeRates.price_usd}
+                              </div>
+                              <div>
+                                Current Value (USD): {currentValue.toFixed(2)}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-            )
+            );
           })}
           <InvestmentForm
             currencies={this.state.currencies}
@@ -160,9 +181,9 @@ class HomepageContainer extends Component {
           />
         </div>
       </Page>
-    )
-  };
-};
+    );
+  }
+}
 
 export default connect(mapStateToProps, {
   getCognitoUser

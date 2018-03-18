@@ -9,7 +9,7 @@ import { validators } from '../../utils';
 
 function mapStateToProps(state) {
   return {
-    state,
+    state
   };
 }
 
@@ -20,13 +20,12 @@ class CreateAccountContainer extends Component {
       error: null,
       userAddedSuccessfully: false,
       successfullyCreatedUser: false
-    };    
+    };
   }
 
   passwordsMatch = (passwordOne, passwordTwo) => {
     return passwordOne.value === passwordTwo.value;
   };
-  
 
   handleRegistration = e => {
     e.preventDefault();
@@ -40,12 +39,12 @@ class CreateAccountContainer extends Component {
       firstName: firstName.value,
       lastName: lastName.value
     };
-          
+
     return this.props
       .registerCognitoUser(userInformation)
       .then(() => {
-        this.setState({ 
-          successfullyCreatedUser: true, 
+        this.setState({
+          successfullyCreatedUser: true,
           isLoading: false
         });
       })
@@ -71,7 +70,7 @@ class CreateAccountContainer extends Component {
             }
           })
           .catch(() => this.setState({ sentStatus: 'error' }));
-      })
+      });
   };
 
   render() {
@@ -85,7 +84,10 @@ class CreateAccountContainer extends Component {
                 Check Your Email to Activate Your Account
               </p>
               <div className="register__details">
-                <span>Once your account is verified, you'll be able to log in and use the app</span>
+                <span>
+                  Once your account is verified, you'll be able to log in and
+                  use the app
+                </span>
               </div>
             </div>
           ) : (
@@ -102,4 +104,6 @@ class CreateAccountContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, { registerCognitoUser })(CreateAccountContainer);
+export default connect(mapStateToProps, { registerCognitoUser })(
+  CreateAccountContainer
+);

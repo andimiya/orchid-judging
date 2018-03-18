@@ -6,7 +6,7 @@ export default str => {
     { base: 'e', letters: /[\u0112\u0113]/g }, // Ē and ē
     { base: 'i', letters: /[\u012b\u012b]/g }, // Ī and ī
     { base: 'o', letters: /[\u014c\u014d]/g }, // Ō and ō
-    { base: 'u', letters: /[\u016a\u016b]/g }, // Ū and ū
+    { base: 'u', letters: /[\u016a\u016b]/g } // Ū and ū
   ];
 
   for (var i = 0; i < removalMap.length; i++) {

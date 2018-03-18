@@ -4,14 +4,14 @@ class CreateAccountForm extends Component {
   render() {
     const { handleRegistration } = this.props;
     return (
-      <div className="register__form outer" >
+      <div className="register__form outer">
         <h1 className="section__title">Create an Account</h1>
         <div className="form__error">
           <p>{this.props.error}</p>
         </div>
         <form onSubmit={handleRegistration}>
           <div className="form-group">
-            <input 
+            <input
               type="text"
               name="email"
               placeholder="Email Address"
@@ -20,7 +20,7 @@ class CreateAccountForm extends Component {
             />
           </div>
           <div className="form-group">
-            <input 
+            <input
               type="text"
               name="firstName"
               placeholder="First Name"
@@ -29,7 +29,7 @@ class CreateAccountForm extends Component {
             />
           </div>
           <div className="form-group">
-            <input 
+            <input
               type="text"
               name="lastName"
               placeholder="Last Name"
@@ -38,7 +38,7 @@ class CreateAccountForm extends Component {
           </div>
           <div className="form-group">
             <label>Minimum 8 characters, upper and lower case</label>
-            <input 
+            <input
               type="password"
               name="passwordOne"
               placeholder="Password"
@@ -48,15 +48,17 @@ class CreateAccountForm extends Component {
           </div>
           <div className="form-group">
             <label>Minimum 8 characters, upper and lower case</label>
-            <input 
+            <input
               type="password"
               name="passwordTwo"
               placeholder="Re-enter password"
               className="form-control"
               required
             />
-        </div>
-          <button className="btn" type="submit">Create Account</button>
+          </div>
+          <button className="btn" type="submit">
+            Create Account
+          </button>
         </form>
       </div>
     );

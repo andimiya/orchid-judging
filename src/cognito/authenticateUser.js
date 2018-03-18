@@ -1,7 +1,7 @@
 import {
   AuthenticationDetails,
   CognitoUserPool,
-  CognitoUser,
+  CognitoUser
 } from 'amazon-cognito-identity-js';
 import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
 
@@ -20,19 +20,19 @@ export default credentials => {
 
     const authenticationData = {
       Username: userName,
-      Password: password,
+      Password: password
     };
     const authenticationDetails = new AuthenticationDetails(authenticationData);
 
     const poolData = {
       UserPoolId: COGNITO_USER_POOL_ID,
-      ClientId: COGNITO_CLIENT_ID,
+      ClientId: COGNITO_CLIENT_ID
     };
     const userPool = new CognitoUserPool(poolData);
 
     const userData = {
       Username: userName,
-      Pool: userPool,
+      Pool: userPool
     };
     const cognitoUser = new CognitoUser(userData);
 
@@ -42,7 +42,7 @@ export default credentials => {
       },
       onFailure: err => {
         return reject(err);
-      },
+      }
     });
   });
 };

@@ -9,7 +9,7 @@ class UserConfirmedContainer extends Component {
 
     this.state = {
       successMessage: false,
-      error: null,
+      error: null
     };
   }
   componentDidMount() {
@@ -34,7 +34,9 @@ class UserConfirmedContainer extends Component {
           {this.state.successMessage && (
             <div>
               {this.state.successMessage}
-              <Link className="link" to="/login">Click here to Log In</Link>
+              <Link className="link" to="/login">
+                Click here to Log In
+              </Link>
             </div>
           )}
         </div>

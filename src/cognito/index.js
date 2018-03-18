@@ -20,5 +20,5 @@ export default {
   resetPassword,
   updateUserAttributes,
   confirmUser,
-  resendConfirmationEmail,
+  resendConfirmationEmail
 };

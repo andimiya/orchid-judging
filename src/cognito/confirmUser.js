@@ -16,13 +16,13 @@ export default (username, confirmationCode) => {
     }
     const poolData = {
       UserPoolId: COGNITO_USER_POOL_ID,
-      ClientId: COGNITO_CLIENT_ID,
+      ClientId: COGNITO_CLIENT_ID
     };
 
     const userPool = new CognitoUserPool(poolData);
     const userData = {
       Username: username,
-      Pool: userPool,
+      Pool: userPool
     };
 
     const cognitoUser = new CognitoUser(userData);

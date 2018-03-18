@@ -10,19 +10,12 @@ function mapStateToProps(state) {
 }
 
 export class AuthWrapper extends React.Component {
-
   render() {
     if (!this.props.isLoggedIn) {
-      return (
-        <Redirect to="/login" />
-      )
+      return <Redirect to="/login" />;
     }
 
-    return (
-      <div>
-        { React.cloneElement(this.props.children) }
-      </div>
-    );
+    return <div>{React.cloneElement(this.props.children)}</div>;
   }
 }
 

@@ -15,11 +15,9 @@ const REGISTER_USER_FAIL = 'crypto-app/auth/REGISTER_USER_FAIL';
 const GET_USER_ATTRIBUTES = 'crypto-app/auth/GET_USER_ATTRIBUTES';
 const GET_USER_ATTRIBUTES_SUCCESS =
   'crypto-app/auth/GET_USER_ATTRIBUTES_SUCCESS';
-const GET_USER_ATTRIBUTES_FAIL =
-  'crypto-app/auth/GET_USER_ATTRIBUTES_FAIL';
+const GET_USER_ATTRIBUTES_FAIL = 'crypto-app/auth/GET_USER_ATTRIBUTES_FAIL';
 
-const UPDATE_USER_ATTRIBUTES =
-  'crypto-app/auth/UPDATE_USER_ATTRIBUTES';
+const UPDATE_USER_ATTRIBUTES = 'crypto-app/auth/UPDATE_USER_ATTRIBUTES';
 const UPDATE_USER_ATTRIBUTES_SUCCESS =
   'crypto-app/auth/UPDATE_USER_ATTRIBUTES_SUCCESS';
 const UPDATE_USER_ATTRIBUTES_FAIL =
@@ -28,71 +26,67 @@ const UPDATE_USER_ATTRIBUTES_FAIL =
 const UPDATE_USER_PASSWORD = 'crypto-app/auth/UPDATE_USER_PASSWORD';
 const UPDATE_USER_PASSWORD_SUCCESS =
   'crypto-app/auth/UPDATE_USER_PASSWORD_SUCCESS';
-const UPDATE_USER_PASSWORD_FAIL =
-  'crypto-app/auth/UPDATE_USER_PASSWORD_FAIL';
+const UPDATE_USER_PASSWORD_FAIL = 'crypto-app/auth/UPDATE_USER_PASSWORD_FAIL';
 
-const SEND_PASSWORD_RESET_CODE =
-  'crypto-app/auth/SEND_PASSWORD_RESET_CODE';
+const SEND_PASSWORD_RESET_CODE = 'crypto-app/auth/SEND_PASSWORD_RESET_CODE';
 const SEND_PASSWORD_RESET_CODE_SUCCESS =
   'crypto-app/auth/SEND_PASSWORD_RESET_CODE_SUCCESS';
 const SEND_PASSWORD_RESET_CODE_FAIL =
   'crypto-app/auth/SEND_PASSWORD_RESET_CODE_FAIL';
 
 const RESET_PASSWORD = 'crypto-app/auth/RESET_PASSWORD';
-const RESET_PASSWORD_SUCCESS =
-  'crypto-app/auth/RESET_PASSWORD_SUCCESS';
+const RESET_PASSWORD_SUCCESS = 'crypto-app/auth/RESET_PASSWORD_SUCCESS';
 const RESET_PASSWORD_FAIL = 'crypto-app/auth/RESET_PASSWORD_FAIL';
 
 const VERIFY_USER_LOGGED_IN = 'crypto-app/auth/VERIFY_USER_LOGGED_IN';
 const VERIFY_USER_LOGGED_IN_SUCCESS =
   'crypto-app/auth/VERIFY_USER_LOGGED_IN_SUCCESS';
-const VERIFY_USER_LOGGED_IN_FAIL =
-  'crypto-app/auth/VERIFY_USER_LOGGED_IN_FAIL';
+const VERIFY_USER_LOGGED_IN_FAIL = 'crypto-app/auth/VERIFY_USER_LOGGED_IN_FAIL';
 
 const initialState = {
   userInformation: {
     email: '',
-    firstName: '',
+    firstName: ''
   },
-  userIsLoggedIn: false,
+  userIsLoggedIn: false
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
-        ...state,
+        ...state
       };
     case LOGOUT_SUCCESS:
       return {
-        state: initialState,
+        state: initialState
       };
     case UPDATE_USER_ATTRIBUTES_SUCCESS:
       return {
-        ...state,
+        ...state
       };
     case GET_USER_ATTRIBUTES_SUCCESS:
       return {
         ...state,
         userInformation: {
           ...action.userInformation,
-          firstName: action.userInformation.name,
-        },
+          firstName: action.userInformation.name
+        }
       };
     case REGISTER_USER_SUCCESS:
       return {
-        ...state,
+        ...state
       };
     case VERIFY_USER_LOGGED_IN_SUCCESS:
     case VERIFY_USER_LOGGED_IN_FAIL:
       return {
         ...state,
-        userIsLoggedIn: action.loginStatus,
+        userIsLoggedIn: action.loginStatus
       };
 
     case RESET_PASSWORD_SUCCESS:
       return {
-        ...state,
+        ...state
       };
     case UPDATE_USER_ATTRIBUTES_FAIL:
     case GET_USER_ATTRIBUTES_FAIL:
@@ -109,55 +103,55 @@ export default function reducer(state = initialState, action = {}) {
 
 export function loginUser() {
   return {
-    type: LOGIN,
+    type: LOGIN
   };
 }
 
 export function updateUserAccount() {
   return {
-    type: UPDATE_USER_ATTRIBUTES,
+    type: UPDATE_USER_ATTRIBUTES
   };
 }
 
 export function updateUserPassword() {
   return {
-    type: UPDATE_USER_PASSWORD,
+    type: UPDATE_USER_PASSWORD
   };
 }
 
 export function registerUser() {
   return {
-    type: REGISTER_USER,
+    type: REGISTER_USER
   };
 }
 
 export function forgotPassword() {
   return {
-    type: SEND_PASSWORD_RESET_CODE,
+    type: SEND_PASSWORD_RESET_CODE
   };
 }
 
 export function resetPassword() {
   return {
-    type: RESET_PASSWORD,
+    type: RESET_PASSWORD
   };
 }
 
 export function getAttributes() {
   return {
-    type: GET_USER_ATTRIBUTES,
+    type: GET_USER_ATTRIBUTES
   };
 }
 
 export function getUserSession() {
   return {
-    type: VERIFY_USER_LOGGED_IN,
+    type: VERIFY_USER_LOGGED_IN
   };
 }
 
 export function logoutUser() {
   return {
-    type: LOGOUT,
+    type: LOGOUT
   };
 }
 

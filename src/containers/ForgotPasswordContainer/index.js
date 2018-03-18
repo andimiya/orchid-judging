@@ -15,7 +15,7 @@ class ForgotPasswordContainer extends Component {
     this.state = {
       resetCodeSent: false,
       error: null,
-      userEmail: null,
+      userEmail: null
     };
   }
 
@@ -62,7 +62,7 @@ class ForgotPasswordContainer extends Component {
         </p>
         <form onSubmit={this.sendResetCode}>
           <div className="form-group">
-            <input 
+            <input
               type="text"
               name="email"
               placeholder="Email Address"
@@ -70,7 +70,7 @@ class ForgotPasswordContainer extends Component {
               required
             />
           </div>
-            {error && <div className="form__error">{error}</div>}
+          {error && <div className="form__error">{error}</div>}
           <button className="btn" type="submit">
             Reset My Password
           </button>

@@ -33,16 +33,16 @@ class LoginContainer extends Component {
     }
     const credentials = {
       userName: userEmail,
-      password: userPassword,
+      password: userPassword
     };
     return this.props
       .authenticateCognitoUser(credentials)
       .then(result => {
-        this.props.history.push('/transactions')
+        this.props.history.push('/transactions');
       })
       .catch(err => {
         this.setState({ error: err.message });
-      })
+      });
   };
 
   render() {
@@ -51,7 +51,7 @@ class LoginContainer extends Component {
         <div className="outer">
           <h1>Log In to Your Account</h1>
           <div className="form__error">
-          {this.state.error && <p>{this.state.error}</p>}
+            {this.state.error && <p>{this.state.error}</p>}
           </div>
           <form onSubmit={this.handleLogin}>
             <div className="form-group">
@@ -71,11 +71,7 @@ class LoginContainer extends Component {
               />
             </div>
             <div className="form-group">
-              <input
-                className="btn btn-primary"
-                type="submit"
-                value="Log In"
-              />
+              <input className="btn btn-primary" type="submit" value="Log In" />
             </div>
           </form>
         </div>
@@ -86,5 +82,5 @@ class LoginContainer extends Component {
 
 export default connect(mapStateToProps, {
   authenticateCognitoUser,
-  getCognitoUser,
+  getCognitoUser
 })(LoginContainer);

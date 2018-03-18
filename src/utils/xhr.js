@@ -1,7 +1,11 @@
 /* xhr function used for all API requests */
 import $ from 'jquery';
 import CognitoService from '../cognito';
-import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID, INFERNO_APP_API_ENDPOINT } from '../constants';
+import {
+  COGNITO_USER_POOL_ID,
+  COGNITO_CLIENT_ID,
+  INFERNO_APP_API_ENDPOINT
+} from '../constants';
 
 function apiService({
   endpoint = INFERNO_APP_API_ENDPOINT,
@@ -9,19 +13,19 @@ function apiService({
   filter,
   method = 'GET',
   body,
-  authToken,
+  authToken
 }) {
   let options = {
     method,
     contentType: 'application/json; charset=utf-8',
-    data: JSON.stringify(body),
+    data: JSON.stringify(body)
   };
   if (authToken) {
     options = {
       ...options,
       headers: {
-        Authorization: authToken,
-      },
+        Authorization: authToken
+      }
     };
   }
   let url = `${endpoint}${path}`;

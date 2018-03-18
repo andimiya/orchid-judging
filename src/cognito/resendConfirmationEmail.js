@@ -11,12 +11,12 @@ export default email => {
   return new Promise((resolve, reject) => {
     const poolData = {
       UserPoolId: COGNITO_USER_POOL_ID,
-      ClientId: COGNITO_CLIENT_ID,
+      ClientId: COGNITO_CLIENT_ID
     };
     const userPool = new CognitoUserPool(poolData);
     const userData = {
       Username: email,
-      Pool: userPool,
+      Pool: userPool
     };
 
     const cognitoUser = new CognitoUser(userData);

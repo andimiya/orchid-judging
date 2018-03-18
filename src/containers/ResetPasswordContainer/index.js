@@ -5,7 +5,7 @@ import { resetUserPassword } from '../../redux/auth';
 
 function mapStateToProps(state) {
   return {
-    state,
+    state
   };
 }
 
@@ -14,7 +14,7 @@ class ResetPasswordContainer extends Component {
     super(props);
     this.state = {
       error: null,
-      isLoading: false,
+      isLoading: false
     };
   }
 
@@ -31,7 +31,7 @@ class ResetPasswordContainer extends Component {
       if (!this.passwordsMatch(passwordOne.value, passwordTwo.value)) {
         return this.setState({
           error: 'Passwords must match',
-          isLoading: false,
+          isLoading: false
         });
       }
 
@@ -50,10 +50,11 @@ class ResetPasswordContainer extends Component {
       <Page>
         <div className="outer">
           <h1>Reset Your Password</h1>
+          <p>Enter your new password below.</p>
           <p>
-            Enter your new password below.
+            Passwords must be at least 8 characters long and contain both upper
+            and lowercase letters.
           </p>
-          <p>Passwords must be at least 8 characters long and contain both upper and lowercase letters.</p>
           <div className="password-reset__form">
             <form onSubmit={this.handlePasswordReset}>
               <div className="form-group">
@@ -86,7 +87,8 @@ class ResetPasswordContainer extends Component {
                   required
                 />
               </div>
-              <button className="btn" type="submit">Reset Password
+              <button className="btn" type="submit">
+                Reset Password
               </button>
             </form>
           </div>
@@ -96,4 +98,6 @@ class ResetPasswordContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, { resetUserPassword })(ResetPasswordContainer);
+export default connect(mapStateToProps, { resetUserPassword })(
+  ResetPasswordContainer
+);

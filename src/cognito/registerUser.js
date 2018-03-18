@@ -1,6 +1,6 @@
 import {
   CognitoUserAttribute,
-  CognitoUserPool,
+  CognitoUserPool
 } from 'amazon-cognito-identity-js';
 import { connect } from 'react-redux';
 import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
@@ -13,7 +13,6 @@ import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
 */
 export default userInformation => {
   return new Promise((resolve, reject) => {
-
     // Validation Checks //
     let validationError = null;
     if (!COGNITO_USER_POOL_ID || !COGNITO_CLIENT_ID) {
@@ -41,7 +40,7 @@ export default userInformation => {
     }
     const poolData = {
       UserPoolId: COGNITO_USER_POOL_ID,
-      ClientId: COGNITO_CLIENT_ID,
+      ClientId: COGNITO_CLIENT_ID
     };
     const userPool = new CognitoUserPool(poolData);
 
@@ -49,13 +48,13 @@ export default userInformation => {
 
     const dataEmail = {
       Name: 'email',
-      Value: email,
+      Value: email
     };
     const attributeEmail = new CognitoUserAttribute(dataEmail);
 
     const dataName = {
       Name: 'name',
-      Value: firstName,
+      Value: firstName
     };
     const attributeName = new CognitoUserAttribute(dataName);
 
