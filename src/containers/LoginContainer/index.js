@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { authenticateCognitoUser } from '../../redux/auth';
+
 import AuthWrapper from '../../components/AuthWrapper';
 import { Link } from 'react-router-dom';
 
 import { validators } from '../../utils';
+
+function mapStateToProps(state) {
+  return state;
+}
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -74,4 +82,6 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+export default connect(mapStateToProps, {
+  authenticateCognitoUser
+})(LoginContainer);

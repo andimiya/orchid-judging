@@ -1,5 +1,6 @@
-import CognitoService from '../cognito';
 import { ajax } from 'jquery';
+import CognitoService from '../cognito';
+import { USERS } from '../constants';
 
 const LOGIN = 'crypto-app/auth/LOGIN';
 const LOGIN_SUCCESS = 'crypto-app/auth/LOGIN_SUCCESS';
@@ -47,12 +48,17 @@ const VERIFY_USER_LOGGED_IN_SUCCESS =
 const VERIFY_USER_LOGGED_IN_FAIL = 'crypto-app/auth/VERIFY_USER_LOGGED_IN_FAIL';
 
 const initialState = {
+  cognitoUserInformation: {
+    email: '',
+    firstName: ''
+  },
+  userIsLoggedIn: false,
   userInformation: {
     email: '',
     firstName: '',
+    lastName: '',
     userId: ''
-  },
-  userIsLoggedIn: false
+  }
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -72,15 +78,15 @@ export default function reducer(state = initialState, action = {}) {
     case GET_USER_ATTRIBUTES_SUCCESS:
       return {
         ...state,
-        userInformation: {
-          ...action.userInformation
+        cognitoUserInformation: {
+          ...action.cognitoUserInformation
         }
       };
     case GET_DB_USER_ATTRIBUTES_SUCCESS:
       return {
         ...state,
-        databaseUserInfo: {
-          ...action.databaseUserInfo
+        userInformation: {
+          ...action.userInformation
         }
       };
     case REGISTER_USER_SUCCESS:
@@ -193,30 +199,40 @@ export function updateCognitoUser(userAttributes) {
   };
 }
 
-// export function getDatabaseUserInfo() {
-//   console.log('test');
-//   return dispatch => {
-//     return ajax(
-//       `http://localhost:8080/api/users?email=takamiya.andrea%2Btest@gmail.com`
-//     )
-//       .then(databaseUserInfo => {
-//         console.log(databaseUserInfo, 'db info');
-//         dispatch({ type: GET_DB_USER_ATTRIBUTES_SUCCESS, databaseUserInfo });
-//         return databaseUserInfo;
-//       })
-//       .catch(err => {
-//         throw err;
-//       });
-//   };
-// }
+export function getDatabaseUserInfo() {
+  let userInformation = null;
+  let cognitoEmail = null;
+  console.log('test');
+  return dispatch => {
+    dispatch(getAttributes());
+    return CognitoService.getUserAttributes()
+      .then(cognitoUserInformation => {
+        cognitoEmail = encodeURIComponent(cognitoUserInformation.email);
+      })
+      .then(_ => {
+        ajax(`${USERS}?email=${cognitoEmail}`)
+          .then(databaseUserInfo => {
+            console.log(databaseUserInfo, 'db user info');
+
+            userInformation = databaseUserInfo.data[0];
+
+            dispatch({ type: GET_DB_USER_ATTRIBUTES_SUCCESS, userInformation });
+            return userInformation;
+          })
+          .catch(err => {
+            throw err;
+          });
+      });
+  };
+}
 
 export function getCognitoUser() {
   return dispatch => {
     dispatch(getAttributes());
     return CognitoService.getUserAttributes()
-      .then(userInformation => {
-        dispatch({ type: GET_USER_ATTRIBUTES_SUCCESS, userInformation });
-        return userInformation;
+      .then(cognitoUserInformation => {
+        dispatch({ type: GET_USER_ATTRIBUTES_SUCCESS, cognitoUserInformation });
+        return cognitoUserInformation;
       })
       .catch(err => {
         throw err;
