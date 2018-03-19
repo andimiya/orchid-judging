@@ -24,7 +24,6 @@ function forgotPassword(email) {
     const cognitoUser = new CognitoUser(userData);
     cognitoUser.forgotPassword({
       onSuccess: data => {
-        console.log(data, 'data');
         return resolve({ data });
       },
       onFailure: err => {

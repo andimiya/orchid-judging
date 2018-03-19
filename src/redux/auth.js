@@ -202,7 +202,6 @@ export function updateCognitoUser(userAttributes) {
 export function getDatabaseUserInfo() {
   let userInformation = null;
   let cognitoEmail = null;
-  console.log('test');
   return dispatch => {
     dispatch(getAttributes());
     return CognitoService.getUserAttributes()
@@ -212,10 +211,7 @@ export function getDatabaseUserInfo() {
       .then(_ => {
         ajax(`${USERS}?email=${cognitoEmail}`)
           .then(databaseUserInfo => {
-            console.log(databaseUserInfo, 'db user info');
-
             userInformation = databaseUserInfo.data[0];
-
             dispatch({ type: GET_DB_USER_ATTRIBUTES_SUCCESS, userInformation });
             return userInformation;
           })

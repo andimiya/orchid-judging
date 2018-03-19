@@ -8,7 +8,6 @@ import {
 } from '../redux/auth';
 
 function mapStateToProps(state) {
-  console.log(state.auth, 'auth state');
   return {
     cognitoUser: state.auth.cognitoUserInformation,
     userIsLoggedIn: state.auth.userIsLoggedIn,
@@ -44,8 +43,6 @@ class AuthWrapper extends Component {
   }
 
   render() {
-    console.log(this.props, 'props from AuthWrapper');
-
     const { cognitoUser, userIsLoggedIn, getDatabaseUserInfo } = this.props;
 
     return <div className="page__content">{this.props.children}</div>;
