@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import AuthWrapper from '../../components/AuthWrapper';
 
 import {
-  USERS,
   COINMARKET_API,
   CURRENCIES,
   CRYPTO_TYPES,

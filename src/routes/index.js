@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { PrivateRoute } from 'react-router';
 import NavBar from '../components/NavBar';
 import MktgPageContainer from '../containers/MktgPageContainer';
 import HomepageContainer from '../containers/HomepageContainer';

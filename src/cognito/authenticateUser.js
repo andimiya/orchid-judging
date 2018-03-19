@@ -14,7 +14,6 @@ import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
 export default credentials => {
   return new Promise((resolve, reject) => {
     // Validation Checks //
-    let validationError = null;
 
     const { userName, password } = credentials;
 

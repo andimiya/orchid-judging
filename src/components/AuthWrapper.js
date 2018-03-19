@@ -34,7 +34,6 @@ class AuthWrapper extends Component {
         getCognitoUser();
       })
       .then(() => {
-        console.log('sanity');
         getDatabaseUserInfo();
       })
       .catch(err => {
@@ -43,8 +42,6 @@ class AuthWrapper extends Component {
   }
 
   render() {
-    const { cognitoUser, userIsLoggedIn, getDatabaseUserInfo } = this.props;
-
     return <div className="page__content">{this.props.children}</div>;
   }
 }

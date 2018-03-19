@@ -21,7 +21,6 @@ class NavBar extends Component {
     this.state = {
       navClass: 'navbar-container'
     };
-    let loggedIn = null;
   }
 
   handleClick() {

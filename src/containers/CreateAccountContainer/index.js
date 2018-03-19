@@ -5,7 +5,6 @@ import AuthWrapper from '../../components/AuthWrapper';
 import CreateAccountForm from '../../components/CreateAccountForm';
 import { CREATE_NEW_USER } from '../../constants';
 import { registerCognitoUser } from '../../redux/auth';
-import { validators } from '../../utils';
 
 function mapStateToProps(state) {
   return {
@@ -30,7 +29,6 @@ class CreateAccountContainer extends Component {
   handleRegistration = e => {
     e.preventDefault();
 
-    const { isValidEmail } = validators;
     const { email, firstName, lastName, passwordOne, passwordTwo } = e.target;
 
     const userInformation = {
@@ -39,6 +37,13 @@ class CreateAccountContainer extends Component {
       firstName: firstName.value,
       lastName: lastName.value
     };
+
+    if (!this.passwordsMatch(passwordOne.value, passwordTwo.value)) {
+      return this.setState({
+        error: 'Passwords must match',
+        isLoading: false
+      });
+    }
 
     return this.props
       .registerCognitoUser(userInformation)

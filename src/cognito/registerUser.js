@@ -2,7 +2,6 @@ import {
   CognitoUserAttribute,
   CognitoUserPool
 } from 'amazon-cognito-identity-js';
-import { connect } from 'react-redux';
 import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../constants';
 
 /*
