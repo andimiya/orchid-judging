@@ -35,17 +35,18 @@ class NavBar extends Component {
     this.setState({ navClass: 'navbar-container' });
   }
 
-  logoutCurrentUser = () => {
-    // if (this.props.isLoggedIn){
-    this.props
-      .logoutUserSession()
-      .then(() => {
-        // window.location.reload();
-        this.props.history.push('/homepage');
-      })
-      .catch(err => {});
-    // }
-  };
+  logoutCurrentUser() {
+    if (this.props.isLoggedIn) {
+      this.props
+        .logoutUserSession()
+        .then(() => {
+          this.props.history.push('/');
+        })
+        .catch(err => {});
+    } else {
+      return true;
+    }
+  }
 
   render() {
     let menuProperties = [
@@ -88,7 +89,7 @@ class NavBar extends Component {
       {
         menuItemContainerClass: 'menu-item',
         linkTo: '/',
-        onClick: this.logoutCurrentUser,
+        onClick: this.props.logoutUserSession,
         navDisplayText: 'Log Out',
         showWhenLoggedIn: true
       }

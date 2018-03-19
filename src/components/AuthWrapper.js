@@ -42,7 +42,14 @@ class AuthWrapper extends Component {
   }
 
   render() {
-    return <div className="page__content">{this.props.children}</div>;
+    console.log(this.props.databaseUserInfo, 'db user info auth wrapper');
+    return (
+      <div>
+        {React.cloneElement(this.props.children, {
+          databaseUserInfo: this.props.databaseUserInfo
+        })}
+      </div>
+    );
   }
 }
 

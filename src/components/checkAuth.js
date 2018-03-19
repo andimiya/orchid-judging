@@ -10,7 +10,13 @@ function mapStateToProps(state) {
 }
 
 class AuthWrapper extends Component {
+  componentDidMount() {
+    getCognitoUser();
+  }
+
   render() {
+    console.log(this.props.isLoggedIn, 'is logged in');
+
     if (!this.props.isLoggedIn) {
       return <Redirect to="/login" />;
     }

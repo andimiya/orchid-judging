@@ -65,12 +65,11 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
-        ...state
+        ...state,
+        userIsLoggedIn: true
       };
     case LOGOUT_SUCCESS:
-      return {
-        state: initialState
-      };
+      return initialState;
     case UPDATE_USER_ATTRIBUTES_SUCCESS:
       return {
         ...state
@@ -176,10 +175,13 @@ export function authenticateCognitoUser(credentials) {
     dispatch(loginUser());
     return CognitoService.authenticateUser(credentials)
       .then(result => {
+        console.log(result, 'authenticate success result');
+
         dispatch({ type: LOGIN_SUCCESS, result });
         return result;
       })
       .catch(err => {
+        console.log(err, 'authenticate error result');
         throw err;
       });
   };
@@ -212,6 +214,7 @@ export function getDatabaseUserInfo() {
         ajax(`${USERS}?email=${cognitoEmail}`)
           .then(databaseUserInfo => {
             userInformation = databaseUserInfo.data[0];
+            console.log(userInformation, 'user info redux');
             dispatch({ type: GET_DB_USER_ATTRIBUTES_SUCCESS, userInformation });
             return userInformation;
           })
@@ -315,6 +318,7 @@ export function logoutUserSession() {
         dispatch({ type: LOGOUT_SUCCESS });
       })
       .catch(err => {
+        console.log(err, 'error redux logout user session');
         dispatch({ type: LOGOUT_FAIL });
       });
   };

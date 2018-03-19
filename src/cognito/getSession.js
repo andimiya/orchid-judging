@@ -17,12 +17,18 @@ export default () => {
       return reject(error);
     }
     const userPool = new CognitoUserPool(poolData);
+    // console.log(userPool, 'userPool');
     const cognitoUser = userPool.getCurrentUser();
+    console.log(cognitoUser, 'cognito');
+
     if (!cognitoUser) {
-      error = new Error('User is not logged in');
-      return reject(error);
+      // error = new Error('User is not logged in');
+      console.log('test');
+      return reject('User not logged in - reject message');
     }
     cognitoUser.getSession((err, session) => {
+      console.log(err, 'error');
+      console.log(session, 'session');
       if (err || !session.isValid()) {
         error = err || new Error('Invalid session');
         return reject(error);

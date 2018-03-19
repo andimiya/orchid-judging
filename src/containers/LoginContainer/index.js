@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { authenticateCognitoUser } from '../../redux/auth';
-import AuthWrapper from '../../components/AuthWrapper';
 import { validators } from '../../utils';
 
 function mapStateToProps(state) {
@@ -46,35 +45,33 @@ class LoginContainer extends Component {
 
   render() {
     return (
-      <AuthWrapper>
-        <div className="outer">
-          <h1>Log In to Your Account</h1>
-          <div className="form__error">
-            {this.state.error && <p>{this.state.error}</p>}
-          </div>
-          <form onSubmit={this.handleLogin}>
-            <div className="form-group">
-              <input
-                type="email"
-                placeholder="Email Address"
-                name="email"
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <input className="btn btn-primary" type="submit" value="Log In" />
-            </div>
-          </form>
+      <div className="outer">
+        <h1>Log In to Your Account</h1>
+        <div className="form__error">
+          {this.state.error && <p>{this.state.error}</p>}
         </div>
-      </AuthWrapper>
+        <form onSubmit={this.handleLogin}>
+          <div className="form-group">
+            <input
+              type="email"
+              placeholder="Email Address"
+              name="email"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <input className="btn btn-primary" type="submit" value="Log In" />
+          </div>
+        </form>
+      </div>
     );
   }
 }

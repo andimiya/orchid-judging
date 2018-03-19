@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { ajax } from 'jquery';
+import { connect } from 'react-redux';
 import {
-  USERS,
   GET_TRANSACTIONS,
   DELETE_TRANSACTIONS,
   CURRENCIES
 } from '../../constants';
+
+import { getDatabaseUserInfo } from '../../redux/auth';
 import InvestmentForm from '../../components/InvestmentForm';
 import TransactionTable from '../../components/TransactionTable';
+
+function mapStateToProps(state) {
+  return {
+    databaseUserInfo: state.auth.userInformation
+  };
+}
 
 class TransactionContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.getUserId = this.getUserId.bind(this);
     this.getAllCurrencies = this.getAllCurrencies.bind(this);
     this.deleteTransaction = this.deleteTransaction.bind(this);
 
@@ -21,21 +28,13 @@ class TransactionContainer extends Component {
       allData: [],
       exchangeRates: [],
       currencies: [],
-      user_id: null,
       error: ''
     };
   }
 
   componentDidMount() {
-    this.getUserId();
     this.getAllCurrencies();
-  }
-
-  getUserId() {
-    let user_email = this.props.userInformation.email;
-    ajax(`${USERS}?email=${user_email}`).then(cryptoTypes => {
-      this.setState({ user_id: cryptoTypes.data[0].id }, this.getTransactions);
-    });
+    this.props.getDatabaseUserInfo();
   }
 
   getAllCurrencies() {
@@ -47,7 +46,7 @@ class TransactionContainer extends Component {
   }
 
   getTransactions() {
-    let user_id = this.state.user_id;
+    let user_id = this.props.databaseUserInfo.id;
     ajax(`${GET_TRANSACTIONS}?user_id=${user_id}`).then(data => {
       this.setState({ allData: data.data });
     });
@@ -63,7 +62,9 @@ class TransactionContainer extends Component {
     });
   }
 
-  render(props) {
+  render() {
+    console.log(this.props.databaseUserInfo.id, 'transaction db user id');
+
     return (
       <div className="transaction-container outer">
         <div className="transaction-table-container">
@@ -84,4 +85,6 @@ class TransactionContainer extends Component {
   }
 }
 
-export default TransactionContainer;
+export default connect(mapStateToProps, {
+  getDatabaseUserInfo
+})(TransactionContainer);
