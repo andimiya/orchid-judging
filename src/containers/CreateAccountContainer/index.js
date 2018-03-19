@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-import Page from '../../components/Page';
+import AuthWrapper from '../../components/AuthWrapper';
 import CreateAccountForm from '../../components/CreateAccountForm';
 import { CREATE_NEW_USER } from '../../constants';
 import { registerCognitoUser } from '../../redux/auth';
@@ -75,7 +75,7 @@ class CreateAccountContainer extends Component {
 
   render() {
     return (
-      <Page>
+      <AuthWrapper>
         <div className="register__container outer">
           {this.state.successfullyCreatedUser ? (
             <div className="register__success">
@@ -99,7 +99,7 @@ class CreateAccountContainer extends Component {
             </div>
           )}
         </div>
-      </Page>
+      </AuthWrapper>
     );
   }
 }

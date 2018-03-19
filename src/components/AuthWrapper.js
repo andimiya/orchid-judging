@@ -3,16 +3,15 @@ import { connect } from 'react-redux';
 
 import { getCognitoUser, verifyUserLoggedIn } from '../redux/auth';
 
-// import HeaderNav from './HeaderNav';
-
 function mapStateToProps(state) {
   return {
     user: state.auth.userInformation,
     userIsLoggedIn: state.auth.userIsLoggedIn
+    // databaseUserInfo: state.auth.databaseUserInfo
   };
 }
 
-class Page extends Component {
+class AuthWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,12 +31,16 @@ class Page extends Component {
   }
 
   render() {
+    console.log(this.props, 'props from AuthWrapper');
+
     const { user, userIsLoggedIn } = this.props;
 
     return <div className="page__content">{this.props.children}</div>;
   }
 }
 
-export default connect(mapStateToProps, { getCognitoUser, verifyUserLoggedIn })(
-  Page
-);
+export default connect(mapStateToProps, {
+  getCognitoUser,
+  verifyUserLoggedIn
+  // getDatabaseUserInfo
+})(AuthWrapper);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Page from '../../components/Page';
+import AuthWrapper from '../../components/AuthWrapper';
 import { resetUserPassword } from '../../redux/auth';
 
 function mapStateToProps(state) {
@@ -47,7 +47,7 @@ class ResetPasswordContainer extends Component {
 
   render() {
     return (
-      <Page>
+      <AuthWrapper>
         <div className="outer">
           <h1>Reset Your Password</h1>
           <p>Enter your new password below.</p>
@@ -93,7 +93,7 @@ class ResetPasswordContainer extends Component {
             </form>
           </div>
         </div>
-      </Page>
+      </AuthWrapper>
     );
   }
 }

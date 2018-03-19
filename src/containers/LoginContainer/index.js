@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Page from '../../components/Page';
+import AuthWrapper from '../../components/AuthWrapper';
 import { Link } from 'react-router-dom';
-import { authenticateCognitoUser, getCognitoUser } from '../../redux/auth';
 
 import { validators } from '../../utils';
-
-function mapStateToProps(state) {
-  return state;
-}
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -47,7 +41,7 @@ class LoginContainer extends Component {
 
   render() {
     return (
-      <Page>
+      <AuthWrapper>
         <div className="outer">
           <h1>Log In to Your Account</h1>
           <div className="form__error">
@@ -75,12 +69,9 @@ class LoginContainer extends Component {
             </div>
           </form>
         </div>
-      </Page>
+      </AuthWrapper>
     );
   }
 }
 
-export default connect(mapStateToProps, {
-  authenticateCognitoUser,
-  getCognitoUser
-})(LoginContainer);
+export default LoginContainer;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Page from '../../components/Page';
+import AuthWrapper from '../../components/AuthWrapper';
 import { emailResetPasswordCode } from '../../redux/auth';
 
 function mapStateToProps(state) {
@@ -84,12 +84,12 @@ class ForgotPasswordContainer extends Component {
 
   render() {
     return (
-      <Page>
+      <AuthWrapper>
         <div className="outer">
           <h1 className="section__title">Forgot Your Password?</h1>
           {this.renderBody()}
         </div>
-      </Page>
+      </AuthWrapper>
     );
   }
 }

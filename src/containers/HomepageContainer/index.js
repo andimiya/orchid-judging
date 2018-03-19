@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Page from '../../components/Page';
-import { connect } from 'react-redux';
-import { getCognitoUser } from '../../redux/auth';
+import AuthWrapper from '../../components/AuthWrapper';
 
 import {
   USERS,
@@ -34,18 +32,10 @@ const icons = {
   genericIcon: genericIcon
 };
 
-function mapStateToProps(state) {
-  return {
-    isLoggedIn: state.auth.userIsLoggedIn,
-    userInformation: state.auth.userInformation
-  };
-}
-
 class HomepageContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.getUserId = this.getUserId.bind(this);
     this.generateCards = this.generateCards.bind(this);
     this.getTransactionSums = this.getTransactionSums.bind(this);
     this.getAllCurrencies = this.getAllCurrencies.bind(this);
@@ -61,16 +51,8 @@ class HomepageContainer extends Component {
   }
 
   componentDidMount() {
-    this.getUserId();
     this.getAllCurrencies();
     this.getTransactionSums();
-  }
-
-  getUserId() {
-    let user_email = this.props.userInformation.email;
-    ajax(`${USERS}?email=${user_email}`).then(cryptoTypes => {
-      this.setState({ user_id: cryptoTypes.data[0].id }, this.generateCards);
-    });
   }
 
   generateCards() {
@@ -104,9 +86,9 @@ class HomepageContainer extends Component {
     );
   }
 
-  render(props) {
+  render() {
     return (
-      <Page>
+      <AuthWrapper>
         <div className="crypto-container outer">
           {this.state.cryptoTypes.map(currencies => {
             let icon = icons[`${currencies.symbol}Icon`];
@@ -180,11 +162,9 @@ class HomepageContainer extends Component {
             userId={this.state.user_id}
           />
         </div>
-      </Page>
+      </AuthWrapper>
     );
   }
 }
 
-export default connect(mapStateToProps, {
-  getCognitoUser
-})(HomepageContainer);
+export default HomepageContainer;

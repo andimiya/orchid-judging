@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Page from '../../components/Page';
+import AuthWrapper from '../../components/AuthWrapper';
 import CognitoService from '../../cognito';
 import { Link } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ class UserConfirmedContainer extends Component {
   }
   render() {
     return (
-      <Page>
+      <AuthWrapper>
         <div className="confirmed__container">
           <h1 className="section__title">Account Confirmed!</h1>
           {this.state.error && <div>{this.state.error}</div>}
@@ -40,7 +40,7 @@ class UserConfirmedContainer extends Component {
             </div>
           )}
         </div>
-      </Page>
+      </AuthWrapper>
     );
   }
 }

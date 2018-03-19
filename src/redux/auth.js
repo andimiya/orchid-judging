@@ -1,4 +1,5 @@
 import CognitoService from '../cognito';
+import { ajax } from 'jquery';
 
 const LOGIN = 'crypto-app/auth/LOGIN';
 const LOGIN_SUCCESS = 'crypto-app/auth/LOGIN_SUCCESS';
@@ -16,6 +17,8 @@ const GET_USER_ATTRIBUTES = 'crypto-app/auth/GET_USER_ATTRIBUTES';
 const GET_USER_ATTRIBUTES_SUCCESS =
   'crypto-app/auth/GET_USER_ATTRIBUTES_SUCCESS';
 const GET_USER_ATTRIBUTES_FAIL = 'crypto-app/auth/GET_USER_ATTRIBUTES_FAIL';
+const GET_DB_USER_ATTRIBUTES_SUCCESS =
+  'crypto-app/auth/GET_DB_USER_ATTRIBUTES_SUCCESS';
 
 const UPDATE_USER_ATTRIBUTES = 'crypto-app/auth/UPDATE_USER_ATTRIBUTES';
 const UPDATE_USER_ATTRIBUTES_SUCCESS =
@@ -46,7 +49,8 @@ const VERIFY_USER_LOGGED_IN_FAIL = 'crypto-app/auth/VERIFY_USER_LOGGED_IN_FAIL';
 const initialState = {
   userInformation: {
     email: '',
-    firstName: ''
+    firstName: '',
+    userId: ''
   },
   userIsLoggedIn: false
 };
@@ -69,8 +73,14 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         userInformation: {
-          ...action.userInformation,
-          firstName: action.userInformation.name
+          ...action.userInformation
+        }
+      };
+    case GET_DB_USER_ATTRIBUTES_SUCCESS:
+      return {
+        ...state,
+        databaseUserInfo: {
+          ...action.databaseUserInfo
         }
       };
     case REGISTER_USER_SUCCESS:
@@ -182,6 +192,23 @@ export function updateCognitoUser(userAttributes) {
       });
   };
 }
+
+// export function getDatabaseUserInfo() {
+//   console.log('test');
+//   return dispatch => {
+//     return ajax(
+//       `http://localhost:8080/api/users?email=takamiya.andrea%2Btest@gmail.com`
+//     )
+//       .then(databaseUserInfo => {
+//         console.log(databaseUserInfo, 'db info');
+//         dispatch({ type: GET_DB_USER_ATTRIBUTES_SUCCESS, databaseUserInfo });
+//         return databaseUserInfo;
+//       })
+//       .catch(err => {
+//         throw err;
+//       });
+//   };
+// }
 
 export function getCognitoUser() {
   return dispatch => {

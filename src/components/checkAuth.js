@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { getCognitoUser } from '../redux/auth';
@@ -9,13 +9,23 @@ function mapStateToProps(state) {
   };
 }
 
-export class AuthWrapper extends React.Component {
+class AuthWrapper extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     if (!this.props.isLoggedIn) {
       return <Redirect to="/login" />;
     }
 
-    return <div>{React.cloneElement(this.props.children)}</div>;
+    return (
+      <div>
+        {React.cloneElement(this.props.children, {
+          isLoggedIn: this.props.isLoggedIn
+        })}
+      </div>
+    );
   }
 }
 

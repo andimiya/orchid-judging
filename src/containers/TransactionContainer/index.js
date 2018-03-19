@@ -6,16 +6,8 @@ import {
   DELETE_TRANSACTIONS,
   CURRENCIES
 } from '../../constants';
-import { connect } from 'react-redux';
-import { getCognitoUser } from '../../redux/auth';
 import InvestmentForm from '../../components/InvestmentForm';
 import TransactionTable from '../../components/TransactionTable';
-
-function mapStateToProps(state) {
-  return {
-    userInformation: state.auth.userInformation
-  };
-}
 
 class TransactionContainer extends Component {
   constructor(props) {
@@ -92,6 +84,4 @@ class TransactionContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, {
-  getCognitoUser
-})(TransactionContainer);
+export default TransactionContainer;

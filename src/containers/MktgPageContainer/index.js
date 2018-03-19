@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Page from '../../components/Page';
+import AuthWrapper from '../../components/AuthWrapper';
 import screenshot from '../../assets/crypto-track.png';
 
 class MktgPageContainer extends Component {
   render() {
     return (
-      <Page>
+      <AuthWrapper>
         <div className="outer">
           <h1>Track your shit with Crypto Tracker</h1>
           <p>Find out out much your cryptocurrency is worth, in real-time.</p>
@@ -43,7 +43,7 @@ class MktgPageContainer extends Component {
             </ul>
           </div>
         </div>
-      </Page>
+      </AuthWrapper>
     );
   }
 }

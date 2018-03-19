@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Page from '../../components/Page';
+import AuthWrapper from '../../components/AuthWrapper';
 import UserAccountForm from '../../components/UserAccountForm';
 import {
   updateCognitoUser,
@@ -150,7 +150,7 @@ class UserAccountContainer extends Component {
     const { userIsLoggedIn } = this.props;
     const { email, firstName } = this.state.accountForm;
     return (
-      <Page title="My account">
+      <AuthWrapper title="My account">
         <div className="account__container">
           {userIsLoggedIn && (
             <UserAccountForm
@@ -165,7 +165,7 @@ class UserAccountContainer extends Component {
             />
           )}
         </div>
-      </Page>
+      </AuthWrapper>
     );
   }
 }
