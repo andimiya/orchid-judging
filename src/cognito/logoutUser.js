@@ -9,8 +9,6 @@ export default () => {
       .then(cognitoUser => {
         return resolve(cognitoUser.signOut());
       })
-      .catch(err => {
-        console.log(err, 'logout error');
-      });
+      .catch(err => {});
   });
 };

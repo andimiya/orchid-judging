@@ -15,8 +15,6 @@ class AuthWrapper extends Component {
   }
 
   render() {
-    console.log(this.props.isLoggedIn, 'is logged in');
-
     if (!this.props.isLoggedIn) {
       return <Redirect to="/login" />;
     }

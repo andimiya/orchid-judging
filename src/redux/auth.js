@@ -175,13 +175,10 @@ export function authenticateCognitoUser(credentials) {
     dispatch(loginUser());
     return CognitoService.authenticateUser(credentials)
       .then(result => {
-        console.log(result, 'authenticate success result');
-
         dispatch({ type: LOGIN_SUCCESS, result });
         return result;
       })
       .catch(err => {
-        console.log(err, 'authenticate error result');
         throw err;
       });
   };
@@ -317,7 +314,6 @@ export function logoutUserSession() {
         dispatch({ type: LOGOUT_SUCCESS });
       })
       .catch(err => {
-        console.log(err, 'error redux logout user session');
         dispatch({ type: LOGOUT_FAIL });
       });
   };
