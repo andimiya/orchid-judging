@@ -12,15 +12,15 @@ import NewInvestmentsContainer from '../containers/NewInvestmentsContainer';
 import UserAccountContainer from '../containers/UserAccountContainer';
 import UserConfirmedContainer from '../containers/UserConfirmedContainer';
 import Footer from '../components/Footer';
-import AuthWrapper from '../components/checkAuth';
+import CheckAuth from '../components/checkAuth';
 
 const AuthRoutes = ({ component: Component, ...routeProps }) => (
   <Route
     {...routeProps}
     render={props => (
-      <AuthWrapper {...props}>
+      <CheckAuth {...props}>
         <Component />
-      </AuthWrapper>
+      </CheckAuth>
     )}
   />
 );

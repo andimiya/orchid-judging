@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AuthWrapper from '../../components/AuthWrapper';
 import { resetUserPassword } from '../../redux/auth';
 
 function mapStateToProps(state) {
@@ -47,53 +46,51 @@ class ResetPasswordContainer extends Component {
 
   render() {
     return (
-      <AuthWrapper>
-        <div className="outer">
-          <h1>Reset Your Password</h1>
-          <p>Enter your new password below.</p>
-          <p>
-            Passwords must be at least 8 characters long and contain both upper
-            and lowercase letters.
-          </p>
-          <div className="password-reset__form">
-            <form onSubmit={this.handlePasswordReset}>
-              <div className="form-group">
-                <label>New Password</label>
-                <input
-                  className="form-control"
-                  name="passwordOne"
-                  type="password"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Retype Password</label>
-                <input
-                  className="form-control"
-                  name="passwordTwo"
-                  type="password"
-                  required
-                />
-              </div>
-              {this.state.error && (
-                <p className="form__error">{this.state.error}</p>
-              )}
-              <div className="form-group">
-                <label>Verification Code</label>
-                <input
-                  className="form-control"
-                  name="verificationCode"
-                  type="number"
-                  required
-                />
-              </div>
-              <button className="btn" type="submit">
-                Reset Password
-              </button>
-            </form>
-          </div>
+      <div className="outer">
+        <h1>Reset Your Password</h1>
+        <p>Enter your new password below.</p>
+        <p>
+          Passwords must be at least 8 characters long and contain both upper
+          and lowercase letters.
+        </p>
+        <div className="password-reset__form">
+          <form onSubmit={this.handlePasswordReset}>
+            <div className="form-group">
+              <label>New Password</label>
+              <input
+                className="form-control"
+                name="passwordOne"
+                type="password"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Retype Password</label>
+              <input
+                className="form-control"
+                name="passwordTwo"
+                type="password"
+                required
+              />
+            </div>
+            {this.state.error && (
+              <p className="form__error">{this.state.error}</p>
+            )}
+            <div className="form-group">
+              <label>Verification Code</label>
+              <input
+                className="form-control"
+                name="verificationCode"
+                type="number"
+                required
+              />
+            </div>
+            <button className="btn" type="submit">
+              Reset Password
+            </button>
+          </form>
         </div>
-      </AuthWrapper>
+      </div>
     );
   }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AuthWrapper from '../../components/AuthWrapper';
 import CognitoService from '../../cognito';
 import { Link } from 'react-router-dom';
 
@@ -27,20 +26,18 @@ class UserConfirmedContainer extends Component {
   }
   render() {
     return (
-      <AuthWrapper>
-        <div className="confirmed__container">
-          <h1 className="section__title">Account Confirmed!</h1>
-          {this.state.error && <div>{this.state.error}</div>}
-          {this.state.successMessage && (
-            <div>
-              {this.state.successMessage}
-              <Link className="link" to="/login">
-                Click here to Log In
-              </Link>
-            </div>
-          )}
-        </div>
-      </AuthWrapper>
+      <div className="confirmed__container">
+        <h1 className="section__title">Account Confirmed!</h1>
+        {this.state.error && <div>{this.state.error}</div>}
+        {this.state.successMessage && (
+          <div>
+            {this.state.successMessage}
+            <Link className="link" to="/login">
+              Click here to Log In
+            </Link>
+          </div>
+        )}
+      </div>
     );
   }
 }

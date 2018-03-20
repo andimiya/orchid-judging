@@ -9,7 +9,7 @@ function mapStateToProps(state) {
   };
 }
 
-class AuthWrapper extends Component {
+class CheckAuth extends Component {
   componentDidMount() {
     getCognitoUser();
   }
@@ -31,4 +31,4 @@ class AuthWrapper extends Component {
 
 export default connect(mapStateToProps, {
   getCognitoUser
-})(AuthWrapper);
+})(CheckAuth);

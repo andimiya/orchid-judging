@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-import AuthWrapper from '../../components/AuthWrapper';
 import CreateAccountForm from '../../components/CreateAccountForm';
 import { CREATE_NEW_USER } from '../../constants';
 import { registerCognitoUser } from '../../redux/auth';
@@ -80,31 +79,29 @@ class CreateAccountContainer extends Component {
 
   render() {
     return (
-      <AuthWrapper>
-        <div className="register__container outer">
-          {this.state.successfullyCreatedUser ? (
-            <div className="register__success">
-              <h4 className="section__title">Your Account Has Been Created!</h4>
-              <p className="register__instructions">
-                Check Your Email to Activate Your Account
-              </p>
-              <div className="register__details">
-                <span>
-                  Once your account is verified, you'll be able to log in and
-                  use the app
-                </span>
-              </div>
+      <div className="register__container outer">
+        {this.state.successfullyCreatedUser ? (
+          <div className="register__success">
+            <h4 className="section__title">Your Account Has Been Created!</h4>
+            <p className="register__instructions">
+              Check Your Email to Activate Your Account
+            </p>
+            <div className="register__details">
+              <span>
+                Once your account is verified, you'll be able to log in and use
+                the app
+              </span>
             </div>
-          ) : (
-            <div>
-              <CreateAccountForm
-                handleRegistration={this.handleRegistration}
-                error={this.state.error}
-              />
-            </div>
-          )}
-        </div>
-      </AuthWrapper>
+          </div>
+        ) : (
+          <div>
+            <CreateAccountForm
+              handleRegistration={this.handleRegistration}
+              error={this.state.error}
+            />
+          </div>
+        )}
+      </div>
     );
   }
 }
