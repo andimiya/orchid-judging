@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { ajax } from 'jquery';
+import { connect } from 'react-redux';
 
 import {
   COINMARKET_API,
@@ -7,8 +9,9 @@ import {
   CRYPTO_TYPES_SUM
 } from '../../constants';
 
-import { ajax } from 'jquery';
 import InvestmentForm from '../../components/InvestmentForm';
+
+import { getDatabaseUserInfo } from '../../redux/auth';
 
 const BTCIcon = require('../../assets/bitcoinIcon.svg');
 const BCHIcon = require('../../assets/bitcoinIcon.svg');
@@ -29,6 +32,12 @@ const icons = {
   DOGEIcon: DOGEIcon,
   genericIcon: genericIcon
 };
+
+function mapStateToProps(state) {
+  return {
+    databaseUserInfo: state.auth.userInformation
+  };
+}
 
 class HomepageContainer extends Component {
   constructor(props) {
@@ -54,16 +63,29 @@ class HomepageContainer extends Component {
   }
 
   generateCards() {
-    let user_id = this.state.user_id;
-    ajax(`${CRYPTO_TYPES}?user_id=${user_id}`).then(cryptoTypes => {
-      ajax(`${COINMARKET_API}`).then(exchangeRates => {
-        return this.setState({ exchangeRates: exchangeRates });
+    this.props
+      .getDatabaseUserInfo()
+      .then(data => {
+        let user_id = data.id;
+        console.log(user_id, 'user id');
+
+        ajax(`${CRYPTO_TYPES}?user_id=${user_id}`)
+          .then(cryptoTypes => {
+            ajax(`${COINMARKET_API}`).then(exchangeRates => {
+              return this.setState({ exchangeRates: exchangeRates });
+            });
+            this.setState({
+              error: 'Error returning exchange rates from Coinmarket API'
+            });
+            this.setState({ cryptoTypes: cryptoTypes.data });
+          })
+          .catch(err => {
+            throw err;
+          });
+      })
+      .catch(err => {
+        throw err;
       });
-      this.setState({
-        error: 'Error returning exchange rates from Coinmarket API'
-      });
-      this.setState({ cryptoTypes: cryptoTypes.data });
-    });
   }
 
   getAllCurrencies() {
@@ -85,8 +107,6 @@ class HomepageContainer extends Component {
   }
 
   render() {
-    console.log(this.props, 'props homepage');
-
     return (
       <div className="crypto-container outer">
         {this.state.cryptoTypes.map(currencies => {
@@ -158,11 +178,13 @@ class HomepageContainer extends Component {
           currencies={this.state.currencies}
           getTransactions={this.generateCards}
           getTransactionSums={this.getTransactionSums}
-          userId={this.state.user_id}
+          userId={this.props.databaseUserInfo.id}
         />
       </div>
     );
   }
 }
 
-export default HomepageContainer;
+export default connect(mapStateToProps, {
+  getDatabaseUserInfo
+})(HomepageContainer);

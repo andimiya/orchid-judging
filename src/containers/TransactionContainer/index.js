@@ -7,7 +7,7 @@ import {
   CURRENCIES
 } from '../../constants';
 
-import { getDatabaseUserInfo, getCognitoUser } from '../../redux/auth';
+import { getDatabaseUserInfo } from '../../redux/auth';
 import InvestmentForm from '../../components/InvestmentForm';
 import TransactionTable from '../../components/TransactionTable';
 
@@ -89,7 +89,7 @@ class TransactionContainer extends Component {
           <InvestmentForm
             currencies={this.state.currencies}
             getTransactions={this.getTransactions}
-            userId={this.state.user_id}
+            userId={this.props.databaseUserInfo.id}
           />
         </div>
       </div>
@@ -98,6 +98,5 @@ class TransactionContainer extends Component {
 }
 
 export default connect(mapStateToProps, {
-  getDatabaseUserInfo,
-  getCognitoUser
+  getDatabaseUserInfo
 })(TransactionContainer);

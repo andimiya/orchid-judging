@@ -105,6 +105,8 @@ class InvestmentForm extends Component {
   }
 
   render() {
+    console.log(this.props.userId, 'investment form id prop');
+
     return (
       <div className="investment-form-container">
         <div className="form-group">
