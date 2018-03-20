@@ -7,7 +7,7 @@ import {
   CURRENCIES
 } from '../../constants';
 
-import { getDatabaseUserInfo } from '../../redux/auth';
+import { getDatabaseUserInfo, getCognitoUser } from '../../redux/auth';
 import InvestmentForm from '../../components/InvestmentForm';
 import TransactionTable from '../../components/TransactionTable';
 
@@ -21,6 +21,7 @@ class TransactionContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.getTransactions = this.getTransactions.bind(this);
     this.getAllCurrencies = this.getAllCurrencies.bind(this);
     this.deleteTransaction = this.deleteTransaction.bind(this);
 
@@ -28,13 +29,14 @@ class TransactionContainer extends Component {
       allData: [],
       exchangeRates: [],
       currencies: [],
+      userId: '',
       error: ''
     };
   }
 
   componentDidMount() {
+    this.getTransactions();
     this.getAllCurrencies();
-    this.props.getDatabaseUserInfo();
   }
 
   getAllCurrencies() {
@@ -46,10 +48,22 @@ class TransactionContainer extends Component {
   }
 
   getTransactions() {
-    let user_id = this.props.databaseUserInfo.id;
-    ajax(`${GET_TRANSACTIONS}?user_id=${user_id}`).then(data => {
-      this.setState({ allData: data.data });
-    });
+    this.props
+      .getDatabaseUserInfo()
+      .then(data => {
+        let user_id = data.id;
+        ajax(`${GET_TRANSACTIONS}?user_id=${user_id}`)
+          .then(data => {
+            this.setState({ allData: data.data });
+          })
+          .catch(err => {
+            throw err;
+          });
+        return data;
+      })
+      .catch(err => {
+        throw err;
+      });
   }
 
   deleteTransaction(e) {
@@ -63,8 +77,6 @@ class TransactionContainer extends Component {
   }
 
   render() {
-    console.log(this.props.databaseUserInfo.id, 'transaction db user id');
-
     return (
       <div className="transaction-container outer">
         <div className="transaction-table-container">
@@ -86,5 +98,6 @@ class TransactionContainer extends Component {
 }
 
 export default connect(mapStateToProps, {
-  getDatabaseUserInfo
+  getDatabaseUserInfo,
+  getCognitoUser
 })(TransactionContainer);

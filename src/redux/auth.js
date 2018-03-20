@@ -230,7 +230,6 @@ export function getCognitoUser() {
     return CognitoService.getUserAttributes()
       .then(cognitoUserInformation => {
         dispatch({ type: GET_USER_ATTRIBUTES_SUCCESS, cognitoUserInformation });
-        console.log(cognitoUserInformation, 'cognito user info');
         return cognitoUserInformation;
       })
       .catch(err => {
