@@ -211,10 +211,9 @@ export function getDatabaseUserInfo() {
         cognitoEmail = encodeURIComponent(cognitoUserInformation.email);
       })
       .then(_ => {
-        ajax(`${USERS}?email=${cognitoEmail}`)
+        return ajax(`${USERS}?email=${cognitoEmail}`)
           .then(databaseUserInfo => {
             userInformation = databaseUserInfo.data[0];
-            console.log(userInformation, 'user info redux');
             dispatch({ type: GET_DB_USER_ATTRIBUTES_SUCCESS, userInformation });
             return userInformation;
           })
@@ -231,6 +230,7 @@ export function getCognitoUser() {
     return CognitoService.getUserAttributes()
       .then(cognitoUserInformation => {
         dispatch({ type: GET_USER_ATTRIBUTES_SUCCESS, cognitoUserInformation });
+        console.log(cognitoUserInformation, 'cognito user info');
         return cognitoUserInformation;
       })
       .catch(err => {
