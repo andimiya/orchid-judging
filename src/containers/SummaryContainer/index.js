@@ -64,8 +64,6 @@ class SummaryContainer extends Component {
   }
 
   generateCards() {
-    console.log('generate cards');
-
     this.props
       .getDatabaseUserInfo()
       .then(data => {
@@ -163,7 +161,7 @@ class SummaryContainer extends Component {
                               {exchangeRates.price_usd}
                             </div>
                             <div>
-                              Current Value (USD): {currentValue.toFixed(2)}
+                              Current Value (USD): ${currentValue.toFixed(2)}
                             </div>
                           </div>
                         );

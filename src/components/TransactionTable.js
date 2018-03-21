@@ -13,7 +13,7 @@ const TransactionTable = props => {
             <th className="align-middle">USD Invested</th>
             <th className="align-middle">Exchange Rate</th>
             <th className="align-middle">Amount of Coin</th>
-            <th className="align-middle">Date Purchased</th>
+            <th className="align-middle">Date/Time of Exchange</th>
             <th />
           </tr>
         </thead>
@@ -31,9 +31,9 @@ const TransactionTable = props => {
                 <td>{transactions.exchange_rate}</td>
                 <td>{transactions.coin_purchased}</td>
                 <td>
-                  {moment
-                    .unix(transactions.purchased_at)
-                    .format('MMM DD, YYYY H:mm')}
+                  {moment(transactions.purchased_at).format(
+                    'MMM DD, YYYY H:mm'
+                  )}
                 </td>
                 <td>
                   <a onClick={props.onClick}>
