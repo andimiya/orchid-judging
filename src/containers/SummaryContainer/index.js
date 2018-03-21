@@ -39,7 +39,7 @@ function mapStateToProps(state) {
   };
 }
 
-class HomepageContainer extends Component {
+class SummaryContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -58,17 +58,18 @@ class HomepageContainer extends Component {
   }
 
   componentDidMount() {
+    this.generateCards();
     this.getAllCurrencies();
     this.getTransactionSums();
   }
 
   generateCards() {
+    console.log('generate cards');
+
     this.props
       .getDatabaseUserInfo()
       .then(data => {
         let user_id = data.id;
-        console.log(user_id, 'user id');
-
         ajax(`${CRYPTO_TYPES}?user_id=${user_id}`)
           .then(cryptoTypes => {
             ajax(`${COINMARKET_API}`).then(exchangeRates => {
@@ -187,4 +188,4 @@ class HomepageContainer extends Component {
 
 export default connect(mapStateToProps, {
   getDatabaseUserInfo
-})(HomepageContainer);
+})(SummaryContainer);

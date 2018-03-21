@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import MktgPageContainer from '../containers/MktgPageContainer';
-import HomepageContainer from '../containers/HomepageContainer';
+import SummaryContainer from '../containers/SummaryContainer';
 import TransactionContainer from '../containers/TransactionContainer';
 import LoginContainer from '../containers/LoginContainer';
 import CreateAccountContainer from '../containers/CreateAccountContainer';
@@ -48,7 +48,7 @@ const Routes = props => {
         />
         <Route exact path="/" component={MktgPageContainer} />
       </Switch>
-      <AuthRoutes path="/summary" component={HomepageContainer} />
+      <AuthRoutes path="/summary" component={SummaryContainer} />
       <AuthRoutes path="/transactions" component={TransactionContainer} />
       <AuthRoutes path="/account" component={UserAccountContainer} />
       <AuthRoutes path="/new-investments" component={NewInvestmentsContainer} />
