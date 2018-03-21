@@ -37,7 +37,7 @@ class LoginContainer extends Component {
     return this.props
       .authenticateCognitoUser(credentials)
       .then(result => {
-        this.props.history.push('/transactions');
+        this.props.history.push('/summary');
       })
       .catch(err => {
         this.setState({ error: err.message });

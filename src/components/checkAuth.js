@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { getCognitoUser, verifyUserLoggedIn } from '../redux/auth';
 
 function mapStateToProps(state) {
@@ -29,6 +30,10 @@ class CheckAuth extends Component {
   }
 
   render() {
+    if (!this.props.userIsLoggedIn) {
+      return <Redirect to="/login" />;
+    }
+
     return (
       <div>
         {React.cloneElement(this.props.children, {
