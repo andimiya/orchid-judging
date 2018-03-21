@@ -20,11 +20,15 @@ export default () => {
     const cognitoUser = userPool.getCurrentUser();
 
     if (!cognitoUser) {
-      return reject('User not logged in - reject message');
+      error = new Error('User is not logged in');
+      return reject(error);
     }
     cognitoUser.getSession((err, session) => {
       if (err || !session.isValid()) {
         error = err || new Error('Invalid session');
+        console.log(session, 'session');
+        console.log(err, 'error');
+
         return reject(error);
       }
       return resolve(cognitoUser);

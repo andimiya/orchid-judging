@@ -54,7 +54,7 @@ class TransactionContainer extends Component {
         let user_id = data.id;
         ajax(`${GET_TRANSACTIONS}?user_id=${user_id}`)
           .then(data => {
-            this.setState({ allData: data.data });
+            return this.setState({ allData: data.data });
           })
           .catch(err => {
             throw err;

@@ -83,7 +83,7 @@ class InvestmentForm extends Component {
           this.setState({ sentStatus: 'error' });
         }
       })
-      .catch(() => this.setState({ sentStatus: 'error' }));
+      .catch(err => this.setState({ sentStatus: err }));
   }
 
   findExchange(event) {
@@ -105,8 +105,6 @@ class InvestmentForm extends Component {
   }
 
   render() {
-    console.log(this.props.userId, 'investment form id prop');
-
     return (
       <div className="investment-form-container">
         <div className="form-group">

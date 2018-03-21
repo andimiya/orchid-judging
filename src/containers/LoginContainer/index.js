@@ -33,6 +33,7 @@ class LoginContainer extends Component {
       userName: userEmail,
       password: userPassword
     };
+
     return this.props
       .authenticateCognitoUser(credentials)
       .then(result => {
