@@ -70,12 +70,15 @@ class SummaryContainer extends Component {
         let user_id = data.id;
         ajax(`${CRYPTO_TYPES}?user_id=${user_id}`)
           .then(cryptoTypes => {
-            ajax(`${COINMARKET_API}`).then(exchangeRates => {
-              return this.setState({ exchangeRates: exchangeRates });
-            });
-            this.setState({
-              error: 'Error returning exchange rates from Coinmarket API'
-            });
+            ajax(`${COINMARKET_API}`)
+              .then(exchangeRates => {
+                this.setState({ exchangeRates: exchangeRates });
+              })
+              .catch(err => {
+                this.setState({
+                  error: err
+                });
+              });
             this.setState({ cryptoTypes: cryptoTypes.data });
           })
           .catch(err => {
