@@ -69,8 +69,12 @@ class TransactionContainer extends Component {
   deleteTransaction(e) {
     e.preventDefault();
     ajax({
-      url: `${DELETE_TRANSACTIONS}/${e.target.id}`,
-      type: 'DELETE'
+      url: DELETE_TRANSACTIONS,
+      type: 'DELETE',
+      data: {
+        id: e.target.id,
+        user_id: this.props.databaseUserInfo.id
+      }
     }).done(() => {
       this.getTransactions();
     });
