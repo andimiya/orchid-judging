@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import { ajax } from 'jquery';
 import { connect } from 'react-redux';
-
-import {
-  COINMARKET_API,
-  CURRENCIES,
-  CRYPTO_TYPES,
-  CRYPTO_TYPES_SUM
-} from '../../constants';
 
 import InvestmentForm from '../../components/InvestmentForm';
 
 import { getDatabaseUserInfo } from '../../redux/auth';
+import { getAllCurrencies, getUsersCryptoTypes } from '../../redux/currencies';
+import { getExchangeRates } from '../../redux/exchangeRates';
+import { getTransactionSums } from '../../redux/transactions';
 
 const BTCIcon = require('../../assets/bitcoinIcon.svg');
 const BCHIcon = require('../../assets/bitcoinIcon.svg');
@@ -35,7 +30,11 @@ const icons = {
 
 function mapStateToProps(state) {
   return {
-    databaseUserInfo: state.auth.userInformation
+    databaseUserInfo: state.auth.userInformation,
+    currencies: state.currencies.currencies,
+    exchangeRates: state.exchangeRates.exchangeRates,
+    transactionSums: state.transactions.transactionSums,
+    cryptoTypes: state.currencies.cryptoTypes
   };
 }
 
@@ -44,42 +43,27 @@ class SummaryContainer extends Component {
     super(props);
 
     this.generateCards = this.generateCards.bind(this);
-    this.getTransactionSums = this.getTransactionSums.bind(this);
-    this.getAllCurrencies = this.getAllCurrencies.bind(this);
 
     this.state = {
-      cryptoTypes: [],
-      transactionSums: [],
-      exchangeRates: [],
-      currencies: [],
-      user_id: null,
       error: ''
     };
   }
 
   componentDidMount() {
     this.generateCards();
-    this.getAllCurrencies();
-    this.getTransactionSums();
+    this.props.getAllCurrencies();
+    this.props.getExchangeRates();
   }
 
   generateCards() {
     this.props
       .getDatabaseUserInfo()
-      .then(data => {
-        let user_id = data.id;
-        ajax(`${CRYPTO_TYPES}?user_id=${user_id}`)
-          .then(cryptoTypes => {
-            ajax(`${COINMARKET_API}`)
-              .then(exchangeRates => {
-                this.setState({ exchangeRates: exchangeRates });
-              })
-              .catch(err => {
-                this.setState({
-                  error: err
-                });
-              });
-            this.setState({ cryptoTypes: cryptoTypes.data });
+      .then(_ => {
+        let user_id = this.props.databaseUserInfo.id;
+        this.props
+          .getTransactionSums(user_id)
+          .then(_ => {
+            this.props.getUsersCryptoTypes(user_id);
           })
           .catch(err => {
             throw err;
@@ -90,28 +74,10 @@ class SummaryContainer extends Component {
       });
   }
 
-  getAllCurrencies() {
-    ajax(CURRENCIES).then(currencies => {
-      this.setState({
-        currencies: currencies.data
-      });
-    });
-  }
-
-  getTransactionSums() {
-    ajax(`${CRYPTO_TYPES_SUM}?user_id=${this.state.user_id}`).then(
-      transactionSums => {
-        this.setState({
-          transactionSums: transactionSums.data
-        });
-      }
-    );
-  }
-
   render() {
     return (
       <div className="crypto-container outer">
-        {this.state.cryptoTypes.map(currencies => {
+        {this.props.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
           if (!icon) {
             icon = genericIcon;
@@ -128,7 +94,7 @@ class SummaryContainer extends Component {
                 <h2>{currencies.name}</h2>
               </div>
               <div className="data-container">
-                {this.state.exchangeRates.map(exchange => {
+                {this.props.exchangeRates.map(exchange => {
                   if (currencies.name !== exchange.name) {
                     return null;
                   }
@@ -138,7 +104,7 @@ class SummaryContainer extends Component {
                     </div>
                   );
                 })}
-                {this.state.transactionSums.map(sums => {
+                {this.props.transactionSums.map(sums => {
                   if (currencies.name !== sums.name) {
                     return null;
                   }
@@ -148,7 +114,7 @@ class SummaryContainer extends Component {
                       <div>
                         Coins Owned: {sums.coin_purchased} {currencies.name}
                       </div>
-                      {this.state.exchangeRates.map(exchangeRates => {
+                      {this.props.exchangeRates.map(exchangeRates => {
                         const currencyNameToLowerCase = currencies.name
                           .replace(/\s+/g, '-')
                           .toLowerCase();
@@ -177,9 +143,9 @@ class SummaryContainer extends Component {
           );
         })}
         <InvestmentForm
-          currencies={this.state.currencies}
+          currencies={this.props.currencies}
           getTransactions={this.generateCards}
-          getTransactionSums={this.getTransactionSums}
+          getTransactionSums={this.props.transactionSums}
           userId={this.props.databaseUserInfo.id}
         />
       </div>
@@ -188,5 +154,9 @@ class SummaryContainer extends Component {
 }
 
 export default connect(mapStateToProps, {
-  getDatabaseUserInfo
+  getDatabaseUserInfo,
+  getAllCurrencies,
+  getExchangeRates,
+  getTransactionSums,
+  getUsersCryptoTypes
 })(SummaryContainer);
