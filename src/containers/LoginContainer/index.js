@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Link } from 'react-router-dom';
 import { authenticateCognitoUser } from '../../redux/auth';
 import { validators } from '../../utils';
 
@@ -72,6 +73,14 @@ class LoginContainer extends Component {
             <input className="btn btn-primary" type="submit" value="Log In" />
           </div>
         </form>
+        <div>
+          <p>
+            <Link to="/forgot-password">Forgot Password</Link>
+          </p>
+          <p>
+            <Link to="/create-account">Create New Account</Link>
+          </p>
+        </div>
       </div>
     );
   }

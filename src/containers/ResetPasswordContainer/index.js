@@ -11,9 +11,15 @@ function mapStateToProps(state) {
 class ResetPasswordContainer extends Component {
   constructor(props) {
     super(props);
+
+    this.passwordsMatch = this.passwordsMatch.bind(this);
+
     this.state = {
       error: null,
-      isLoading: false
+      email: '',
+      verificationCode: '',
+      passwordOne: '',
+      passwordTwo: ''
     };
   }
 
@@ -23,25 +29,25 @@ class ResetPasswordContainer extends Component {
 
   handlePasswordReset = e => {
     e.preventDefault();
-    this.setState({ error: null, isLoading: true }, () => {
-      const { params: { email }, resetUserPassword } = this.props;
-      const { verificationCode, passwordOne, passwordTwo } = e.target;
-
-      if (!this.passwordsMatch(passwordOne.value, passwordTwo.value)) {
-        return this.setState({
-          error: 'Passwords must match',
-          isLoading: false
-        });
-      }
-
-      return resetUserPassword(email, verificationCode.value, passwordOne.value)
-        .then(result => {
-          this.context.router.push('/login');
-        })
-        .catch(err => {
-          this.setState({ error: err.message, isLoading: false });
-        });
+    this.setState({
+      email: e.target.email.value,
+      verificationCode: e.target.verificationCode.value,
+      passwordOne: e.target.passwordOne.value,
+      passwordTwo: e.target.passwordTwo.value
     });
+
+    this.props
+      .resetUserPassword(
+        e.target.email.value,
+        e.target.verificationCode.value,
+        e.target.passwordOne.value
+      )
+      .then(_ => {
+        this.props.history.push('/login');
+      })
+      .catch(err => {
+        this.setState({ error: err.message });
+      });
   };
 
   render() {
@@ -55,6 +61,15 @@ class ResetPasswordContainer extends Component {
         </p>
         <div className="password-reset__form">
           <form onSubmit={this.handlePasswordReset}>
+            <div className="form-group">
+              <label>Email Address</label>
+              <input
+                className="form-control"
+                name="email"
+                type="email"
+                required
+              />
+            </div>
             <div className="form-group">
               <label>New Password</label>
               <input
