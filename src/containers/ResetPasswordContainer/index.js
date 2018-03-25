@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { resetUserPassword } from '../../redux/auth';
 
 function mapStateToProps(state) {
@@ -92,7 +93,10 @@ class ResetPasswordContainer extends Component {
               <p className="form__error">{this.state.error}</p>
             )}
             <div className="form-group">
-              <label>Verification Code</label>
+              <label>
+                Verification Code - If you don't have one yet, visit the{' '}
+                <Link to="/forgot-password">Forgot Password</Link> page
+              </label>
               <input
                 className="form-control"
                 name="verificationCode"

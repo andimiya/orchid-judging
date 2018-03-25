@@ -78,7 +78,7 @@ class LoginContainer extends Component {
             <Link to="/forgot-password">Forgot Password</Link>
           </p>
           <p>
-            <Link to="/create-account">Create New Account</Link>
+            <Link to="/reset-password">Reset Password</Link>
           </p>
         </div>
       </div>
