@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { ajax } from 'jquery';
 import { connect } from 'react-redux';
-import {
-  GET_TRANSACTIONS,
-  DELETE_TRANSACTIONS,
-  CURRENCIES
-} from '../../constants';
+import { DELETE_TRANSACTIONS } from '../../constants';
 
 import { getDatabaseUserInfo } from '../../redux/auth';
+import { getAllCurrencies } from '../../redux/currencies';
+import { getTransactions } from '../../redux/transactions';
+
 import InvestmentForm from '../../components/InvestmentForm';
 import TransactionTable from '../../components/TransactionTable';
 
 function mapStateToProps(state) {
   return {
-    databaseUserInfo: state.auth.userInformation
+    databaseUserInfo: state.auth.userInformation,
+    currencies: state.currencies.currencies,
+    transactions: state.transactions.userTransactions
   };
 }
 
@@ -21,45 +22,26 @@ class TransactionContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.getTransactions = this.getTransactions.bind(this);
-    this.getAllCurrencies = this.getAllCurrencies.bind(this);
     this.deleteTransaction = this.deleteTransaction.bind(this);
+    this.getUserTransactions = this.getUserTransactions.bind(this);
 
     this.state = {
-      allData: [],
       exchangeRates: [],
-      currencies: [],
-      userId: '',
       error: ''
     };
   }
 
   componentDidMount() {
-    this.getTransactions();
-    this.getAllCurrencies();
+    this.getUserTransactions();
+    this.props.getAllCurrencies();
   }
 
-  getAllCurrencies() {
-    ajax(CURRENCIES).then(currencies => {
-      this.setState({
-        currencies: currencies.data
-      });
-    });
-  }
-
-  getTransactions() {
+  getUserTransactions() {
     this.props
       .getDatabaseUserInfo()
-      .then(data => {
-        let user_id = data.id;
-        ajax(`${GET_TRANSACTIONS}?user_id=${user_id}`)
-          .then(data => {
-            return this.setState({ allData: data.data });
-          })
-          .catch(err => {
-            throw err;
-          });
-        return data;
+      .then(_ => {
+        let user_id = this.props.databaseUserInfo.id;
+        this.props.getTransactions(user_id);
       })
       .catch(err => {
         throw err;
@@ -76,7 +58,7 @@ class TransactionContainer extends Component {
         user_id: this.props.databaseUserInfo.id
       }
     }).done(() => {
-      this.getTransactions();
+      this.getUserTransactions();
     });
   }
 
@@ -85,14 +67,14 @@ class TransactionContainer extends Component {
       <div className="transaction-container outer">
         <div className="transaction-table-container">
           <TransactionTable
-            allData={this.state.allData}
+            allData={this.props.transactions}
             onClick={this.deleteTransaction}
           />
         </div>
         <div className="investment-form-container-outer">
           <InvestmentForm
-            currencies={this.state.currencies}
-            getTransactions={this.getTransactions}
+            currencies={this.props.currencies}
+            getTransactions={this.getUserTransactions}
             userId={this.props.databaseUserInfo.id}
           />
         </div>
@@ -102,5 +84,7 @@ class TransactionContainer extends Component {
 }
 
 export default connect(mapStateToProps, {
-  getDatabaseUserInfo
+  getDatabaseUserInfo,
+  getAllCurrencies,
+  getTransactions
 })(TransactionContainer);
