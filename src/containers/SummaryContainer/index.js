@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import { ajax } from 'jquery';
 import { connect } from 'react-redux';
-
-import {
-  COINMARKET_API,
-  // CURRENCIES,
-  CRYPTO_TYPES
-  // CRYPTO_TYPES_SUM
-} from '../../constants';
 
 import InvestmentForm from '../../components/InvestmentForm';
 

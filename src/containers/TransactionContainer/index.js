@@ -26,7 +26,6 @@ class TransactionContainer extends Component {
     this.getUserTransactions = this.getUserTransactions.bind(this);
 
     this.state = {
-      exchangeRates: [],
       error: ''
     };
   }

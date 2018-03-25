@@ -1,5 +1,5 @@
 import { ajax } from 'jquery';
-import { CURRENCIES, CRYPTO_TYPES, COINMARKET_API } from '../constants';
+import { CURRENCIES, CRYPTO_TYPES } from '../constants';
 
 const GET_CURRENCIES = 'crypto-app/currencies/GET_CURRENCIES';
 const GET_CURRENCIES_FAIL = 'crypto-app/currencies/GET_CURRENCIES_FAIL';
