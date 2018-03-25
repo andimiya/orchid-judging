@@ -12,7 +12,7 @@ import {
 import InvestmentForm from '../../components/InvestmentForm';
 
 import { getDatabaseUserInfo } from '../../redux/auth';
-import { getAllCurrencies } from '../../redux/currencies';
+import { getAllCurrencies, getUsersCryptoTypes } from '../../redux/currencies';
 import { getExchangeRates } from '../../redux/exchangeRates';
 import { getTransactionSums } from '../../redux/transactions';
 
@@ -41,7 +41,8 @@ function mapStateToProps(state) {
     databaseUserInfo: state.auth.userInformation,
     currencies: state.currencies.currencies,
     exchangeRates: state.exchangeRates.exchangeRates,
-    transactionSums: state.transactions.transactionSums
+    transactionSums: state.transactions.transactionSums,
+    cryptoTypes: state.currencies.cryptoTypes
   };
 }
 
@@ -52,8 +53,6 @@ class SummaryContainer extends Component {
     this.generateCards = this.generateCards.bind(this);
 
     this.state = {
-      cryptoTypes: [],
-      user_id: null,
       error: ''
     };
   }
@@ -67,14 +66,12 @@ class SummaryContainer extends Component {
   generateCards() {
     this.props
       .getDatabaseUserInfo()
-      .then(data => {
-        let user_id = data.id;
-        this.setState({ user_id: data.id });
-        this.props.getTransactionSums(this.props.databaseUserInfo.id);
-        ajax(`${CRYPTO_TYPES}?user_id=${user_id}`)
-          .then(cryptoTypes => {
-            ajax(`${COINMARKET_API}`);
-            this.setState({ cryptoTypes: cryptoTypes.data });
+      .then(_ => {
+        let user_id = this.props.databaseUserInfo.id;
+        this.props
+          .getTransactionSums(user_id)
+          .then(_ => {
+            this.props.getUsersCryptoTypes(user_id);
           })
           .catch(err => {
             throw err;
@@ -88,7 +85,7 @@ class SummaryContainer extends Component {
   render() {
     return (
       <div className="crypto-container outer">
-        {this.state.cryptoTypes.map(currencies => {
+        {this.props.cryptoTypes.map(currencies => {
           let icon = icons[`${currencies.symbol}Icon`];
           if (!icon) {
             icon = genericIcon;
@@ -168,5 +165,6 @@ export default connect(mapStateToProps, {
   getDatabaseUserInfo,
   getAllCurrencies,
   getExchangeRates,
-  getTransactionSums
+  getTransactionSums,
+  getUsersCryptoTypes
 })(SummaryContainer);
