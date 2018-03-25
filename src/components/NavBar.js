@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCognitoUser, logoutUserSession } from '../redux/auth';
+import {
+  getCognitoUser,
+  logoutUserSession,
+  getDatabaseUserInfo
+} from '../redux/auth';
 const hamburger = require('../assets/hamburger.svg');
 
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.auth.userIsLoggedIn
+    isLoggedIn: state.auth.userIsLoggedIn,
+    firstName: state.auth.userInformation.first_name
   };
 }
 
@@ -104,6 +109,7 @@ class NavBar extends Component {
         </div>
 
         <div className="menu-item-container">
+          <div>{this.props.firstName}</div>
           {menuProperties
             .filter(menuProperties => {
               return menuProperties.showWhenLoggedIn === this.props.isLoggedIn;
@@ -139,5 +145,6 @@ class NavBar extends Component {
 
 export default connect(mapStateToProps, {
   getCognitoUser,
-  logoutUserSession
+  logoutUserSession,
+  getDatabaseUserInfo
 })(NavBar);
