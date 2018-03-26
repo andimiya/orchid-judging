@@ -7,6 +7,7 @@ import {
   getDatabaseUserInfo
 } from '../redux/auth';
 const hamburger = require('../assets/hamburger.svg');
+const profileIcon = require('../assets/profileIcon.svg');
 
 function mapStateToProps(state) {
   return {
@@ -109,7 +110,6 @@ class NavBar extends Component {
         </div>
 
         <div className="menu-item-container">
-          <div>{this.props.firstName}</div>
           {menuProperties
             .filter(menuProperties => {
               return menuProperties.showWhenLoggedIn === this.props.isLoggedIn;
@@ -126,6 +126,23 @@ class NavBar extends Component {
                 </div>
               );
             })}
+          <div className="menu-item">
+            <Link to="/account">
+              {!this.props.firstName ? (
+                <p />
+              ) : (
+                <p>
+                  <img
+                    src={profileIcon}
+                    alt="Profile"
+                    width="35px"
+                    height="35px"
+                  />
+                  {this.props.firstName}
+                </p>
+              )}
+            </Link>
+          </div>
         </div>
 
         <div className="hamburger">
