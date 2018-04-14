@@ -14,7 +14,7 @@ class UserAccountForm extends Component {
       onInputChange
     } = this.props;
     return (
-      <div className="account__form">
+      <div className="form-container">
         <h1 className="section__title">Account Information</h1>
         <div className="form__error">
           <p>{error}</p>

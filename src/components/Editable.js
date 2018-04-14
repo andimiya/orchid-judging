@@ -12,13 +12,13 @@ class Editable extends Component {
       onChange
     } = this.props;
     return (
-      <label className="form__field account-form__field">
+      <div className="form-group">
         <span className="form__label-text account-form__label-text">
           {label}
         </span>
         {editable ? (
           <input
-            className="form__input account-form__input"
+            className="form__input account-form__input form-control"
             onChange={onChange}
             name={name}
             type="text"
@@ -26,17 +26,17 @@ class Editable extends Component {
             required={required}
           />
         ) : (
-          <div className="account-form__editable-field">
+          <div className="form-group account-form__editable-field">
             <span className="account-form__existing-value">{value}</span>
             <button
               className="button--invisible"
-              type="secondary"
+              type="submit"
               name={name}
               onClick={onClick}
             />
           </div>
         )}
-      </label>
+      </div>
     );
   }
 }

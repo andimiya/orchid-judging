@@ -15,25 +15,11 @@ function mapStateToProps(state) {
   };
 }
 
-const editableReset = {
-  firstName: false,
-  email: false
-};
-
 class UserAccountContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
-      accountUpdated: false,
-      accountForm: {
-        email: '',
-        firstName: ''
-      },
-      editable: {
-        firstName: false,
-        email: false
-      }
+      error: null
     };
   }
 
@@ -41,6 +27,7 @@ class UserAccountContainer extends Component {
     this.props
       .getCognitoUser()
       .then(userInfo => {
+        console.log(userInfo, 'user info');
         return this.setState({
           accountForm: { email: userInfo.email, firstName: userInfo.name }
         });
@@ -81,8 +68,6 @@ class UserAccountContainer extends Component {
   };
 
   updateUserAccount = (email, firstName) => {
-    // const { isValidEmail } = validators;
-
     let userAttributes = [];
     // if (email) {
     //   if (!isValidEmail(email)) {
@@ -146,10 +131,12 @@ class UserAccountContainer extends Component {
   };
 
   render() {
+    console.log(this.props, 'props');
+    console.log(this.state, 'state');
     const { userIsLoggedIn } = this.props;
     const { email, firstName } = this.state.accountForm;
     return (
-      <div className="account__container">
+      <div className="account__container outer">
         {userIsLoggedIn && (
           <UserAccountForm
             error={this.state.error}
