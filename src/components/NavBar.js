@@ -105,7 +105,7 @@ class NavBar extends Component {
       <div className={this.state.navClass}>
         <div className="name-container">
           <Link to="/" onClick={this.collapseNav}>
-            <p>Crypto Tracker</p>
+            <p>Orchid Judging</p>
           </Link>
         </div>
 

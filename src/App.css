@@ -6,7 +6,7 @@
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  background-color: #75d6c7;
+  background-color: #b3bffc;
   opacity: 0.8;
   height: 3.5rem;
   font-family: "futura-pt";
@@ -70,14 +70,15 @@
         color: black;
         margin: 0; }
       .menu-item,
-      .menu-item a, .menu-item p:hover {
+      .menu-item a,
+      .menu-item p:hover {
         color: white; } }
 
 .false {
   display: none; }
 
 .responsive-container {
-  background-color: #75d6c7;
+  background-color: #b3bffc;
   opacity: 0.8;
   padding: 1rem 1rem 0.5rem 1rem;
   width: 100%;
@@ -164,7 +165,7 @@
       letter-spacing: 3.3px;
       text-transform: uppercase;
       text-decoration: none;
-      color: #68c9ba;
+      color: #b3bffc;
       margin: 0;
       margin-bottom: 0.8rem; }
     .crypto-set .title-container img {
@@ -204,8 +205,8 @@ form {
   letter-spacing: 0.3px; }
 
 .btn {
-  background-color: #75d6c7;
-  border: #75d6c7;
+  background-color: #b3bffc;
+  border: #b3bffc;
   color: black;
   letter-spacing: 1.1px;
   text-transform: uppercase;
@@ -216,7 +217,15 @@ form {
 
 .btn:hover {
   color: white;
-  background-color: #75d6c7; }
+  background-color: #b3bffc; }
+
+.btn-group label {
+  background-color: white;
+  border: 1px solid #b3bffc; }
+
+.btn-group .btn:hover {
+  background-color: #b3bffc;
+  border: 1px solid #b3bffc; }
 
 .historical-exchange-container {
   padding-top: 1rem; }
