@@ -1,10 +1,10 @@
 import React from 'react';
 import FieldSet from './FieldSet';
 
-const ScoreSheet = props => {
+const Cattleya = props => {
   return (
     <div>
-      <form>
+      <form className="form-of-flower-form">
         <legend>
           <label>Form of Flower - Total: {props.totalScore}</label>
         </legend>
@@ -21,4 +21,4 @@ const ScoreSheet = props => {
   );
 };
 
-export default ScoreSheet;
+export default Cattleya;

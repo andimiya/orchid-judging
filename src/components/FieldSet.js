@@ -16,7 +16,7 @@ const FieldSet = props => {
       >
         {pointsArray.map(point => {
           return (
-            <label className="btn btn-success" key={point}>
+            <label className="btn btn-info" key={point}>
               <input
                 type="radio"
                 name="options"

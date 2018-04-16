@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { ajax } from 'jquery';
 import { connect } from 'react-redux';
 import { getDatabaseUserInfo } from '../../redux/auth';
-import ScoreSheet from '../../components/ScoreSheet';
+import Cattleya from '../../components/Cattleya';
+import Dendrobium from '../../components/Dendrobium';
 
 function mapStateToProps(state) {
   return {
@@ -14,12 +15,18 @@ class TransactionContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.formSelection = this.formSelection.bind(this);
     this.scoreAdder = this.scoreAdder.bind(this);
 
     this.state = {
+      formSelected: '',
       totalScore: 0,
       error: ''
     };
+  }
+
+  formSelection(e) {
+    this.setState({ formSelected: e.target.value });
   }
 
   scoreAdder() {
@@ -37,11 +44,37 @@ class TransactionContainer extends Component {
     return (
       <div className="transaction-container outer">
         <div className="investment-form-container-outer">
-          <ScoreSheet
-            userId={this.props.databaseUserInfo.id}
-            scoreAdder={this.scoreAdder}
-            totalScore={this.state.totalScore}
-          />
+          <select
+            className="btn btn-secondary"
+            name="Flower Type"
+            onChange={this.formSelection}
+          >
+            <option defaultValue="Flower Type">Flower Type</option>
+            <option value="cattleya">Cattleya</option>
+            <option value="dendrobium">Dendrobium</option>
+          </select>
+          <br />
+          <br />
+          {(() => {
+            switch (this.state.formSelected) {
+              case 'dendrobium':
+                return (
+                  <Dendrobium
+                    scoreAdder={this.scoreAdder}
+                    totalScore={this.state.totalScore}
+                  />
+                );
+              case 'cattleya':
+                return (
+                  <Cattleya
+                    scoreAdder={this.scoreAdder}
+                    totalScore={this.state.totalScore}
+                  />
+                );
+              default:
+                return null;
+            }
+          })()}
         </div>
       </div>
     );
