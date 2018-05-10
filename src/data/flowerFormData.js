@@ -7,7 +7,10 @@ const flowerFormData = {
           formTitle: 'Form of Flower',
           totalSectionScore: 30,
           grading: [
-            { criteria: 'Over-all Form', maxPoints: 15 },
+            {
+              criteria: 'Over-all Form',
+              maxPoints: 15
+            },
             { criteria: 'Sepals', maxPoints: 5 },
             { criteria: 'Petals', maxPoints: 5 },
             { criteria: 'Labellum (*Pouch)', maxPoints: 5 }

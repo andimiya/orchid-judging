@@ -1,8 +1,6 @@
 import React from 'react';
 
 const FieldSet = props => {
-  console.log(props, 'props');
-
   let pointsArray = [];
   for (var i = 1; i < props.points + 1; i++) {
     pointsArray.push(i);

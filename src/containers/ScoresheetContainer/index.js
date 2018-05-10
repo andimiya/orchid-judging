@@ -3,6 +3,7 @@ import { ajax } from 'jquery';
 import { connect } from 'react-redux';
 import { getDatabaseUserInfo } from '../../redux/auth';
 import flowerFormData from '../../data/flowerFormData';
+import FieldSet from '../../components/FieldSet';
 
 function mapStateToProps(state) {
   return {
@@ -20,19 +21,22 @@ class ScoresheetContainer extends Component {
       <div className="transaction-container outer">
         <div>
           {flowerFormData.flowers.map((flowerFormData, index) => (
-            <div>{flowerFormData.flower}</div>
+            <div key={index}>
+              <h2>Flower: {flowerFormData.flower}</h2>
+              {flowerFormData.formSections.map((formSections, index) => (
+                <div key={index}>
+                  <h3>Form Title: {formSections.formTitle}</h3>
+                  {formSections.grading.map((grading, index) => (
+                    <div key={index}>
+                      Criteria: {grading.criteria}
+                      <FieldSet points={grading.maxPoints} />
+                    </div>
+                  ))}
+                  Form Total Score: {formSections.totalSectionScore}
+                </div>
+              ))}
+            </div>
           ))}
-          {flowerFormData.flowers[0].formSections.map((formSections, index) => (
-            <div>{formSections.formTitle}</div>
-          ))}
-          {flowerFormData.flowers[0].formSections[0].grading.map(
-            (grading, index) => (
-              <div>
-                Criteria: {grading.criteria}
-                Max Points: {grading.maxPoints}
-              </div>
-            )
-          )}
         </div>
       </div>
     );
