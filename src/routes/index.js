@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import MktgPageContainer from '../containers/MktgPageContainer';
-import TransactionContainer from '../containers/TransactionContainer';
+import TransactionContainer from '../components/Cattleya';
 import LoginContainer from '../containers/LoginContainer';
+import ScoresheetContainer from '../containers/ScoresheetContainer';
 import CreateAccountContainer from '../containers/CreateAccountContainer';
 import ForgotPasswordContainer from '../containers/ForgotPasswordContainer';
 import ResetPasswordContainer from '../containers/ResetPasswordContainer';
@@ -47,7 +48,7 @@ const Routes = props => {
         />
         <Route exact path="/" component={MktgPageContainer} />
       </Switch>
-      <AuthRoutes path="/transactions" component={TransactionContainer} />
+      <AuthRoutes path="/transactions" component={ScoresheetContainer} />
       <AuthRoutes path="/account" component={UserAccountContainer} />
       <AuthRoutes path="/new-investments" component={NewInvestmentsContainer} />
       <AuthRoutes path="/confirm" component={UserConfirmedContainer} />
