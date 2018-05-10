@@ -22,15 +22,25 @@ $large-width: 1024px;
 
 $background-color-dark: #b3bffc;
 $text-color-dark: black;
+$text-color-grey: #404040;
 $text-color-h2: #b3bffc;
 $text-link: #b3bffc;
 $background-color-tiles: #fafafa;
 $font: 'futura-pt';
 
-#app-container {
+html {
   font-family: 'futura-pt';
   font-weight: 300;
   letter-spacing: 0.3px;
+  color: $text-color-grey;
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 1rem 0;
+  }
 }
 
 .navbar-container {

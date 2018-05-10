@@ -1,7 +1,14 @@
-#app-container {
+html {
   font-family: 'futura-pt';
   font-weight: 300;
-  letter-spacing: 0.3px; }
+  letter-spacing: 0.3px;
+  color: #404040; }
+  html h2 {
+    font-size: 2rem; }
+  html h3 {
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 1rem 0; }
 
 .navbar-container {
   display: flex;
