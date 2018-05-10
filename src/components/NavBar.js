@@ -58,25 +58,11 @@ class NavBar extends Component {
     let menuProperties = [
       {
         menuItemContainerClass: 'menu-item',
-        linkTo: '/summary',
+        linkTo: '/judging-forms',
         onClick: this.collapseNav,
-        navDisplayText: 'Summary',
+        navDisplayText: 'Judging Forms',
         showWhenLoggedIn: true
       },
-      {
-        menuItemContainerClass: 'menu-item',
-        linkTo: '/transactions',
-        onClick: this.collapseNav,
-        navDisplayText: 'Transactions',
-        showWhenLoggedIn: true
-      },
-      // {
-      //   menuItemContainerClass: "menu-item",
-      //   linkTo: "/new-investments",
-      //   onClick: this.collapseNav,
-      //   navDisplayText: "Add New",
-      //   showWhenLoggedIn: true
-      // },
       {
         menuItemContainerClass: 'menu-item',
         linkTo: '/create-account',

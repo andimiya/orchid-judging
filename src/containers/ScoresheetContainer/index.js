@@ -25,14 +25,14 @@ class ScoresheetContainer extends Component {
               <h2>Flower: {flowerFormData.flower}</h2>
               {flowerFormData.formSections.map((formSections, index) => (
                 <div key={index}>
-                  <h3>Form Title: {formSections.formTitle}</h3>
+                  <h3>{formSections.formTitle}</h3>
                   {formSections.grading.map((grading, index) => (
                     <div key={index}>
-                      Criteria: {grading.criteria}
+                      {grading.criteria}
                       <FieldSet points={grading.maxPoints} />
                     </div>
                   ))}
-                  Form Total Score: {formSections.totalSectionScore}
+                  <h3>Form Total Score: {formSections.totalSectionScore}</h3>
                 </div>
               ))}
             </div>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import screenshot from '../../assets/crypto-track.png';
 
 class MktgPageContainer extends Component {
   render() {

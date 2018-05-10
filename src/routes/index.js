@@ -46,8 +46,9 @@ const Routes = props => {
           component={ResetPasswordContainer}
         />
         <Route exact path="/" component={MktgPageContainer} />
+        <Route exact path="/judging-forms" component={ScoresheetContainer} />
       </Switch>
-      <AuthRoutes path="/transactions" component={ScoresheetContainer} />
+      {/* <AuthRoutes path="/judging-forms" component={ScoresheetContainer} /> */}
       <AuthRoutes path="/account" component={UserAccountContainer} />
       <AuthRoutes path="/confirm" component={UserConfirmedContainer} />
       <Footer />
