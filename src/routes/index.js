@@ -8,7 +8,6 @@ import ScoresheetContainer from '../containers/ScoresheetContainer';
 import CreateAccountContainer from '../containers/CreateAccountContainer';
 import ForgotPasswordContainer from '../containers/ForgotPasswordContainer';
 import ResetPasswordContainer from '../containers/ResetPasswordContainer';
-import NewInvestmentsContainer from '../containers/NewInvestmentsContainer';
 import UserAccountContainer from '../containers/UserAccountContainer';
 import UserConfirmedContainer from '../containers/UserConfirmedContainer';
 import Footer from '../components/Footer';
@@ -50,7 +49,6 @@ const Routes = props => {
       </Switch>
       <AuthRoutes path="/transactions" component={ScoresheetContainer} />
       <AuthRoutes path="/account" component={UserAccountContainer} />
-      <AuthRoutes path="/new-investments" component={NewInvestmentsContainer} />
       <AuthRoutes path="/confirm" component={UserConfirmedContainer} />
       <Footer />
     </div>

@@ -2,7 +2,7 @@ const flowerFormData = {
   flowers: [
     {
       flower: 'Cattleya',
-      formOfFlower: [
+      formSections: [
         {
           formTitle: 'Form of Flower',
           totalSectionScore: 30,
@@ -12,9 +12,7 @@ const flowerFormData = {
             { criteria: 'Petals', maxPoints: 5 },
             { criteria: 'Labellum (*Pouch)', maxPoints: 5 }
           ]
-        }
-      ],
-      colorOfFlower: [
+        },
         {
           formTitle: 'Color of Flower',
           totalSectionScore: 30,
@@ -24,9 +22,7 @@ const flowerFormData = {
             { criteria: 'Sepals and Petals', maxPoints: 5 },
             { criteria: 'Labellum (*Pouch)', maxPoints: 5 }
           ]
-        }
-      ],
-      flowerAndStem: [
+        },
         {
           formTitle: 'Flower and Stem Characteristics',
           totalSectionScore: 40,
@@ -42,21 +38,17 @@ const flowerFormData = {
     },
     {
       flower: 'Dendrobium',
-      formOfFlower: [
+      formSections: [
         {
           formTitle: 'Form of Flower',
           totalSectionScore: 30,
           grading: [{ criteria: 'Over-all Form', maxPoints: 30 }]
-        }
-      ],
-      colorOfFlower: [
+        },
         {
           formTitle: 'Color of Flower',
           totalSectionScore: 30,
           grading: [{ criteria: 'Color of Flower', maxPoints: 30 }]
-        }
-      ],
-      flowerAndStem: [
+        },
         {
           formTitle: 'Flower and Stem Characteristics',
           totalSectionScore: 40,
