@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import MktgPageContainer from '../containers/MktgPageContainer';
-import TransactionContainer from '../components/Cattleya';
 import LoginContainer from '../containers/LoginContainer';
 import ScoresheetContainer from '../containers/ScoresheetContainer';
 import CreateAccountContainer from '../containers/CreateAccountContainer';

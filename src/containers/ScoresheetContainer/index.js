@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ajax } from 'jquery';
 import { connect } from 'react-redux';
 import { getDatabaseUserInfo } from '../../redux/auth';
 import flowerFormData from '../../data/flowerFormData';
