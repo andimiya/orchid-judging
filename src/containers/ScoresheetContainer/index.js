@@ -14,6 +14,29 @@ function mapStateToProps(state) {
 class ScoresheetContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      formSelected: 'Cattleya',
+      formBody: {}
+    };
+
+    this.selectForm = this.selectForm.bind(this);
+  }
+
+  selectForm(e) {
+    this.setState({ formSelected: e.target.value });
+
+    let formBody = flowerFormData.flowers.find(
+      flowers => flowers.flower === e.target.value
+    );
+
+    this.setState({ formBody: formBody });
+  }
+
+  componentWillMount() {
+    let formBody = flowerFormData.flowers.find(
+      flowers => flowers.flower === 'Cattleya'
+    );
+    this.setState({ formBody: formBody });
   }
 
   render() {
@@ -22,19 +45,32 @@ class ScoresheetContainer extends Component {
         <div>
           {flowerFormData.flowers.map((flowerFormData, index) => (
             <div key={index}>
-              <h2>Flower: {flowerFormData.flower}</h2>
-              {flowerFormData.formSections.map((formSections, index) => (
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="flower-radio"
+                  id={index}
+                  value={flowerFormData.flower}
+                  onClick={this.selectForm}
+                />
+                <label className="form-check-label" htmlFor={index}>
+                  {flowerFormData.flower}
+                </label>
+              </div>
+            </div>
+          ))}
+          <h2>{this.state.formBody.flower}</h2>
+          {this.state.formBody.formSections.map((formSections, index) => (
+            <div key={index}>
+              <h3>{formSections.formTitle}</h3>
+              {formSections.grading.map((grading, index) => (
                 <div key={index}>
-                  <h3>{formSections.formTitle}</h3>
-                  {formSections.grading.map((grading, index) => (
-                    <div key={index}>
-                      {grading.criteria}
-                      <FieldSet points={grading.maxPoints} />
-                    </div>
-                  ))}
-                  <h3>Form Total Score: {formSections.totalSectionScore}</h3>
+                  {grading.criteria}
+                  <FieldSet points={grading.maxPoints} />
                 </div>
               ))}
+              <h3>Form Total Score: {formSections.totalSectionScore}</h3>
             </div>
           ))}
         </div>
