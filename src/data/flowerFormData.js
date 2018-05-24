@@ -66,6 +66,38 @@ const flowerFormData = {
           ]
         }
       ]
+    },
+    {
+      flower: 'Oncidium',
+      formSections: [
+        {
+          formTitle: 'Form of Flower',
+          totalSectionScore: 30,
+          grading: [{ criteria: 'Over-all Form', maxPoints: 30 }]
+        },
+        {
+          formTitle: 'Color of Flower',
+          totalSectionScore: 30,
+          grading: [
+            { criteria: 'Color of Flower', maxPoints: 15 },
+            { criteria: 'Sepals and Petals', maxPoints: 6 },
+            { criteria: 'Labellum (*Pouch)', maxPoints: 9 }
+          ]
+        },
+        {
+          formTitle: 'Flower and Stem Characteristics',
+          totalSectionScore: 40,
+          grading: [
+            { criteria: 'Size of Flower', maxPoints: 10 },
+            { criteria: 'Substance and Texture', maxPoints: 10 },
+            {
+              criteria: 'Habit of Stem and Arrangement of Flowers',
+              maxPoints: 10
+            },
+            { criteria: 'Floriferousness', maxPoints: 10 }
+          ]
+        }
+      ]
     }
   ]
 };

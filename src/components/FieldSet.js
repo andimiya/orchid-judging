@@ -12,7 +12,7 @@ const FieldSet = props => {
         className="btn-group"
         id="scores"
         data-toggle="buttons"
-        onClick={props.adder}
+        onClick={props.updateFlowerScores}
       >
         {pointsArray.map(point => {
           return (
