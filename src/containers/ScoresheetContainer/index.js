@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getDatabaseUserInfo } from '../../redux/auth';
-import { updateFlowerScores } from '../../redux/scores';
+import { updateFlowerScores, getFlowerScores } from '../../redux/scores';
 import flowerFormData from '../../data/flowerFormData';
 import FieldSet from '../../components/FieldSet';
 
 function mapStateToProps(state) {
   return {
     databaseUserInfo: state.auth.userInformation,
-    updateFlowerScores: state.scores.flowerScores
+    updateFlowerScores: state.scores.flowerScores,
+    flowerScores: state.scores.flowerScores
   };
 }
 
@@ -74,11 +75,12 @@ class ScoresheetContainer extends Component {
       flowers => flowers.flower === 'Cattleya'
     );
     this.setState({ formBody: formBody });
+    this.props.updateFlowerScores(this.state.formBody);
   }
 
   render() {
     console.log(this.state, 'state');
-    console.log(this.props, 'props'); // this.props.updateFlowerScores(this.state.formBody);
+    console.log(this.props, 'props');
     return (
       <div className="transaction-container outer">
         <div>
@@ -110,7 +112,7 @@ class ScoresheetContainer extends Component {
                     points={grading.maxPoints}
                     flower={this.state.formBody.flower}
                     formSection={formSections.formTitle}
-                    saveScore={this.props.updateFlowerScores}
+                    updateFlowerScores={this.props.updateFlowerScores}
                   />
                 </div>
               ))}

@@ -5,27 +5,35 @@ const initialState = {
   flowerScores: []
 };
 
-export default function reducer(scores = initialState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case UPDATE_FLOWER_SCORES:
       return {
-        ...scores,
-        flowerScores: action.result
-
-        // flowerScores: scores.map(score => {
-        //   return score.flowerName === action.flowerScores.flowerName
-        //     ? action.flowerScores
-        //     : score;
-        // })
+        ...state,
+        flowerScores: action.scores
       };
+    case GET_FLOWER_SCORES:
+      return state;
+
+    // .map(score => {
+    // console.log(score, 'score');
+    //   return score.flowerName === action.flowerScores.flowerName
+    //     ? action.flowerScores
+    //     : score;
+    // })
+
+    // .catch(err => {
+    //   throw err;
+    // })
+    // };
     default:
-      return scores;
+      return state;
   }
 }
 
-export function updateFlowerScores(updateFlowerScores) {
-  console.log(updateFlowerScores, 'redux update flower scores');
+export function updateFlowerScores(formBody) {
   return dispatch => {
-    dispatch({ type: UPDATE_FLOWER_SCORES, scores: updateFlowerScores });
+    dispatch({ type: UPDATE_FLOWER_SCORES, scores: formBody });
+    return formBody;
   };
 }
